@@ -17,8 +17,32 @@ git clone https://git.ffhs.ch/web-technologien/fwebt/fs24/inf-w-af004-fwebt-ol-s
 cd ol010-sandro-gerber-eternal-depths
 ```
 
+### Verfügbare Scripts
+
+Im Projektverzeichnis kannst du Folgendes ausführen:
+
+#### `npm start`
+
+Startet die App im Entwicklungsmodus.\
+Öffne [http://localhost:3000](http://localhost:3000), um sie in deinem Browser anzuzeigen.
+
+Die Seite wird neu geladen, wenn du Änderungen vornimmst.\
+Du kannst auch Lint-Fehler in der Konsole sehen.
+
+#### `npm test`
+
+Startet den Test-Runner im interaktiven Watch-Modus.\
+Siehe den Abschnitt über [das Ausführen von Tests](https://facebook.github.io/create-react-app/docs/running-tests) für weitere Informationen.
+
+#### `npm run build`
+
+Erstellt die App für die Produktion im `build`-Ordner.\
+Es bündelt React im Produktionsmodus und optimiert den Build für die beste Leistung.
+
+Der Build wird minifiziert und die Dateinamen enthalten die Hashes.\
+Deine App ist bereit für die Bereitstellung!
+
 
 ## 📫 Kontakt
 
 Für weitere Informationen und Unterstützung kontaktiere bitte sandro.gerber@students.ffhs.ch.
-
