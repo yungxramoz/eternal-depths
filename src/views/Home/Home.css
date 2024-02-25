@@ -1,0 +1,24 @@
+.home-container {
+    /* center content verticaly */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1.main-title {
+    text-align: center;
+    font-size: 2rem;
+    line-height: 2.5rem;
+}
+
+.button-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.button-menu button {
+    width: 100%;
+}
