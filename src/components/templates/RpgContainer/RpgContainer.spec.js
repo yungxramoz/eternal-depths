@@ -25,4 +25,15 @@ describe('RpgContainer', () => {
       'rpgui-container framed framed-golden framed-golden-2 framed-grey full-page custom-class',
     )
   })
+  it('applies background image based on bgImg prop', async () => {
+    const testRenderer = TestRenderer.create(<RpgContainer bgImg="test.png" />)
+    const testInstance = testRenderer.root
+    const div = await testInstance.findByType('div')
+    expect(div.props.style).toEqual({
+      backgroundImage:
+        'linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(test.png)',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+    })
+  })
 })

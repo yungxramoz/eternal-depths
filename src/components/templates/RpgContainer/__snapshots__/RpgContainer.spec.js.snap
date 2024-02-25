@@ -3,5 +3,6 @@
 exports[`RpgContainer renders correctly 1`] = `
 <div
   className="rpgui-container framed"
+  style={Object {}}
 />
 `;

@@ -3,6 +3,13 @@
 exports[`Home renders correctly 1`] = `
 <div
   className="rpgui-container framed full-page home-container"
+  style={
+    Object {
+      "backgroundImage": "linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(home.png)",
+      "backgroundRepeat": "no-repeat",
+      "backgroundSize": "cover",
+    }
+  }
 >
   <h1
     className="main-title"
