@@ -10,9 +10,11 @@
   opacity: 0.5;
 }
 
-.icon-button:hover {
-  filter: drop-shadow(-1px 0 #d27d2c) drop-shadow(1px 0 #d27d2c)
-    drop-shadow(0 -1px #d27d2c) drop-shadow(0 1px #d27d2c);
+@media (hover: hover) {
+  .icon-button:hover {
+    filter: drop-shadow(-1px 0 #d27d2c) drop-shadow(1px 0 #d27d2c)
+      drop-shadow(0 -1px #d27d2c) drop-shadow(0 1px #d27d2c);
+  }
 }
 
 .icon-button:active {
