@@ -22,9 +22,10 @@ const RpgContainer = ({
   let bgImgStyle = {}
   if (bgImg) {
     bgImgStyle = {
-      backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${bgImg})`,
+      backgroundImage: `url(${bgImg})`,
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
+      backgroundPosition: 'bottom',
     }
   }
 

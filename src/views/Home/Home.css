@@ -1,3 +1,24 @@
+@keyframes lightning {
+  from {
+    filter: brightness(100%);
+  }
+  92% {
+    filter: brightness(100%);
+  }
+  93% {
+    filter: brightness(40%);
+  }
+  94% {
+    filter: brightness(80%);
+  }
+  96% {
+    filter: brightness(10%);
+  }
+  to {
+    filter: brightness(100%);
+  }
+}
+
 h1.main-title {
   text-align: center;
   font-size: 2rem;
@@ -13,27 +34,6 @@ h1.main-title {
 
 .button-menu button {
   width: 100%;
-}
-
-@keyframes lightning {
-  from {
-    filter: brightness(100%);
-  }
-  92% {
-    filter: brightness(100%);
-  }
-  93% {
-    filter: brightness(160%);
-  }
-  94% {
-    filter: brightness(120%);
-  }
-  96% {
-    filter: brightness(190%);
-  }
-  to {
-    filter: brightness(100%);
-  }
 }
 
 .home-container {
