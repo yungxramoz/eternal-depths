@@ -2,14 +2,17 @@ import React from 'react'
 import RpgButton from '../../components/atoms/RpgButton/RpgButton'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
 import RpgSeparator from '../../components/templates/RpgSeperator/RpgSeparator'
-import Character from '../../models/Character'
 import './NewCharacter.css'
 import IconButton from '../../components/atoms/IconButton/IconButton'
-
-const character = new Character()
-let availableAttributePoints = 2
+import { useDispatch, useSelector } from 'react-redux'
+import { assignAttributePoint } from '../../state/character/characterSlice'
 
 const NewCharacter = () => {
+  const character = useSelector((state) => state.character.current)
+  const availableAttributePoints = useSelector((state) => state.character.availableAttributePoints)
+
+  const dispatch = useDispatch()
+
   return (
     <RpgContainer fullPage>
       <h1>New Character</h1>
@@ -31,7 +34,8 @@ const NewCharacter = () => {
         </div>
         <div className="attribute">
           <p>Strength</p>
-          <p>- {character.strength} +</p>
+          <p>- {character.strength}</p>
+          <IconButton iconName="chevron-right" onClick={() => dispatch(assignAttributePoint('strength'))} />
         </div>
         <div className="attribute">
           <p>Agility</p>
