@@ -22,7 +22,7 @@ describe('RpgContainer', () => {
     const testInstance = testRenderer.root
     const div = await testInstance.findByType('div')
     expect(div.props.className).toEqual(
-      'rpgui-container framed framed-golden framed-golden-2 framed-grey full-page custom-class',
+      'rpgui-container container framed framed-golden framed-golden-2 framed-grey full-page custom-class',
     )
   })
   it('applies background image based on bgImg prop', async () => {
@@ -31,7 +31,8 @@ describe('RpgContainer', () => {
     const div = await testInstance.findByType('div')
     expect(div.props.style).toEqual({
       backgroundImage:
-        'linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(test.png)',
+        'url(test.png)',
+      backgroundPosition: 'bottom',
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
     })

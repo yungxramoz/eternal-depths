@@ -2,7 +2,7 @@
 
 exports[`RpgContainer renders correctly 1`] = `
 <div
-  className="rpgui-container framed"
+  className="rpgui-container container framed"
   style={Object {}}
 />
 `;

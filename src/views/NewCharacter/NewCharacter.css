@@ -1,0 +1,19 @@
+.attribute {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.look-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}

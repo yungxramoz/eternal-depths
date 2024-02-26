@@ -5,10 +5,11 @@ exports[`App renders correctly 1`] = `
   className="rpgui-content"
 >
   <div
-    className="rpgui-container framed full-page home-container"
+    className="rpgui-container container framed full-page home-container"
     style={
       Object {
-        "backgroundImage": "linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(home.png)",
+        "backgroundImage": "url(home.png)",
+        "backgroundPosition": "bottom",
         "backgroundRepeat": "no-repeat",
         "backgroundSize": "cover",
       }
