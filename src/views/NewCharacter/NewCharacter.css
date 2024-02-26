@@ -17,3 +17,10 @@
   justify-content: center;
   margin: 1rem 0;
 }
+
+.attr-controller {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 1rem;
+}
