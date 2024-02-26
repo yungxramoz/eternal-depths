@@ -50,7 +50,7 @@ class Armor extends Item {
     this.stats = {
       health: 0,
       strength: 0,
-      speed: 0,
+      agility: 0,
     }
     super.generateStats(this.stats)
   }
@@ -71,7 +71,7 @@ class Greaves extends Item {
   constructor(rarity, name = 'Greaves') {
     super(name, 'greaves', rarity)
     this.stats = {
-      speed: 0,
+        agility: 0,
       precision: 0,
     }
     super.generateStats(this.stats)

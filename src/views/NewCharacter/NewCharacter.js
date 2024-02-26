@@ -4,6 +4,7 @@ import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
 import RpgSeparator from '../../components/templates/RpgSeperator/RpgSeparator'
 import Character from '../../models/Character'
 import './NewCharacter.css'
+import IconButton from '../../components/atoms/IconButton/IconButton'
 
 const character = new Character()
 let availableAttributePoints = 2
@@ -14,7 +15,9 @@ const NewCharacter = () => {
       <h1>New Character</h1>
       <RpgSeparator />
       <div className="look-container">
+        <IconButton iconName="chevron-left" />
         <div className="rpgui-icon helmet-slot" />
+        <IconButton iconName="chevron-right" />
       </div>
       <input type="text" placeholder="Name" value={character.name} />
       <RpgSeparator />
@@ -24,19 +27,19 @@ const NewCharacter = () => {
         <RpgSeparator golden={false} />
         <div className="attribute">
           <p>Health</p>
-          <p>{character.health}</p>
+          <p>- {character.health} +</p>
         </div>
         <div className="attribute">
           <p>Strength</p>
-          <p>{character.strength}</p>
+          <p>- {character.strength} +</p>
         </div>
         <div className="attribute">
-          <p>Speed</p>
-          <p>{character.speed}</p>
+          <p>Agility</p>
+          <p>- {character.agility} +</p>
         </div>
         <div className="attribute">
           <p>Precision</p>
-          <p>{character.precision}</p>
+          <p>- {character.precision} +</p>
         </div>
       </RpgContainer>
       <div className='btn-container'>

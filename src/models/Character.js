@@ -9,7 +9,7 @@ class Character {
     this.currentHp = 100
     this.health = 1
     this.strength = 1
-    this.speed = 1
+    this.agility = 1
     this.precision = 1
     this.helmet = null
     this.armor = null
@@ -18,10 +18,10 @@ class Character {
     this.greaves = null
   }
 
-  increaseAttributes({ health = 0, strength = 0, speed = 0, precision = 0 }) {
+  increaseAttributes({ health = 0, strength = 0, agility = 0, precision = 0 }) {
     this.health += health
     this.strength += strength
-    this.speed += speed
+    this.agility += agility
     this.precision += precision
   }
 
@@ -29,7 +29,7 @@ class Character {
     const stats = {
       health: this.health,
       strength: this.strength,
-      speed: this.speed,
+      agility: this.agility,
       precision: this.precision,
     }
     const items = [
