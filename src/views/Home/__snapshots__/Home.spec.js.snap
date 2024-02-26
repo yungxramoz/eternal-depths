@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home renders correctly 1`] = `
+<div
+  className="rpgui-container framed full-page home-container"
+  style={
+    Object {
+      "backgroundImage": "linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(home.png)",
+      "backgroundRepeat": "no-repeat",
+      "backgroundSize": "cover",
+    }
+  }
+>
+  <h1
+    className="main-title"
+  >
+    Eternal Depths
+  </h1>
+  <hr
+    className="separator golden"
+  />
+  <div
+    className="button-menu"
+  >
+    <a
+      href="/new-character"
+      onClick={[Function]}
+    >
+      <button
+        className="rpgui-button btn"
+      >
+        New Character
+      </button>
+    </a>
+    <a
+      href="/leaderboard"
+      onClick={[Function]}
+    >
+      <button
+        className="rpgui-button btn"
+      >
+        Leaderboard
+      </button>
+    </a>
+  </div>
+</div>
+`;
