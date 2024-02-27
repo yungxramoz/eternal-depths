@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import IconButton from '../../molecules/IconButton/IconButton'
 import './CharacterChooser.css'
-import CharacterImg from '../../molecules/CharacterImg/CharacterImg'
+import CharacterImg from '../../atoms/CharacterImg/CharacterImg'
 
 const CharacterChooser = ({ onCharacterChange }) => {
   const handlePreviousCharacter = () => {

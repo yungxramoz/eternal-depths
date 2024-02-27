@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MinusIcon renders correctly 1`] = `
+<svg
+  fill="currentColor"
+  id="Minus"
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <rect
+    height="2"
+    width="22"
+    x="1"
+    y="11"
+  />
+</svg>
+`;
