@@ -1,9 +1,9 @@
 const { Weapon } = require('./Item')
 
 class Character {
-  constructor(name, look = 1) {
-    this.look = look
-    this.name = name
+  constructor() {
+    this.look = 1
+    this.name = ''
     this.level = 1
     this.xp = 0
     this.stats = {
