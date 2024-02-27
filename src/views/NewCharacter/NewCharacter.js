@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import RpgButton from '../../components/atoms/RpgButton/RpgButton'
-import IconButton from '../../components/molecules/IconButton/IconButton'
+import CharacterChooser from '../../components/organisms/CharacterChooser/CharacterChooser'
+import EditStatsPanel from '../../components/organisms/EditStatsPanel/EditStatsPanel'
+import GoBackButton from '../../components/organisms/GoBackButton/GoBackButton'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
 import RpgSeparator from '../../components/templates/RpgSeperator/RpgSeparator'
 import {
   assignAttributePoint,
+  setLook,
   setName,
 } from '../../state/character/characterSlice'
 import './NewCharacter.css'
-import EditStatsPanel from '../../components/organisms/EditStatsPanel/EditStatsPanel'
-import GoBackButton from '../../components/organisms/GoBackButton/GoBackButton'
 
 const NewCharacter = () => {
   const dispatch = useDispatch()
@@ -25,6 +26,7 @@ const NewCharacter = () => {
     agility: 0,
     precision: 0,
   })
+  const [characterLook, setCharacterLook] = useState(0)
 
   const isCreateDisabled = () => {
     return (
@@ -36,12 +38,14 @@ const NewCharacter = () => {
 
   const createCharacter = (assignedPoints) => {
     dispatch(setName(localName))
+    dispatch(setLook(characterLook))
     dispatch(assignAttributePoint(assignedPoints))
     resetLocalFields()
   }
 
   const resetLocalFields = () => {
     setLocalName('')
+    setCharacterLook(0)
     setAssignedPoints({
       health: 0,
       strength: 0,
@@ -55,11 +59,7 @@ const NewCharacter = () => {
       <GoBackButton />
       <h1>New Character</h1>
       <RpgSeparator />
-      <div className="look-container">
-        <IconButton icon="chevron-left" />
-        <div className="rpgui-icon helmet-slot" />
-        <IconButton icon="chevron-right" />
-      </div>
+      <CharacterChooser onCharacterChange={setCharacterLook} />
       <input
         type="text"
         placeholder="Name"

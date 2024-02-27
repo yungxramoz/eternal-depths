@@ -1,0 +1,13 @@
+.look-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.character-img {
+  width: 80px;
+  height: 80px;
+  margin: 0 1rem;
+}
