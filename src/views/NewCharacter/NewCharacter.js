@@ -10,6 +10,7 @@ import {
 } from '../../state/character/characterSlice'
 import './NewCharacter.css'
 import EditStatsPanel from '../../components/organisms/EditStatsPanel/EditStatsPanel'
+import GoBackButton from '../../components/organisms/GoBackButton/GoBackButton'
 
 const NewCharacter = () => {
   const dispatch = useDispatch()
@@ -43,6 +44,7 @@ const NewCharacter = () => {
 
   return (
     <RpgContainer fullPage>
+      <GoBackButton />
       <h1>New Character</h1>
       <RpgSeparator />
       <div className="look-container">
