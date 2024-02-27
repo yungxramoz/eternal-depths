@@ -1,14 +1,18 @@
 import React from 'react'
-import './IconButton.css'
 import ArrowLeftIcon from '../../atoms/Icons/ArrowLeftIcon'
 import ChevronLeftIcon from '../../atoms/Icons/ChevronLeftIcon'
 import ChevronRightIcon from '../../atoms/Icons/ChevronRightIcon'
 import MinusIcon from '../../atoms/Icons/MinusIcon'
 import PlusIcon from '../../atoms/Icons/PlusIcon'
+import './IconButton.css'
 
-const IconButton = ({ icon, size, onClick }) => {
+const IconButton = ({ icon, size, disabled, onClick }) => {
   return (
-    <button className={`icon-button ${getSizeClass(size)}`} onClick={onClick}>
+    <button
+      className={`icon-button ${getSizeClass(size)}`}
+      disabled={disabled}
+      onClick={onClick}
+    >
       {getIcon(icon)}
     </button>
   )

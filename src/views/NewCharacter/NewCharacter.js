@@ -26,6 +26,14 @@ const NewCharacter = () => {
     precision: 0,
   })
 
+  const isCreateDisabled = () => {
+    return (
+      !localName ||
+      Object.values(assignedPoints).reduce((a, b) => a + b, 0) !==
+        initialPoints
+    )
+  }
+
   const createCharacter = (assignedPoints) => {
     dispatch(setName(localName))
     dispatch(assignAttributePoint(assignedPoints))
@@ -68,6 +76,7 @@ const NewCharacter = () => {
       <div className="btn-container">
         <RpgButton
           text="Create"
+          disabled={isCreateDisabled()}
           onClick={() => createCharacter(assignedPoints)}
         />
       </div>

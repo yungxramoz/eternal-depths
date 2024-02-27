@@ -5,9 +5,9 @@
   cursor: pointer;
   width: 4rem;
 }
-.icon-button.disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
+
+.icon-button:disabled {
+  color: #999;
 }
 
 @media (hover: hover) {
@@ -15,10 +15,19 @@
     filter: drop-shadow(-1px 0 #d27d2c) drop-shadow(1px 0 #d27d2c)
       drop-shadow(0 -1px #d27d2c) drop-shadow(0 1px #d27d2c);
   }
+  /* disabled */
+  .icon-button:disabled:hover {
+    filter: drop-shadow(-1px 0 #999) drop-shadow(1px 0 #999)
+      drop-shadow(0 -1px #999) drop-shadow(0 1px #999);
+  }
 }
 
 .icon-button:active {
   color: #854c30;
+}
+
+.icon-button:disabled:active {
+  color: #4e4a4e;
 }
 
 .icon-button.small {

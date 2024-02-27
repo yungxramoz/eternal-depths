@@ -17,6 +17,14 @@ const EditStatsPanel = ({ localStats, initialPoints, assignedPoints, setAssigned
     setPoints(points - value)
   }
 
+  const isMinusDisabled = (stat) => {
+    return assignedPoints[stat] === 0
+  }
+
+  const isPlusDisabled = () => {
+    return points === 0
+  }
+
   return (
     <RpgContainer golden className="attribute-container">
       <h2>Attributes</h2>
@@ -30,12 +38,14 @@ const EditStatsPanel = ({ localStats, initialPoints, assignedPoints, setAssigned
               icon="minus"
               size="medium"
               onClick={() => updateStats(stat, -1)}
+              disabled={isMinusDisabled(stat)}
             />
             <p>{localStats[stat] + assignedPoints[stat]}</p>
             <IconButton
               icon="plus"
               size="medium"
               onClick={() => updateStats(stat, 1)}
+              disabled={isPlusDisabled()}
             />
           </div>
         </div>
