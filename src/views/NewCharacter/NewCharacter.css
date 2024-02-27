@@ -1,9 +1,3 @@
-.attribute {
-  display: flex !important;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
 .btn-container {
   display: flex;
   justify-content: center;
@@ -16,11 +10,4 @@
   align-items: center;
   justify-content: center;
   margin: 1rem 0;
-}
-
-.attr-controller {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  column-gap: 1rem;
 }

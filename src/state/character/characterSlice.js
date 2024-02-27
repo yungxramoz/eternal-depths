@@ -18,14 +18,14 @@ export const characterSlice = createSlice({
     },
     assignAttributePoint: (
       state,
-      { payload: { strength, health, agility, precision } },
+      { payload: { health, strength, agility, precision } },
     ) => {
-      const total = strength + health + agility + precision
+      const total = health + strength + agility + precision
       if (state.availableAttributePoints >= total) {
-        state.current.strength += strength
-        state.current.health += health
-        state.current.agility += agility
-        state.current.precision += precision
+        state.current.stats.health += health
+        state.current.stats.strength += strength
+        state.current.stats.agility += agility
+        state.current.stats.precision += precision
         state.availableAttributePoints -= total
       }
     },

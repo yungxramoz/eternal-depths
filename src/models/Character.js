@@ -6,38 +6,41 @@ class Character {
     this.name = name
     this.level = 1
     this.xp = 0
-    this.currentHp = 100
-    this.health = 1
-    this.strength = 1
-    this.agility = 1
-    this.precision = 1
-    this.helmet = null
-    this.armor = null
-    this.weapon = new Weapon('common')
-    this.shield = null
-    this.greaves = null
+    this.stats = {
+      health: 1,
+      strength: 1,
+      agility: 1,
+      precision: 1,
+    }
+    this.items = {
+      helmet: null,
+      armor: null,
+      weapon: new Weapon('common'),
+      shield: null,
+      greaves: null,
+    }
   }
 
   increaseAttributes({ health = 0, strength = 0, agility = 0, precision = 0 }) {
-    this.health += health
-    this.strength += strength
-    this.agility += agility
-    this.precision += precision
+    this.stats.health += health
+    this.stats.strength += strength
+    this.stats.agility += agility
+    this.stats.precision += precision
   }
 
   calculatedStats() {
     const stats = {
-      health: this.health,
-      strength: this.strength,
-      agility: this.agility,
-      precision: this.precision,
+      health: this.stats.health,
+      strength: this.stats.strength,
+      agility: this.stats.agility,
+      precision: this.stats.precision,
     }
     const items = [
-      this.helmet,
-      this.armor,
-      this.weapon,
-      this.shield,
-      this.greaves,
+      this.items.helmet,
+      this.items.armor,
+      this.items.weapon,
+      this.items.shield,
+      this.items.greaves,
     ]
     for (const item of items) {
       if (item) {
