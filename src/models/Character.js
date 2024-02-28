@@ -1,6 +1,6 @@
-const { Weapon } = require('./Item')
+import { Weapon } from './Item'
 
-class Character {
+export class Character {
   constructor() {
     this.look = 1
     this.name = ''
@@ -53,4 +53,4 @@ class Character {
   }
 }
 
-module.exports = Character
+export default Character

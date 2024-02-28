@@ -14,7 +14,13 @@ const CharacterImg = ({ number }) => {
 
   const characterImage = getCharacterImage()
 
-  return <img src={characterImage} alt={`Character ${number}`} />
+  return (
+    <img
+      className="character-img"
+      src={characterImage}
+      alt={`Character ${number}`}
+    />
+  )
 }
 
 export default CharacterImg
