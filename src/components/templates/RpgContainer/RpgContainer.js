@@ -11,7 +11,7 @@ const RpgContainer = ({
   className,
   bgImg,
 }) => {
-  const containerClasses = ['rpgui-container']
+  const containerClasses = ['rpgui-container container']
   if (framed) containerClasses.push('framed')
   if (golden) containerClasses.push('framed-golden')
   if (golden2) containerClasses.push('framed-golden-2')
