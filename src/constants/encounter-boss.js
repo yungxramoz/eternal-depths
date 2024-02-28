@@ -7,6 +7,11 @@ export const FIRE_DRAGON = Object.freeze({
     agility: 2,
     precision: 2,
   },
+  style: {
+    width: '50vw',
+    top: '0px',
+    left: '0px',
+  },
 })
 
 export const LICH = Object.freeze({
@@ -17,6 +22,11 @@ export const LICH = Object.freeze({
     strength: 2,
     agility: 3,
     precision: 3,
+  },
+  style: {
+    width: '50vw',
+    top: '0px',
+    left: '0px',
   },
 })
 
@@ -29,6 +39,11 @@ export const MAD_MAGE = Object.freeze({
     agility: 2,
     precision: 3,
   },
+  style: {
+    width: '50vw',
+    top: '0px',
+    left: '0px',
+  },
 })
 
 export const SHADOW_DRAGON = Object.freeze({
@@ -40,6 +55,11 @@ export const SHADOW_DRAGON = Object.freeze({
     agility: 2,
     precision: 2,
   },
+  style: {
+    width: '50vw',
+    top: '0px',
+    left: '0px',
+  },
 })
 
 export const VAMPIRE_LORD = Object.freeze({
@@ -50,6 +70,11 @@ export const VAMPIRE_LORD = Object.freeze({
     strength: 2,
     agility: 3,
     precision: 3,
+  },
+  style: {
+    width: '50vw',
+    top: '0px',
+    left: '0px',
   },
 })
 

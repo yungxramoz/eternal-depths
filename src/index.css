@@ -4,6 +4,28 @@ body {
   background-color: black;
 }
 
+.d-flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+.justify-content-center {
+  justify-content: center;
+}
+.align-items-center {
+  align-items: center;
+}
+.align-items-start {
+  align-items: flex-start;
+}
+.align-items-end {
+  align-items: flex-end;
+}
+.justify-content-between {
+  justify-content: space-between;
+}
+
 .pb-1 {
   padding-bottom: 1em;
 }

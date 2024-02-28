@@ -14,6 +14,7 @@ class Encounter {
     this.isBoss = isBoss
     this.name = encounter.name
     this.fileName = encounter.fileName
+    this.style = encounter.style
 
     const points = level * 2
     const stats = encounter.baseStats

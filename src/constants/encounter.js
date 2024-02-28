@@ -7,6 +7,11 @@ export const BARBARIAN = Object.freeze({
     agility: 1,
     precision: 1,
   },
+  style: {
+    width: '50vw',
+    top: '0px',
+    left: '0px',
+  },
 })
 
 export const BAT = Object.freeze({
@@ -17,6 +22,11 @@ export const BAT = Object.freeze({
     strength: 1,
     agility: 3,
     precision: 1,
+  },
+  style: {
+    width: '50vw',
+    top: '0px',
+    left: '0px',
   },
 })
 
@@ -29,6 +39,11 @@ export const GOBLIN = Object.freeze({
     agility: 2,
     precision: 1,
   },
+  style: {
+    width: '50vw',
+    top: '0px',
+    left: '0px',
+  },
 })
 
 export const ORC = Object.freeze({
@@ -39,6 +54,11 @@ export const ORC = Object.freeze({
     strength: 2,
     agility: 0,
     precision: 0,
+  },
+  style: {
+    width: '50vw',
+    top: '0px',
+    left: '0px',
   },
 })
 
@@ -51,6 +71,11 @@ export const SCOUNDREL = Object.freeze({
     agility: 1,
     precision: 1,
   },
+  style: {
+    width: '50vw',
+    top: '0px',
+    left: '0px',
+  },
 })
 
 export const SKELETON = Object.freeze({
@@ -61,6 +86,11 @@ export const SKELETON = Object.freeze({
     strength: 1,
     agility: 1,
     precision: 0,
+  },
+  style: {
+    width: '50vw',
+    top: '0px',
+    left: '0px',
   },
 })
 
@@ -73,6 +103,11 @@ export const SNAKE = Object.freeze({
     agility: 2,
     precision: 2,
   },
+  style: {
+    width: '50vw',
+    top: '0px',
+    left: '0px',
+  },
 })
 
 export const SPIDER = Object.freeze({
@@ -83,6 +118,11 @@ export const SPIDER = Object.freeze({
     strength: 1,
     agility: 2,
     precision: 1,
+  },
+  style: {
+    width: '50vw',
+    top: '0px',
+    left: '0px',
   },
 })
 
@@ -95,6 +135,11 @@ export const THIEF = Object.freeze({
     agility: 2,
     precision: 3,
   },
+  style: {
+    width: '50vw',
+    top: '0px',
+    left: '0px',
+  },
 })
 
 export const WOLF = Object.freeze({
@@ -105,6 +150,11 @@ export const WOLF = Object.freeze({
     strength: 2,
     agility: 1,
     precision: 0,
+  },
+  style: {
+    width: '50vw',
+    top: '0px',
+    left: '0px',
   },
 })
 
