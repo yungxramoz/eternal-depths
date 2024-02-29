@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Navigate, useLocation } from 'react-router-dom'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 
-const GameStateRoute = ({ children }) => {
+const GameStateRoute = () => {
   const gameState = useSelector((state) => state.game.gameState)
   const location = useLocation()
 
@@ -28,7 +28,7 @@ const GameStateRoute = ({ children }) => {
     return navigateToPath('/dungeon')
   }
 
-  return children
+  return <Outlet />
 }
 
 export default GameStateRoute

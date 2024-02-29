@@ -1,18 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import RpgButton from '../../components/atoms/RpgButton/RpgButton'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
-import Encounter from '../../models/Encounter'
+import { nextStage } from '../../state/game/gameSlice'
 import './Dungeon.css'
-import HpProgressBar from '../../components/molecules/ProgressBar/HpProgressBar'
 
 const Dungeon = () => {
-  let [encounter, setEncounter] = useState(new Encounter(1))
+  const dispatch = useDispatch()
+  const encounter = useSelector((state) => state.game.encounter)
+  const stage = useSelector((state) => state.game.stage)
 
-  const regenerateEncounter = () => {
-    const randomLevel = Math.floor(Math.random() * 10) + 1
-    const isBoss = Math.random() < 0.5
-    setEncounter(new Encounter(randomLevel, isBoss))
-  }
   let imgSrc = require('../../assets/images/encounters/' + encounter.fileName)
 
   let randomRoomType = Math.random() < 0.5 ? 'dungeon' : 'cave'
@@ -25,8 +22,7 @@ const Dungeon = () => {
       <h1>
         {encounter.name} Lvl {encounter.level}
       </h1>
-      <h3>Stage: 1</h3>
-      <HpProgressBar currentHp={encounter.hp - 10} maxHp={encounter.maxHp} />
+      <h3>Stage: {stage}</h3>
       <div className="encounter-container">
         <img
           className="encounter-img"
@@ -35,7 +31,7 @@ const Dungeon = () => {
           style={encounter.style}
         />
       </div>
-      <RpgButton text="Regenerate" onClick={regenerateEncounter} />
+      <RpgButton text="Next Stage" onClick={() => dispatch(nextStage())} />
     </RpgContainer>
   )
 }
