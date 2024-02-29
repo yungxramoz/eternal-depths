@@ -3,6 +3,8 @@ import RpgButton from '../../components/atoms/RpgButton/RpgButton'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
 import Encounter from '../../models/Encounter'
 import './Dungeon.css'
+import RpgProgressBar from '../../components/atoms/RpgProgressBar/RpgProgressBar'
+import HpProgressBar from '../../components/molecules/ProgressBar/HpProgressBar'
 
 const Dungeon = () => {
   let [encounter, setEncounter] = useState(new Encounter(1))
@@ -14,9 +16,7 @@ const Dungeon = () => {
   }
   let imgSrc = require('../../assets/images/encounters/' + encounter.fileName)
 
-  //get random dungeon or cave string
   let randomRoomType = Math.random() < 0.5 ? 'dungeon' : 'cave'
-
   let randomDungeonRoom = require(`../../assets/images/rooms/${randomRoomType}-${Math.floor(
     Math.random() * 5,
   )}.png`)
@@ -27,6 +27,7 @@ const Dungeon = () => {
         {encounter.name} Lvl {encounter.level}
       </h1>
       <h3>Stage: 1</h3>
+      <HpProgressBar currentHp={encounter.hp} maxHp={encounter.maxHp} />
       <div className="encounter-container">
         <img
           className="encounter-img"
