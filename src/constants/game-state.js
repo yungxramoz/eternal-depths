@@ -3,4 +3,6 @@ const PLAYING = 'playing'
 const OVER = 'over'
 const WON = 'won'
 
-export { IDLE, PLAYING, OVER, WON }
+const GAME_STATE = { IDLE, PLAYING, OVER, WON }
+
+export default GAME_STATE

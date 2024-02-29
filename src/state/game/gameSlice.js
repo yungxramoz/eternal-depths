@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
+import GAME_STATE from '../../constants/game-state'
 import Encounter from '../../models/Encounter'
-import { IDLE, OVER, PLAYING, WON } from '../../constants/game-state'
 
 const initialState = {
-  gameState: IDLE,
+  gameState: GAME_STATE.IDLE,
   stage: 0,
   encounter: null,
 }
@@ -13,18 +13,18 @@ const gameSlice = createSlice({
   initialState,
   reducers: {
     startGame(state) {
-      state.gameState = PLAYING
+      state.gameState = GAME_STATE.PLAYING
       state.stage = 1
       state.encounter = new Encounter(1)
     },
     gameOver(state) {
-      state.gameState = OVER
+      state.gameState = GAME_STATE.OVER
     },
     gameWon(state) {
-      state.gameState = WON
+      state.gameState = GAME_STATE.WON
     },
     resetGame(state) {
-      state.gameState = IDLE
+      state.gameState = GAME_STATE.IDLE
     },
     nextStage(state) {
       state.stage += 1

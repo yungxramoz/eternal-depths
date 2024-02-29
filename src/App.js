@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
+import ROUTE from './constants/routes'
 import GameStateRoute from './utils/GameStateRoute'
 import Dungeon from './views/Dungeon/Dungeon'
 import Home from './views/Home/Home'
@@ -11,9 +12,9 @@ function App() {
       <Routes>
         {/* <GameStateRoute> */}
         <Route element={<GameStateRoute />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/new-character" element={<NewCharacter />} />
-          <Route path="/dungeon" element={<Dungeon />} />
+          <Route path={ROUTE.HOME} element={<Home />} />
+          <Route path={ROUTE.NEW_CHARACTER} element={<NewCharacter />} />
+          <Route path={ROUTE.DUNGEON} element={<Dungeon />} />
         </Route>
         {/* </GameStateRoute> */}
       </Routes>
