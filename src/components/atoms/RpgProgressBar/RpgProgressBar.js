@@ -16,9 +16,9 @@ const RpgProgressBar = ({ max, current, type }) => {
   }
 
   return (
-    <div className={`rpgui-progress ${color}`} data-rpguitype="progress">
+    <div className="rpgui-progress" data-rpguitype="progress">
       <div className=" rpgui-progress-track">
-        <div className=" rpgui-progress-fill" style={{left: '0px', width: `${progress}%`}}></div>
+        <div className={`rpgui-progress-fill ${color}`} style={{left: '0px', width: `${progress}%`}}></div>
       </div>
       <div className=" rpgui-progress-left-edge"></div>
       <div className=" rpgui-progress-right-edge"></div>

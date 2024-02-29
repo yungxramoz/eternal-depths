@@ -27,7 +27,7 @@ const Dungeon = () => {
         {encounter.name} Lvl {encounter.level}
       </h1>
       <h3>Stage: 1</h3>
-      <HpProgressBar currentHp={encounter.hp} maxHp={encounter.maxHp} />
+      <HpProgressBar currentHp={encounter.hp-10} maxHp={encounter.maxHp} />
       <div className="encounter-container">
         <img
           className="encounter-img"
