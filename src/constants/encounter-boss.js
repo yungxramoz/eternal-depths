@@ -8,9 +8,9 @@ export const FIRE_DRAGON = Object.freeze({
     precision: 2,
   },
   style: {
-    width: '50vw',
-    top: '0px',
-    left: '0px',
+    maxWidth: '95vw',
+    maxHeight: '95vh',
+    alignSelf: 'flex-end',
   },
 })
 
@@ -24,9 +24,9 @@ export const LICH = Object.freeze({
     precision: 3,
   },
   style: {
-    width: '50vw',
-    top: '0px',
-    left: '0px',
+    maxWidth: '70vw',
+    maxHeight: '70vh',
+    alignSelf: 'flex-end',
   },
 })
 
@@ -40,9 +40,9 @@ export const MAD_MAGE = Object.freeze({
     precision: 3,
   },
   style: {
-    width: '50vw',
-    top: '0px',
-    left: '0px',
+    maxWidth: '70vw',
+    maxHeight: '70vh',
+    alignSelf: 'flex-end',
   },
 })
 
@@ -56,9 +56,9 @@ export const SHADOW_DRAGON = Object.freeze({
     precision: 2,
   },
   style: {
-    width: '50vw',
-    top: '0px',
-    left: '0px',
+    maxWidth: '95vw',
+    maxHeight: '95vh',
+    alignSelf: 'flex-start',
   },
 })
 
@@ -72,9 +72,9 @@ export const VAMPIRE_LORD = Object.freeze({
     precision: 3,
   },
   style: {
-    width: '50vw',
-    top: '0px',
-    left: '0px',
+    maxWidth: '70vw',
+    maxHeight: '70vh',
+    alignSelf: 'flex-end',
   },
 })
 

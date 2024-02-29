@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import './Dungeon.css'
-import Encounter from '../../models/Encounter'
+import RpgButton from '../../components/atoms/RpgButton/RpgButton'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
+import Encounter from '../../models/Encounter'
+import './Dungeon.css'
 
 const Dungeon = () => {
   let [encounter, setEncounter] = useState(new Encounter(1))
@@ -26,7 +27,7 @@ const Dungeon = () => {
         {encounter.name} Lvl {encounter.level}
       </h1>
       <h3>Stage: 1</h3>
-      <div className="d-flex justify-content-center">
+      <div className="encounter-container">
         <img
           className="encounter-img"
           src={imgSrc}
@@ -34,6 +35,7 @@ const Dungeon = () => {
           style={encounter.style}
         />
       </div>
+      <RpgButton text="Regenerate" onClick={regenerateEncounter} />
     </RpgContainer>
   )
 }

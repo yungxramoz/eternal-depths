@@ -8,14 +8,14 @@ export const BARBARIAN = Object.freeze({
     precision: 1,
   },
   style: {
-    width: '50vw',
-    top: '0px',
-    left: '0px',
+    maxWidth: '60vw',
+    maxHeight: '60vh',
+    alignSelf: 'flex-end',
   },
 })
 
 export const BAT = Object.freeze({
-  name: 'Bat',
+  name: 'Giant Bat',
   fileName: 'bat.png',
   baseStats: {
     health: 1,
@@ -24,9 +24,9 @@ export const BAT = Object.freeze({
     precision: 1,
   },
   style: {
-    width: '50vw',
-    top: '0px',
-    left: '0px',
+    maxWidth: '70vw',
+    maxHeight: '70vh',
+    alignSelf: 'flex-start',
   },
 })
 
@@ -40,9 +40,9 @@ export const GOBLIN = Object.freeze({
     precision: 1,
   },
   style: {
-    width: '50vw',
-    top: '0px',
-    left: '0px',
+    maxWidth: '45vw',
+    maxHeight: '45vh',
+    alignSelf: 'flex-end',
   },
 })
 
@@ -56,9 +56,9 @@ export const ORC = Object.freeze({
     precision: 0,
   },
   style: {
-    width: '50vw',
-    top: '0px',
-    left: '0px',
+    maxWidth: '70vw',
+    maxHeight: '70vh',
+    alignSelf: 'flex-end',
   },
 })
 
@@ -72,9 +72,9 @@ export const SCOUNDREL = Object.freeze({
     precision: 1,
   },
   style: {
-    width: '50vw',
-    top: '0px',
-    left: '0px',
+    maxWidth: '60vw',
+    maxHeight: '60vh',
+    alignSelf: 'flex-end',
   },
 })
 
@@ -88,9 +88,9 @@ export const SKELETON = Object.freeze({
     precision: 0,
   },
   style: {
-    width: '50vw',
-    top: '0px',
-    left: '0px',
+    maxWidth: '60vw',
+    maxHeight: '60vh',
+    alignSelf: 'flex-end',
   },
 })
 
@@ -104,9 +104,9 @@ export const SNAKE = Object.freeze({
     precision: 2,
   },
   style: {
-    width: '50vw',
-    top: '0px',
-    left: '0px',
+    maxWidth: '40vw',
+    maxHeight: '40vh',
+    alignSelf: 'flex-end',
   },
 })
 
@@ -120,9 +120,9 @@ export const SPIDER = Object.freeze({
     precision: 1,
   },
   style: {
-    width: '50vw',
-    top: '0px',
-    left: '0px',
+    maxWidth: '60vw',
+    maxHeight: '60vh',
+    alignSelf: 'flex-end',
   },
 })
 
@@ -136,9 +136,9 @@ export const THIEF = Object.freeze({
     precision: 3,
   },
   style: {
-    width: '50vw',
-    top: '0px',
-    left: '0px',
+    maxWidth: '60vw',
+    maxHeight: '60vh',
+    alignSelf: 'flex-end',
   },
 })
 
@@ -152,9 +152,9 @@ export const WOLF = Object.freeze({
     precision: 0,
   },
   style: {
-    width: '50vw',
-    top: '0px',
-    left: '0px',
+    maxWidth: '50vw',
+    maxHeight: '50vh',
+    alignSelf: 'flex-end',
   },
 })
 

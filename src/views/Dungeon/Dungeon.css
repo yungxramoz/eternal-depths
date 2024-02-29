@@ -2,3 +2,21 @@
   /* width: 50vw; */
   filter: drop-shadow(-2px 2px 5px black);
 }
+
+.encounter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex-grow: 1;
+  padding: 8em 0;
+}
+
+.dungeon-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: normal;
+}
