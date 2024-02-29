@@ -6,10 +6,10 @@ import MinusIcon from '../../atoms/Icons/MinusIcon'
 import PlusIcon from '../../atoms/Icons/PlusIcon'
 import './IconButton.css'
 
-const IconButton = ({ icon, size, disabled, onClick }) => {
+const IconButton = ({ icon, size, disabled, className, onClick }) => {
   return (
     <button
-      className={`icon-button ${getSizeClass(size)}`}
+      className={`icon-button ${getSizeClass(size)} ${className}`}
       disabled={disabled}
       onClick={onClick}
     >

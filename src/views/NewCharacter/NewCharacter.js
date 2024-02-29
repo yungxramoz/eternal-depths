@@ -12,8 +12,18 @@ import {
   setName,
 } from '../../state/character/characterSlice'
 import './NewCharacter.css'
+import { startGame } from '../../state/game/gameSlice'
+import { useNavigate } from 'react-router'
 
 const NewCharacter = () => {
+  const navigate = useNavigate()
+  const gameState = useSelector((state) => state.game.gameState)
+  React.useEffect(() => {
+    if (gameState === 'playing') {
+      navigate('/dungeon')
+    }
+  })
+
   const dispatch = useDispatch()
   const character = useSelector((state) => state.character.current)
   const initialPoints = useSelector(
@@ -31,8 +41,7 @@ const NewCharacter = () => {
   const isCreateDisabled = () => {
     return (
       !localName ||
-      Object.values(assignedPoints).reduce((a, b) => a + b, 0) !==
-        initialPoints
+      Object.values(assignedPoints).reduce((a, b) => a + b, 0) !== initialPoints
     )
   }
 
@@ -41,6 +50,7 @@ const NewCharacter = () => {
     dispatch(setLook(characterLook))
     dispatch(assignAttributePoint(assignedPoints))
     resetLocalFields()
+    dispatch(startGame())
   }
 
   const resetLocalFields = () => {
@@ -56,9 +66,8 @@ const NewCharacter = () => {
 
   return (
     <RpgContainer fullPage>
-      <GoBackButton />
+      <GoBackButton className="align-self-start" />
       <h1>New Character</h1>
-      <RpgSeparator />
       <CharacterChooser onCharacterChange={setCharacterLook} />
       <input
         type="text"

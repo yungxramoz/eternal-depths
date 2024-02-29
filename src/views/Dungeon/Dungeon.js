@@ -3,7 +3,6 @@ import RpgButton from '../../components/atoms/RpgButton/RpgButton'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
 import Encounter from '../../models/Encounter'
 import './Dungeon.css'
-import RpgProgressBar from '../../components/atoms/RpgProgressBar/RpgProgressBar'
 import HpProgressBar from '../../components/molecules/ProgressBar/HpProgressBar'
 
 const Dungeon = () => {
@@ -27,7 +26,7 @@ const Dungeon = () => {
         {encounter.name} Lvl {encounter.level}
       </h1>
       <h3>Stage: 1</h3>
-      <HpProgressBar currentHp={encounter.hp-10} maxHp={encounter.maxHp} />
+      <HpProgressBar currentHp={encounter.hp - 10} maxHp={encounter.maxHp} />
       <div className="encounter-container">
         <img
           className="encounter-img"

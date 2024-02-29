@@ -97,7 +97,7 @@ export class Shield extends Item {
   }
 }
 
-export default {
+const itemExports = {
   Item,
   Armor,
   Helmet,
@@ -105,3 +105,5 @@ export default {
   Weapon,
   Shield,
 }
+
+export default itemExports
