@@ -158,7 +158,7 @@ export const WOLF = Object.freeze({
   },
 })
 
-export const Encounters = [
+export const ENCOUNTERS = [
   BARBARIAN,
   BAT,
   GOBLIN,

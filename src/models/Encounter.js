@@ -1,10 +1,10 @@
-import { Encounters } from '../constants/encounter'
-import { BossEncounters } from '../constants/encounter-boss'
+import { ENCOUNTERS } from '../constants/encounter'
+import { ENCOUNTER_BOSS } from '../constants/encounter-boss'
 
 class Encounter {
   constructor(level, isBoss = false, randomEncounter = true, encounter = null) {
     if (randomEncounter) {
-      const encounters = isBoss ? BossEncounters : Encounters
+      const encounters = isBoss ? ENCOUNTER_BOSS : ENCOUNTERS
       const randomIndex = Math.floor(Math.random() * encounters.length)
       const randomEncounter = encounters[randomIndex]
       encounter = randomEncounter

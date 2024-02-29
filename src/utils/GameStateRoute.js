@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import { IDLE, OVER, PLAYING, WON } from '../constants/game-state'
 
 const GameStateRoute = () => {
   const gameState = useSelector((state) => state.game.gameState)
@@ -15,16 +16,16 @@ const GameStateRoute = () => {
     return <Navigate to={path} />
   }
 
-  if (gameState === 'idle' && !idlePaths.includes(location.pathname)) {
+  if (gameState === IDLE && !idlePaths.includes(location.pathname)) {
     return navigateToPath('/')
   }
-  if (gameState === 'over' && !overPaths.includes(location.pathname)) {
+  if (gameState === OVER && !overPaths.includes(location.pathname)) {
     return navigateToPath('/game-over')
   }
-  if (gameState === 'won' && !wonPaths.includes(location.pathname)) {
+  if (gameState === WON && !wonPaths.includes(location.pathname)) {
     return navigateToPath('/game-won')
   }
-  if (gameState === 'playing' && !playingPaths.includes(location.pathname)) {
+  if (gameState === PLAYING && !playingPaths.includes(location.pathname)) {
     return navigateToPath('/dungeon')
   }
 

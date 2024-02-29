@@ -78,7 +78,7 @@ export const VAMPIRE_LORD = Object.freeze({
   },
 })
 
-export const BossEncounters = [
+export const ENCOUNTER_BOSS = [
   FIRE_DRAGON,
   LICH,
   MAD_MAGE,
