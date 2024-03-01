@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import GAME_STATE from '../../constants/game-state'
-import Encounter from '../../models/Encounter'
+import { generateEncounter } from '../../utils/encounter-generator'
 
 const initialState = {
   gameState: GAME_STATE.IDLE,
@@ -15,7 +15,7 @@ const gameSlice = createSlice({
     startGame(state) {
       state.gameState = GAME_STATE.PLAYING
       state.stage = 1
-      state.encounter = new Encounter(1)
+      state.encounter = generateEncounter(1)
     },
     gameOver(state) {
       state.gameState = GAME_STATE.OVER
@@ -30,7 +30,7 @@ const gameSlice = createSlice({
       state.stage += 1
       const level = Math.floor((state.stage - 1) / 5) + 1
       const isBoss = state.stage % 5 === 0
-      state.encounter = new Encounter(level, isBoss)
+      state.encounter = generateEncounter(level, isBoss)
     },
   },
 })
