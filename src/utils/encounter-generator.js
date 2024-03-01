@@ -42,6 +42,10 @@ export const generateEncounter = (
   }
 }
 
+export const encounterLevel = (stage) => {
+  return Math.floor((stage - 1) / 5) + 1
+}
+
 const generateStats = (points, stats) => {
   for (let i = 0; i < points; i++) {
     const randomStat = Math.floor(Math.random() * 4)

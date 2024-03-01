@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import RpgButton from '../../components/atoms/RpgButton/RpgButton'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
-import { nextStage } from '../../state/game/gameSlice'
+import { nextStage } from '../../store/game/gameSlice'
 import './Dungeon.css'
 
 const Dungeon = () => {
