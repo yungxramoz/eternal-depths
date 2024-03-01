@@ -10,9 +10,9 @@ import {
   assignAttributePoint,
   setLook,
   setName,
-} from '../../state/character/characterSlice'
+} from '../../store/character/characterSlice'
 import './NewCharacter.css'
-import { startGame } from '../../state/game/gameSlice'
+import { startGame } from '../../store/game/gameSlice'
 
 const NewCharacter = () => {
   const dispatch = useDispatch()
