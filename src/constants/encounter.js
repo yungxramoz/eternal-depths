@@ -9,7 +9,7 @@ export const BARBARIAN = Object.freeze({
   },
   style: {
     maxWidth: '60vw',
-    maxHeight: '60vh',
+    maxHeight: 'd60vh',
     alignSelf: 'flex-end',
   },
 })
@@ -25,7 +25,7 @@ export const BAT = Object.freeze({
   },
   style: {
     maxWidth: '70vw',
-    maxHeight: '70vh',
+    maxHeight: '70dvh',
     alignSelf: 'flex-start',
   },
 })
@@ -41,7 +41,7 @@ export const GOBLIN = Object.freeze({
   },
   style: {
     maxWidth: '45vw',
-    maxHeight: '45vh',
+    maxHeight: '45dvh',
     alignSelf: 'flex-end',
   },
 })
@@ -57,7 +57,7 @@ export const ORC = Object.freeze({
   },
   style: {
     maxWidth: '70vw',
-    maxHeight: '70vh',
+    maxHeight: '70dvh',
     alignSelf: 'flex-end',
   },
 })
@@ -73,7 +73,7 @@ export const SCOUNDREL = Object.freeze({
   },
   style: {
     maxWidth: '60vw',
-    maxHeight: '60vh',
+    maxHeight: '60dvh',
     alignSelf: 'flex-end',
   },
 })
@@ -89,7 +89,7 @@ export const SKELETON = Object.freeze({
   },
   style: {
     maxWidth: '60vw',
-    maxHeight: '60vh',
+    maxHeight: '60dvh',
     alignSelf: 'flex-end',
   },
 })
@@ -105,7 +105,7 @@ export const SNAKE = Object.freeze({
   },
   style: {
     maxWidth: '40vw',
-    maxHeight: '40vh',
+    maxHeight: '40dvh',
     alignSelf: 'flex-end',
   },
 })
@@ -121,7 +121,7 @@ export const SPIDER = Object.freeze({
   },
   style: {
     maxWidth: '60vw',
-    maxHeight: '60vh',
+    maxHeight: '60dvh',
     alignSelf: 'flex-end',
   },
 })
@@ -137,7 +137,7 @@ export const THIEF = Object.freeze({
   },
   style: {
     maxWidth: '60vw',
-    maxHeight: '60vh',
+    maxHeight: '60dvh',
     alignSelf: 'flex-end',
   },
 })
@@ -153,7 +153,7 @@ export const WOLF = Object.freeze({
   },
   style: {
     maxWidth: '50vw',
-    maxHeight: '50vh',
+    maxHeight: '50dvh',
     alignSelf: 'flex-end',
   },
 })
