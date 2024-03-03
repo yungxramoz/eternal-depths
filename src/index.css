@@ -3,3 +3,15 @@ body {
   font-family: 'Press Start 2P', sans-serif;
   background-color: black;
 }
+
+.align-self-center {
+  align-self: center;
+}
+
+.align-self-end {
+  align-self: flex-end;
+}
+
+.align-self-start {
+  align-self: flex-start;
+}

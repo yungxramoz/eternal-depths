@@ -1,38 +1,29 @@
 import React from 'react'
-import TestRenderer from 'react-test-renderer'
 import RpgButton from './RpgButton'
+import { render, screen } from '@testing-library/react'
 
 describe('RpgButton', () => {
   it('renders correctly', () => {
-    const tree = TestRenderer.create(<RpgButton />).toJSON()
-    expect(tree).toMatchSnapshot()
+    render(<RpgButton />)
+    expect(screen).toMatchSnapshot('RpgButton')
   })
-  it('has correct text', async () => {
-    const testRenderer = TestRenderer.create(
-      <RpgButton text="Test" onClick={() => {}} />,
-    )
-    const testInstance = testRenderer.root
-    const button = await testInstance.findByType('button')
-    expect(button.children).toEqual(['Test'])
+  it('has correct text', () => {
+    render(<RpgButton text="Test" onClick={() => {}} />)
+    const button = screen.getByRole('button')
+    expect(button.textContent).toBe('Test')
   })
 
-  it('calls onClick when clicked', async () => {
+  it('calls onClick when clicked', () => {
     const mockOnClick = jest.fn()
-    const testRenderer = TestRenderer.create(
-      <RpgButton text="Test" onClick={mockOnClick} />,
-    )
-    const testInstance = testRenderer.root
-    const button = await testInstance.findByType('button')
-    button.props.onClick()
+    render(<RpgButton text="Test" onClick={mockOnClick} />)
+    const button = screen.getByRole('button')
+    button.click()
     expect(mockOnClick).toHaveBeenCalled()
   })
 
-  it('has golden class when golden prop is true', async () => {
-    const testRenderer = TestRenderer.create(
-      <RpgButton text="Test" onClick={() => {}} golden />,
-    )
-    const testInstance = testRenderer.root
-    const button = await testInstance.findByType('button')
-    expect(button.props.className).toContain('golden')
+  it('has golden class when golden prop is true', () => {
+    render(<RpgButton text="Test" onClick={() => {}} golden />)
+    const button = screen.getByRole('button')
+    expect(button.classList).toContain('golden')
   })
 })

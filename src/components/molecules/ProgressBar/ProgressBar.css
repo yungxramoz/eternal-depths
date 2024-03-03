@@ -1,0 +1,10 @@
+.progress-container {
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+}
+
+.hint-text {
+    margin: 0;
+    padding-left: 42px;
+}

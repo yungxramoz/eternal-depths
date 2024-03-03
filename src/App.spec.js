@@ -1,27 +1,40 @@
+import { configureStore } from '@reduxjs/toolkit'
+import { render, screen } from '@testing-library/react'
 import React from 'react'
-import TestRenderer from 'react-test-renderer'
+import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 import App from './App'
-import Home from './views/Home/Home'
+import gameReducer from './store/game/gameSlice'
 
 describe('App', () => {
-  test('renders correctly', () => {
-    const tree = TestRenderer.create(
-      <MemoryRouter initialEntries={['/']}>
-        <App />
-      </MemoryRouter>,
-    ).toJSON()
-    expect(tree).toMatchSnapshot()
+  let store
+  beforeEach(() => {
+    store = configureStore({
+      reducer: {
+        game: gameReducer,
+      },
+    })
+  })
+  it('renders correctly', () => {
+    render(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <App />
+        </MemoryRouter>
+      </Provider>,
+    )
+    expect(screen).toMatchSnapshot('App')
   })
 
-  test('renders Home component for root path', async () => {
-    const testRenderer = TestRenderer.create(
-      <MemoryRouter initialEntries={['/']}>
-        <App />
-      </MemoryRouter>,
+  it('renders Home component for root path', async () => {
+    render(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <App />
+        </MemoryRouter>
+      </Provider>,
     )
-    const testInstance = testRenderer.root
-    const homeComponents = await testInstance.findAllByType(Home)
-    expect(homeComponents).toHaveLength(1)
+    const homeElement = await screen.findByText('Eternal Depths')
+    expect(homeElement).toBeInTheDocument()
   })
 })

@@ -1,19 +1,21 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
+import ROUTE from './constants/routes'
+import GameStateRoute from './utils/GameStateRoute'
+import Dungeon from './views/Dungeon/Dungeon'
 import Home from './views/Home/Home'
 import NewCharacter from './views/NewCharacter/NewCharacter'
-import store from './state/store'
-import { Provider } from 'react-redux'
 
 function App() {
   return (
     <div className="rpgui-content">
-      <Provider store={store}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/new-character" element={<NewCharacter />} />
-        </Routes>
-      </Provider>
+      <Routes>
+        <Route element={<GameStateRoute />}>
+          <Route path={ROUTE.HOME} element={<Home />} />
+          <Route path={ROUTE.NEW_CHARACTER} element={<NewCharacter />} />
+          <Route path={ROUTE.DUNGEON} element={<Dungeon />} />
+        </Route>
+      </Routes>
     </div>
   )
 }

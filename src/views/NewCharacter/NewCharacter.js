@@ -10,8 +10,9 @@ import {
   assignAttributePoint,
   setLook,
   setName,
-} from '../../state/character/characterSlice'
+} from '../../store/character/characterSlice'
 import './NewCharacter.css'
+import { startGame } from '../../store/game/gameSlice'
 
 const NewCharacter = () => {
   const dispatch = useDispatch()
@@ -31,8 +32,7 @@ const NewCharacter = () => {
   const isCreateDisabled = () => {
     return (
       !localName ||
-      Object.values(assignedPoints).reduce((a, b) => a + b, 0) !==
-        initialPoints
+      Object.values(assignedPoints).reduce((a, b) => a + b, 0) !== initialPoints
     )
   }
 
@@ -41,6 +41,7 @@ const NewCharacter = () => {
     dispatch(setLook(characterLook))
     dispatch(assignAttributePoint(assignedPoints))
     resetLocalFields()
+    dispatch(startGame())
   }
 
   const resetLocalFields = () => {
@@ -56,9 +57,8 @@ const NewCharacter = () => {
 
   return (
     <RpgContainer fullPage>
-      <GoBackButton />
+      <GoBackButton className="align-self-start" />
       <h1>New Character</h1>
-      <RpgSeparator />
       <CharacterChooser onCharacterChange={setCharacterLook} />
       <input
         type="text"
