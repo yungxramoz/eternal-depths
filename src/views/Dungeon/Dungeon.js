@@ -4,11 +4,17 @@ import RpgButton from '../../components/atoms/RpgButton/RpgButton'
 import HpProgressBar from '../../components/molecules/ProgressBar/HpProgressBar'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
 import GAME_CYCLE_STATE from '../../constants/game-cycle-state'
-import { calculatedCharacterStats } from '../../store/character/characterSlice'
+import {
+  calculatedCharacterStats,
+  damageCharacter,
+  recoverHp,
+} from '../../store/character/characterSlice'
 import {
   damageEncounter,
+  gameWon,
   nextStage,
-  startBattle,
+  battleStart,
+  battleDefeat,
 } from '../../store/game/gameSlice'
 import './Dungeon.css'
 
@@ -40,6 +46,29 @@ const Dungeon = () => {
       characterStats.strength
 
     dispatch(damageEncounter(damage))
+
+    if (encounter.hp > 0) {
+      recieveDamage()
+    }
+  }
+
+  const recieveDamage = () => {
+    const minDamage = encounter.minDamage
+    const maxDamage = encounter.maxDamage
+    const damage =
+      Math.floor(Math.random() * (maxDamage - minDamage + 1)) +
+      minDamage +
+      encounter.stats.strength
+
+    dispatch(damageCharacter(damage))
+    if (character.hp <= 0) {
+      dispatch(battleDefeat())
+    }
+  }
+
+  const localNextStage = () => {
+    dispatch(nextStage())
+    dispatch(recoverHp(15))
   }
 
   const encounterHeader = () => {
@@ -54,14 +83,20 @@ const Dungeon = () => {
       return (
         <RpgButton
           text="Start Battle"
-          onClick={() => dispatch(startBattle())}
+          onClick={() => dispatch(battleStart())}
         />
       )
     } else if (gameCycleState === GAME_CYCLE_STATE.BATTLE) {
       return <RpgButton text="Attack" onClick={dealDamage} />
     } else {
       return (
-        <RpgButton text="Next Stage" onClick={() => dispatch(nextStage())} />
+        <>
+          <RpgButton
+            text="Escape Dungeon"
+            onClick={() => dispatch(gameWon())}
+          />
+          <RpgButton text="Next Stage" onClick={localNextStage} />
+        </>
       )
     }
   }
@@ -84,6 +119,9 @@ const Dungeon = () => {
           />
         ) : null}
       </div>
+      {gameCycleState === GAME_CYCLE_STATE.BATTLE ? (
+        <HpProgressBar currentHp={character.hp} maxHp={character.maxHp} />
+      ) : null}
       {encounterActions()}
     </RpgContainer>
   )

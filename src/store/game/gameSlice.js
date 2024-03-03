@@ -19,20 +19,26 @@ const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    startGame(state) {
+    gameStart(state) {
       state.gameState = GAME_STATE.PLAYING
       state.gameCycleState = GAME_CYCLE_STATE.ENCOUNTER
       state.stage = 1
       state.encounter = generateEncounter(1)
       state.stageFileName = generateStage(state.encounter)
     },
-    startBattle(state) {
+    gameWon(state) {
+      state.gameState = GAME_STATE.WON
+    },
+    gameOver(state) {
+      state.gameState = GAME_STATE.OVER
+    },
+    battleStart(state) {
       state.gameCycleState = GAME_CYCLE_STATE.BATTLE
     },
-    victory(state) {
+    battleVictory(state) {
       state.gameCycleState = GAME_CYCLE_STATE.BATTLE_DEFEAT
     },
-    defeat(state) {
+    battleDefeat(state) {
       state.gameCycleState = GAME_CYCLE_STATE.BATTLE_VICTORY
     },
     resetGame(state) {
@@ -50,17 +56,19 @@ const gameSlice = createSlice({
     damageEncounter(state, action) {
       state.encounter.hp -= action.payload
       if (state.encounter.hp <= 0) {
-        gameSlice.caseReducers.victory(state)
+        gameSlice.caseReducers.battleVictory(state)
       }
     },
   },
 })
 
 export const {
-  startGame,
-  startBattle,
+  gameStart,
   gameOver,
   gameWon,
+  battleStart,
+  battleVictory,
+  battleDefeat,
   resetGame,
   nextStage,
   damageEncounter,

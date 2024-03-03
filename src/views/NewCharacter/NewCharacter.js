@@ -12,7 +12,7 @@ import {
   setName,
 } from '../../store/character/characterSlice'
 import './NewCharacter.css'
-import { startGame } from '../../store/game/gameSlice'
+import { gameStart } from '../../store/game/gameSlice'
 
 const NewCharacter = () => {
   const dispatch = useDispatch()
@@ -41,7 +41,7 @@ const NewCharacter = () => {
     dispatch(setLook(characterLook))
     dispatch(assignAttributePoint(assignedPoints))
     resetLocalFields()
-    dispatch(startGame())
+    dispatch(gameStart())
   }
 
   const resetLocalFields = () => {

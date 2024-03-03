@@ -23,7 +23,7 @@ export const generateEncounter = (
   const stats = { ...encounter.baseStats }
   generateStats(points, stats)
 
-  const maxHp = stats.health * 3 + 10
+  const maxHp = stats.health * 4 + 10
   const hp = maxHp
   const minDamage = stats.strength * 2
   const maxDamageRange = isBoss ? 5 : 3
