@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RpgButton renders correctly: RpgButton 1`] = `
+exports[`HpProgressBar renders correctly: HpProgressBar 1`] = `
 Object {
   "debug": [Function],
   "findAllByAltText": [Function],

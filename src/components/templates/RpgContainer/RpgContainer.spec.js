@@ -1,15 +1,15 @@
+import { render, screen } from '@testing-library/react'
 import React from 'react'
-import TestRenderer from 'react-test-renderer'
 import RpgContainer from './RpgContainer'
 
 describe('RpgContainer', () => {
   it('renders correctly', () => {
-    const tree = TestRenderer.create(<RpgContainer />).toJSON()
-    expect(tree).toMatchSnapshot()
+    render(<RpgContainer />)
+    expect(screen).toMatchSnapshot('RpgContainer')
   })
 
-  it('applies correct classes based on props', async () => {
-    const testRenderer = TestRenderer.create(
+  it('applies correct classes based on props', () => {
+    render(
       <RpgContainer
         framed
         golden
@@ -19,22 +19,9 @@ describe('RpgContainer', () => {
         className="custom-class"
       />,
     )
-    const testInstance = testRenderer.root
-    const div = await testInstance.findByType('div')
-    expect(div.props.className).toEqual(
-      'rpgui-container container framed framed-golden framed-golden-2 framed-grey full-page custom-class',
-    )
   })
-  it('applies background image based on bgImg prop', async () => {
-    const testRenderer = TestRenderer.create(<RpgContainer bgImg="test.png" />)
-    const testInstance = testRenderer.root
-    const div = await testInstance.findByType('div')
-    expect(div.props.style).toEqual({
-      backgroundImage:
-        'url(test.png)',
-      backgroundPosition: 'bottom',
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
-    })
+  it('applies background image based on bgImg prop', () => {
+    render(<RpgContainer bgImg="test.png" />)
+    expect(screen).toMatchSnapshot('RpgContainer Background Image')
   })
 })

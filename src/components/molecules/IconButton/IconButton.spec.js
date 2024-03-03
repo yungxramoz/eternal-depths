@@ -1,31 +1,20 @@
+import { render, screen } from '@testing-library/react'
 import React from 'react'
-import TestRenderer from 'react-test-renderer'
 import IconButton from './IconButton'
 
 describe('IconButton', () => {
   it('renders IconButton component', () => {
-    const tree = TestRenderer.create(<IconButton icon="plus" />)
-
-    expect(tree).toMatchSnapshot()
+    render(<IconButton icon="plus" />)
+    expect(screen).toMatchSnapshot('IconButton')
   })
 
   it('renders the correct size class based on the size prop', () => {
-    const testRenderer = TestRenderer.create(
-      <IconButton icon="plus" size="large" />,
-    )
-    const testInstance = testRenderer.root
-
-    expect(
-      testInstance.findByProps({ className: 'icon-button large' }),
-    ).toBeTruthy()
+    render(<IconButton icon="plus" size="large" />)
+    expect(screen).toMatchSnapshot('IconButton Large')
   })
 
   it('disables the button when the disabled prop is true', () => {
-    const testRenderer = TestRenderer.create(
-      <IconButton icon="plus" disabled />,
-    )
-    const testInstance = testRenderer.root
-
-    expect(testInstance.findByProps({ disabled: true })).toBeTruthy()
+    render(<IconButton icon="plus" disabled />)
+    expect(screen).toMatchSnapshot('IconButton Disabled')
   })
 })

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RpgButton renders correctly: RpgButton 1`] = `
+exports[`NewCharacter renders correctly: NewCharacter 1`] = `
 Object {
   "debug": [Function],
   "findAllByAltText": [Function],

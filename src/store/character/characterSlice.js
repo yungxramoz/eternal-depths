@@ -41,7 +41,7 @@ export const characterSlice = createSlice({
     },
     assignAttributePoint: (
       state,
-      { payload: { health, strength, agility, precision } },
+      { payload: { health = 0, strength = 0, agility = 0, precision = 0 } },
     ) => {
       const total = health + strength + agility + precision
       if (state.availableAttributePoints >= total) {
@@ -62,7 +62,6 @@ export const characterSlice = createSlice({
       const items = [
         state.current.items.helmet,
         state.current.items.armor,
-        state.current.items.weapon,
         state.current.items.shield,
         state.current.items.greaves,
       ]
@@ -75,12 +74,18 @@ export const characterSlice = createSlice({
       }
       return stats
     },
-    equipItem: (state, { payload: { type, item } }) => {
-      state.current.items[type] = item
+    equipItem: (state, { payload: { slot, item } }) => {
+      state.current.items[slot] = item
     },
   },
 })
 
-export const { setName, setLook, assignAttributePoint } = characterSlice.actions
+export const {
+  setName,
+  setLook,
+  assignAttributePoint,
+  getCalculatedStats,
+  equipItem,
+} = characterSlice.actions
 
 export default characterSlice.reducer

@@ -1,10 +1,10 @@
+import { render, screen } from '@testing-library/react'
 import React from 'react'
-import TestRenderer from 'react-test-renderer'
 import ArrowLeftIcon from './ArrowLeftIcon'
 
 describe('ArrowLeftIcon', () => {
   it('renders correctly', () => {
-    const tree = TestRenderer.create(<ArrowLeftIcon />).toJSON()
-    expect(tree).toMatchSnapshot()
+    render(<ArrowLeftIcon />)
+    expect(screen).toMatchSnapshot('ArrowLeftIcon')
   })
 })

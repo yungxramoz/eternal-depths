@@ -10,13 +10,11 @@ function App() {
   return (
     <div className="rpgui-content">
       <Routes>
-        {/* <GameStateRoute> */}
         <Route element={<GameStateRoute />}>
           <Route path={ROUTE.HOME} element={<Home />} />
           <Route path={ROUTE.NEW_CHARACTER} element={<NewCharacter />} />
           <Route path={ROUTE.DUNGEON} element={<Dungeon />} />
         </Route>
-        {/* </GameStateRoute> */}
       </Routes>
     </div>
   )
