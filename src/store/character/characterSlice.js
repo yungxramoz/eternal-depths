@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSelector, createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   current: {
@@ -32,6 +32,33 @@ const initialState = {
 export const characterSlice = createSlice({
   name: 'character',
   initialState,
+  selectors: {
+    calculatedCharacterStats: createSelector(
+      (state) => state.current,
+      (current) => {
+        const stats = {
+          health: current.stats.health,
+          strength: current.stats.strength,
+          agility: current.stats.agility,
+          precision: current.stats.precision,
+        }
+        const items = [
+          current.items.helmet,
+          current.items.armor,
+          current.items.shield,
+          current.items.greaves,
+        ]
+        for (const item of items) {
+          if (item) {
+            for (const stat in item.stats) {
+              stats[stat] += item.stats[stat]
+            }
+          }
+        }
+        return stats
+      },
+    ),
+  },
   reducers: {
     setName: (state, { payload }) => {
       state.current.name = payload
@@ -52,40 +79,49 @@ export const characterSlice = createSlice({
         state.availableAttributePoints -= total
       }
     },
-    getCalculatedStats: (state) => {
-      const stats = {
-        health: state.current.stats.health,
-        strength: state.current.stats.strength,
-        agility: state.current.stats.agility,
-        precision: state.current.stats.precision,
-      }
-      const items = [
-        state.current.items.helmet,
-        state.current.items.armor,
-        state.current.items.shield,
-        state.current.items.greaves,
-      ]
-      for (const item of items) {
-        if (item) {
-          for (const stat in item.stats) {
-            stats[stat] += item.stats[stat]
-          }
-        }
-      }
-      return stats
-    },
     equipItem: (state, { payload: { slot, item } }) => {
       state.current.items[slot] = item
+    },
+    getDamage: (state) => {
+      const { minDamage, maxDamage } = state.current.items.weapon.stats
+      return (
+        Math.floor(Math.random() * (maxDamage - minDamage + 1)) +
+        minDamage +
+        characterSlice.caseReducers.getCalculatedStats(state).strength
+      )
     },
   },
 })
 
-export const {
-  setName,
-  setLook,
-  assignAttributePoint,
-  getCalculatedStats,
-  equipItem,
-} = characterSlice.actions
+// export const calculatedCharacterStats = createSelector(
+//   (state) => state.character.current,
+//   (current) => {
+//     const stats = {
+//       health: current.stats.health,
+//       strength: current.stats.strength,
+//       agility: current.stats.agility,
+//       precision: current.stats.precision,
+//     }
+//     const items = [
+//       current.items.helmet,
+//       current.items.armor,
+//       current.items.shield,
+//       current.items.greaves,
+//     ]
+//     for (const item of items) {
+//       if (item) {
+//         for (const stat in item.stats) {
+//           stats[stat] += item.stats[stat]
+//         }
+//       }
+//     }
+//     return stats
+//   },
+// )
+
+export const { calculatedCharacterStats } = characterSlice.selectors
+
+export const { setName, setLook, assignAttributePoint, equipItem } =
+  characterSlice.actions
 
 export default characterSlice.reducer

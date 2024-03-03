@@ -16,6 +16,7 @@ export const generateEncounter = (
 
   const name = encounter.name
   const fileName = encounter.fileName
+  const stages = encounter.stages
   const style = encounter.style
 
   const points = level * 2
@@ -33,6 +34,7 @@ export const generateEncounter = (
     isBoss,
     name,
     fileName,
+    stages,
     style,
     stats,
     maxHp,

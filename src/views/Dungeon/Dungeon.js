@@ -1,37 +1,90 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import RpgButton from '../../components/atoms/RpgButton/RpgButton'
+import HpProgressBar from '../../components/molecules/ProgressBar/HpProgressBar'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
-import { nextStage } from '../../store/game/gameSlice'
+import GAME_CYCLE_STATE from '../../constants/game-cycle-state'
+import { calculatedCharacterStats } from '../../store/character/characterSlice'
+import {
+  damageEncounter,
+  nextStage,
+  startBattle,
+} from '../../store/game/gameSlice'
 import './Dungeon.css'
 
 const Dungeon = () => {
   const dispatch = useDispatch()
+  const character = useSelector((state) => state.character.current)
+  const characterStats = useSelector(calculatedCharacterStats)
   const encounter = useSelector((state) => state.game.encounter)
+  const stageFileName = useSelector((state) => state.game.stageFileName)
   const stage = useSelector((state) => state.game.stage)
+  const gameCycleState = useSelector((state) => state.game.gameCycleState)
 
-  let imgSrc = require('../../assets/images/encounters/' + encounter.fileName)
+  const showEncounter = useMemo(() => {
+    return (
+      gameCycleState === GAME_CYCLE_STATE.ENCOUNTER ||
+      gameCycleState === GAME_CYCLE_STATE.BATTLE
+    )
+  }, [gameCycleState])
 
-  let randomRoomType = Math.random() < 0.5 ? 'dungeon' : 'cave'
-  let randomDungeonRoom = require(`../../assets/images/rooms/${randomRoomType}-${Math.floor(
-    Math.random() * 5,
-  )}.png`)
+  let encounterImgSrc = require('../../assets/images/encounters/' +
+    encounter.fileName)
+  let stageImgSrc = require('../../assets/images/rooms/' + stageFileName)
+
+  const dealDamage = () => {
+    const { minDamage, maxDamage } = character.items.weapon.stats
+    const damage =
+      Math.floor(Math.random() * (maxDamage - minDamage + 1)) +
+      minDamage +
+      characterStats.strength
+
+    dispatch(damageEncounter(damage))
+  }
+
+  const encounterHeader = () => {
+    if (gameCycleState === GAME_CYCLE_STATE.BATTLE) {
+      return <HpProgressBar currentHp={encounter.hp} maxHp={encounter.maxHp} />
+    }
+    return <h3>Stage: {stage}</h3>
+  }
+
+  const encounterActions = () => {
+    if (gameCycleState === GAME_CYCLE_STATE.ENCOUNTER) {
+      return (
+        <RpgButton
+          text="Start Battle"
+          onClick={() => dispatch(startBattle())}
+        />
+      )
+    } else if (gameCycleState === GAME_CYCLE_STATE.BATTLE) {
+      return <RpgButton text="Attack" onClick={dealDamage} />
+    } else {
+      return (
+        <RpgButton text="Next Stage" onClick={() => dispatch(nextStage())} />
+      )
+    }
+  }
 
   return (
-    <RpgContainer fullPage bgImg={randomDungeonRoom}>
-      <h1>
-        {encounter.name} Lvl {encounter.level}
-      </h1>
-      <h3>Stage: {stage}</h3>
+    <RpgContainer fullPage bgImg={stageImgSrc}>
+      {showEncounter ? (
+        <h1>
+          {encounter.name} Lvl {encounter.level}
+        </h1>
+      ) : null}
+      {encounterHeader()}
       <div className="encounter-container">
-        <img
-          className="encounter-img"
-          src={imgSrc}
-          alt={encounter.name}
-          style={encounter.style}
-        />
+        {showEncounter ? (
+          <img
+            className="encounter-img"
+            src={encounterImgSrc}
+            alt={encounter.name}
+            style={encounter.style}
+          />
+        ) : null}
       </div>
-      <RpgButton text="Next Stage" onClick={() => dispatch(nextStage())} />
+      {encounterActions()}
     </RpgContainer>
   )
 }
