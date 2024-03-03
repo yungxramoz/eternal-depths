@@ -2,26 +2,16 @@ import React, { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import RpgButton from '../../components/atoms/RpgButton/RpgButton'
 import HpProgressBar from '../../components/molecules/ProgressBar/HpProgressBar'
+import CombatControl from '../../components/organisms/CombatControl/CombatControl'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
 import GAME_CYCLE_STATE from '../../constants/game-cycle-state'
-import {
-  calculatedCharacterStats,
-  damageCharacter,
-  recoverHp,
-} from '../../store/character/characterSlice'
-import {
-  damageEncounter,
-  gameWon,
-  nextStage,
-  battleStart,
-  battleDefeat,
-} from '../../store/game/gameSlice'
+import { recoverHp } from '../../store/character/characterSlice'
+import { battleStart, gameWon, nextStage } from '../../store/game/gameSlice'
 import './Dungeon.css'
 
 const Dungeon = () => {
   const dispatch = useDispatch()
   const character = useSelector((state) => state.character.current)
-  const characterStats = useSelector(calculatedCharacterStats)
   const encounter = useSelector((state) => state.game.encounter)
   const stageFileName = useSelector((state) => state.game.stageFileName)
   const stage = useSelector((state) => state.game.stage)
@@ -37,34 +27,6 @@ const Dungeon = () => {
   let encounterImgSrc = require('../../assets/images/encounters/' +
     encounter.fileName)
   let stageImgSrc = require('../../assets/images/rooms/' + stageFileName)
-
-  const dealDamage = () => {
-    const { minDamage, maxDamage } = character.items.weapon.stats
-    const damage =
-      Math.floor(Math.random() * (maxDamage - minDamage + 1)) +
-      minDamage +
-      characterStats.strength
-
-    dispatch(damageEncounter(damage))
-
-    if (encounter.hp > 0) {
-      recieveDamage()
-    }
-  }
-
-  const recieveDamage = () => {
-    const minDamage = encounter.minDamage
-    const maxDamage = encounter.maxDamage
-    const damage =
-      Math.floor(Math.random() * (maxDamage - minDamage + 1)) +
-      minDamage +
-      encounter.stats.strength
-
-    dispatch(damageCharacter(damage))
-    if (character.hp <= 0) {
-      dispatch(battleDefeat())
-    }
-  }
 
   const localNextStage = () => {
     dispatch(nextStage())
@@ -87,7 +49,7 @@ const Dungeon = () => {
         />
       )
     } else if (gameCycleState === GAME_CYCLE_STATE.BATTLE) {
-      return <RpgButton text="Attack" onClick={dealDamage} />
+      return <CombatControl attacks={character.attacks} />
     } else {
       return (
         <>

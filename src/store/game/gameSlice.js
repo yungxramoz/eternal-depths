@@ -53,10 +53,31 @@ const gameSlice = createSlice({
       state.stageFileName = generateStage(state.encounter)
       state.gameCycleState = GAME_CYCLE_STATE.ENCOUNTER
     },
-    damageEncounter(state, action) {
-      state.encounter.hp -= action.payload
+    attackEncounter(
+      state,
+      { payload: { attack, characterStats, minDamage, maxDamage } },
+    ) {
+      const { precision } = characterStats
+      let damage = 0
+
+      for (let i = 0; i < attack.hitCount; i++) {
+        let hitDamage =
+          Math.floor(Math.random() * (maxDamage - minDamage + 1)) +
+          minDamage +
+          characterStats.strength +
+          attack.damageIncrease
+
+        const criticalHit =
+          Math.random() < precision / 100 + attack.criticalChance
+        if (criticalHit) {
+          hitDamage *= 2
+        }
+        damage += hitDamage
+      }
+
+      state.encounter.hp -= damage
       if (state.encounter.hp <= 0) {
-        gameSlice.caseReducers.battleVictory(state)
+        state.gameCycleState = GAME_CYCLE_STATE.BATTLE_VICTORY
       }
     },
   },
@@ -71,7 +92,7 @@ export const {
   battleDefeat,
   resetGame,
   nextStage,
-  damageEncounter,
+  attackEncounter,
 } = gameSlice.actions
 
 export default gameSlice.reducer

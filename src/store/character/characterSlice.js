@@ -1,4 +1,5 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit'
+import { BASE_ATTACK } from '../../constants/attack-type'
 
 const initialState = {
   current: {
@@ -25,6 +26,13 @@ const initialState = {
       shield: null,
       greaves: null,
     },
+    attacks: [
+      {
+        ...BASE_ATTACK,
+        id: 1,
+        currentCooldown: 0,
+      },
+    ],
   },
   availableAttributePoints: 2,
 }
@@ -97,6 +105,28 @@ export const characterSlice = createSlice({
     equipItem: (state, { payload: { slot, item } }) => {
       state.current.items[slot] = item
     },
+    attackEffects: (state, { payload: { attack, dealtDamage } }) => {
+      if (attack.selfHealAmount != null) {
+        let heal = 0
+        if (attack.selfHealAmount === 'auto') {
+          heal = dealtDamage
+        } else {
+          heal = attack.selfHealAmount
+        }
+        state.current.hp += heal
+        if (state.current.hp > state.current.maxHp) {
+          state.current.hp = state.current.maxHp
+        }
+      }
+      if (attack.selfInflictedAmount > 0) {
+        state.current.hp -= attack.selfInflictedAmount
+        if (state.current.hp <= 0) {
+          state.current.hp = 0
+        }
+      }
+      state.current.attacks.find((a) => a.id === attack.id).currentCooldown =
+        attack.cooldown
+    },
     damageCharacter: (state, { payload }) => {
       state.current.hp -= payload
       if (state.current.hp <= 0) {
@@ -115,6 +145,7 @@ export const {
   recoverHp,
   equipItem,
   damageCharacter,
+  attackEffects,
 } = characterSlice.actions
 
 export default characterSlice.reducer
