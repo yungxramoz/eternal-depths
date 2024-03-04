@@ -8,3 +8,46 @@
   flex-grow: 1;
   padding: 3em 0 3em 0;
 }
+
+.damage-animation {
+  animation: damage 0.5s ease infinite;
+}
+
+.attack-animation {
+  animation: attack 0.5s;
+}
+
+.idle-animation {
+  animation: idle 1s ease infinite;
+}
+
+@keyframes damage {
+  0% {
+    transform: rotate(3deg);
+  }
+  25% {
+    filter: grayscale(1) drop-shadow(-2px 2px 5px black);
+  }
+  50% {
+    filter: grayscale(0.3) drop-shadow(-2px 2px 5px black);
+  }
+}
+
+@keyframes attack {
+  0% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes idle {
+  0% {
+    transform: translate(0px);
+  }
+  50% {
+    transform: translateY(3px);
+    filter: drop-shadow(-2px -1px 5px black);
+  }
+  100% {
+    transform: translate(0px);
+  }
+}
