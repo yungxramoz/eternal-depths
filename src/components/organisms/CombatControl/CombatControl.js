@@ -7,7 +7,7 @@ import {
 } from '../../../store/character/characterSlice'
 import { battleDefeat, damageEncounter } from '../../../store/game/gameSlice'
 import { calculateDamage } from '../../../utils/attack'
-import AttackButton from '../../atoms/AtackButton/AttackButton'
+import AttackButton from '../../molecules/AtackButton/AttackButton'
 import './CombatControl.css'
 
 const CombatControl = ({ attacks }) => {

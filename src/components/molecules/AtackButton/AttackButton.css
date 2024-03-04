@@ -1,0 +1,13 @@
+.attack-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.attack-icon {
+  height: 2rem;
+}
+
+.attack-container {
+  padding: 4px !important;
+}
