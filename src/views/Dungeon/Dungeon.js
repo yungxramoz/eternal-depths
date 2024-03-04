@@ -82,7 +82,7 @@ const Dungeon = () => {
         ) : null}
       </div>
       {gameCycleState === GAME_CYCLE_STATE.BATTLE ? (
-        <HpProgressBar currentHp={character.hp} maxHp={character.maxHp} />
+        <HpProgressBar prefix={character.name} currentHp={character.hp} maxHp={character.maxHp} />
       ) : null}
       {encounterActions()}
     </RpgContainer>

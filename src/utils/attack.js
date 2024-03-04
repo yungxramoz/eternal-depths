@@ -24,3 +24,30 @@ export const generateAttack = (attack) => {
   }
   return attack
 }
+
+export const calculateDamage = (
+  attack,
+  characterStats,
+  minDamage,
+  maxDamage,
+) => {
+  let damage = 0
+  const { precision, strength } = characterStats
+
+  for (let i = 0; i < attack.hitCount; i++) {
+    let hitDamage =
+      Math.floor(Math.random() * (maxDamage - minDamage + 1)) +
+      minDamage +
+      strength +
+      attack.damageIncrease
+
+    const criticalHit = Math.random() < precision / 100 + attack.criticalChance
+    if (criticalHit) {
+      hitDamage *= 2
+      console.log('Critical hit!')
+    }
+    damage += hitDamage
+  }
+
+  return damage
+}

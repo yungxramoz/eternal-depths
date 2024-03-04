@@ -1,11 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { attackEncounter, battleDefeat } from '../../../store/game/gameSlice'
 import {
+  attackEffects,
   calculatedCharacterStats,
   damageCharacter,
 } from '../../../store/character/characterSlice'
-import RpgButton from '../../atoms/RpgButton/RpgButton'
+import { battleDefeat, damageEncounter } from '../../../store/game/gameSlice'
+import { calculateDamage } from '../../../utils/attack'
+import AttackButton from '../../atoms/AtackButton/AttackButton'
+import './CombatControl.css'
 
 const CombatControl = ({ attacks }) => {
   const dispatch = useDispatch()
@@ -15,10 +18,9 @@ const CombatControl = ({ attacks }) => {
 
   const invokeAttack = (attack) => {
     const { minDamage, maxDamage } = character.items.weapon.stats
-    const encounterHpBeforeAttack = encounter.hp
-    dispatch(attackEncounter({ attack, characterStats, minDamage, maxDamage }))
-    const dealtDamage = encounterHpBeforeAttack - encounter.hp
-    dispatch(attack, dealtDamage)
+    const damage = calculateDamage(attack, characterStats, minDamage, maxDamage)
+    dispatch(damageEncounter(damage))
+    dispatch(attackEffects({ attack, dealtDamage: damage }))
 
     if (character.hp <= 0) {
       dispatch(battleDefeat())
@@ -43,15 +45,13 @@ const CombatControl = ({ attacks }) => {
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div className="combat-control-container">
       {attacks.map((attack) => (
-        <>
-          <RpgButton
-            key={attack.id}
-            text={attack.name}
-            onClick={() => invokeAttack(attack)}
-          ></RpgButton>
-        </>
+        <AttackButton
+          key={attack.id}
+          text={attack.name}
+          onClick={() => invokeAttack(attack)}
+        ></AttackButton>
       ))}
     </div>
   )

@@ -1,5 +1,5 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit'
-import { BASE_ATTACK } from '../../constants/attack-type'
+import { ATTACK, BASE_ATTACK } from '../../constants/attack-type'
 
 const initialState = {
   current: {
@@ -32,6 +32,11 @@ const initialState = {
         id: 1,
         currentCooldown: 0,
       },
+      {
+        ...ATTACK.DRAIN,
+        id: 2,
+        currentCooldown: 0,
+      }
     ],
   },
   availableAttributePoints: 2,
@@ -113,6 +118,7 @@ export const characterSlice = createSlice({
         } else {
           heal = attack.selfHealAmount
         }
+        console.log('heal', heal)
         state.current.hp += heal
         if (state.current.hp > state.current.maxHp) {
           state.current.hp = state.current.maxHp
@@ -123,9 +129,11 @@ export const characterSlice = createSlice({
         if (state.current.hp <= 0) {
           state.current.hp = 0
         }
+        console.log('selfInflictedAmount', attack.selfInflictedAmount)
       }
       state.current.attacks.find((a) => a.id === attack.id).currentCooldown =
         attack.cooldown
+        console.log('attack.cooldown', attack.cooldown)
     },
     damageCharacter: (state, { payload }) => {
       state.current.hp -= payload
