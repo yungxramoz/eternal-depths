@@ -1,4 +1,4 @@
-import { ANIMATION_STATE } from "./animation-state"
+import { ANIMATION_STATE } from './animation-state'
 
 export const BARBARIAN = Object.freeze({
   name: 'Barbarian',
@@ -22,7 +22,7 @@ export const BAT = Object.freeze({
   name: 'Giant Bat',
   fileName: 'bat.png',
   stages: ['cave-0.png', 'cave-1.png', 'cave-2.png', 'cave-3.png'],
-  indleAnimation: ANIMATION_STATE.IDLE_FLYING,
+  idleAnimation: ANIMATION_STATE.IDLE_FLYING,
   baseStats: {
     health: 1,
     strength: 1,

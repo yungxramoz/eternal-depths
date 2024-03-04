@@ -18,7 +18,11 @@
 }
 
 .animate-idle-flying {
-  animation: flying 1s ease infinite;
+  animation: flying 1.2s ease infinite;
+}
+
+.animate-idle-standing {
+  animation: standing 2s ease infinite;
 }
 
 @keyframes damage {
@@ -27,6 +31,7 @@
   }
   25% {
     filter: grayscale(1) drop-shadow(-2px 2px 5px black);
+    opacity: 0.8;
   }
   50% {
     filter: grayscale(0.3) drop-shadow(-2px 2px 5px black);
@@ -45,9 +50,15 @@
   }
   50% {
     transform: translateY(3px);
-    filter: drop-shadow(-2px -1px 5px black);
+    filter: drop-shadow(-2px 2px 4px black);
   }
   100% {
     transform: translate(0px);
+  }
+}
+
+@keyframes standing {
+  50% {
+    transform: translateX(2px);
   }
 }

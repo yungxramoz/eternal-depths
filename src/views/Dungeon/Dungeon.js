@@ -5,13 +5,22 @@ import HpProgressBar from '../../components/molecules/ProgressBar/HpProgressBar'
 import CombatControl from '../../components/organisms/CombatControl/CombatControl'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
 import GAME_CYCLE_STATE from '../../constants/game-cycle-state'
-import { recoverHp } from '../../store/character/characterSlice'
-import { battleStart, gameWon, nextStage } from '../../store/game/gameSlice'
+import {
+  calculatedCharacterStats,
+  recoverHp,
+} from '../../store/character/characterSlice'
+import {
+  battleStart,
+  gameOver,
+  gameWon,
+  nextStage,
+} from '../../store/game/gameSlice'
 import './Dungeon.css'
 
 const Dungeon = () => {
   const dispatch = useDispatch()
   const character = useSelector((state) => state.character.current)
+  const characterStats = useSelector(calculatedCharacterStats)
   const encounter = useSelector((state) => state.game.encounter)
   const stageFileName = useSelector((state) => state.game.stageFileName)
   const stage = useSelector((state) => state.game.stage)
@@ -48,12 +57,12 @@ const Dungeon = () => {
       return (
         <RpgButton
           text="Start Battle"
-          onClick={() => dispatch(battleStart())}
+          onClick={() => dispatch(battleStart(characterStats.agility))}
         />
       )
     } else if (gameCycleState === GAME_CYCLE_STATE.BATTLE) {
       return <CombatControl attacks={character.attacks} />
-    } else {
+    } else if (gameCycleState === GAME_CYCLE_STATE.BATTLE_VICTORY) {
       return (
         <>
           <RpgButton
@@ -63,6 +72,8 @@ const Dungeon = () => {
           <RpgButton text="Next Stage" onClick={localNextStage} />
         </>
       )
+    } else if (gameCycleState === GAME_CYCLE_STATE.BATTLE_DEFEAT) {
+      return <RpgButton text="End Game" onClick={() => dispatch(gameOver())} />
     }
   }
 
@@ -77,7 +88,7 @@ const Dungeon = () => {
       <div className="encounter-container">
         {showEncounter ? (
           <img
-            className={`encounter-img ${encounter.idleAnimation} ${encounterAnimationState}`}
+            className={`encounter-img ${encounterAnimationState}`}
             src={encounterImgSrc}
             alt={encounter.name}
             style={encounter.style}
@@ -86,7 +97,7 @@ const Dungeon = () => {
       </div>
       {gameCycleState === GAME_CYCLE_STATE.BATTLE ? (
         <HpProgressBar
-          prefix={character.name}
+          prefix="Your "
           currentHp={character.hp}
           maxHp={character.maxHp}
         />

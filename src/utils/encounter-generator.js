@@ -16,6 +16,7 @@ export const generateEncounter = (
 
   const name = encounter.name
   const fileName = encounter.fileName
+  const idleAnimation = encounter.idleAnimation
   const stages = encounter.stages
   const style = encounter.style
 
@@ -34,6 +35,7 @@ export const generateEncounter = (
     isBoss,
     name,
     fileName,
+    idleAnimation,
     stages,
     style,
     stats,

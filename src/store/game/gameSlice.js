@@ -15,6 +15,7 @@ const initialState = {
   encounter: null,
   encounterAnimation: '',
   stageFileName: null,
+  encounterTurn: false,
 }
 
 const gameSlice = createSlice({
@@ -26,6 +27,7 @@ const gameSlice = createSlice({
       state.gameCycleState = GAME_CYCLE_STATE.ENCOUNTER
       state.stage = 1
       state.encounter = generateEncounter(1)
+      state.encounterAnimation = state.encounter.idleAnimation
       state.stageFileName = generateStage(state.encounter)
     },
     gameWon(state) {
@@ -34,14 +36,17 @@ const gameSlice = createSlice({
     gameOver(state) {
       state.gameState = GAME_STATE.OVER
     },
-    battleStart(state) {
+    battleStart(state, { payload }) {
+      if (payload < state.encounter.stats.agility) {
+        state.encounterTurn = true
+      }
       state.gameCycleState = GAME_CYCLE_STATE.BATTLE
     },
     battleVictory(state) {
-      state.gameCycleState = GAME_CYCLE_STATE.BATTLE_DEFEAT
+      state.gameCycleState = GAME_CYCLE_STATE.BATTLE_VICTORY
     },
     battleDefeat(state) {
-      state.gameCycleState = GAME_CYCLE_STATE.BATTLE_VICTORY
+      state.gameCycleState = GAME_CYCLE_STATE.BATTLE_DEFEAT
     },
     resetGame(state) {
       state.gameState = GAME_STATE.IDLE
@@ -52,21 +57,32 @@ const gameSlice = createSlice({
       const level = encounterLevel(state.stage)
       const isBoss = state.stage % 5 === 0
       state.encounter = generateEncounter(level, isBoss)
+      state.encounterAnimation = state.encounter.idleAnimation
+      state.encounterTurn = false
       state.stageFileName = generateStage(state.encounter)
       state.gameCycleState = GAME_CYCLE_STATE.ENCOUNTER
     },
     damageEncounter(state, { payload }) {
       state.encounter.hp -= payload
       console.log('damage', payload)
+      gameSlice.caseReducers.animateDamage(state)
       if (state.encounter.hp <= 0) {
-        state.gameCycleState = GAME_CYCLE_STATE.BATTLE_VICTORY
+        gameSlice.caseReducers.battleVictory(state)
       }
+      state.encounterTurn = true
+    },
+    attack(state) {
+      gameSlice.caseReducers.animateAttack(state)
+      state.encounterTurn = false
     },
     animateAttack(state) {
       state.encounterAnimation = ANIMATION_STATE.ATTACKING
     },
     animateDamage(state) {
       state.encounterAnimation = ANIMATION_STATE.DAMAGING
+    },
+    animateIdle(state) {
+      state.encounterAnimation = state.encounter.idleAnimation
     },
   },
 })
@@ -81,8 +97,8 @@ export const {
   resetGame,
   nextStage,
   damageEncounter,
-  animateAttack,
-  animateDamage,
+  attack,
+  animateIdle,
 } = gameSlice.actions
 
 export default gameSlice.reducer

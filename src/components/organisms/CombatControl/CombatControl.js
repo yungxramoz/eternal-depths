@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   attackEffects,
@@ -6,8 +6,8 @@ import {
   damageCharacter,
 } from '../../../store/character/characterSlice'
 import {
-  animateAttack,
-  animateDamage,
+  animateIdle,
+  attack,
   battleDefeat,
   damageEncounter,
 } from '../../../store/game/gameSlice'
@@ -19,46 +19,43 @@ const CombatControl = ({ attacks }) => {
   const dispatch = useDispatch()
   const character = useSelector((state) => state.character.current)
   const encounter = useSelector((state) => state.game.encounter)
+  const encounterTurn = useSelector((state) => state.game.encounterTurn)
   const characterStats = useSelector(calculatedCharacterStats)
-  const [encounterTurn, setEncounterTurn] = useState(false)
 
-  const invokeAttack = async (attack) => {
-    const { minDamage, maxDamage } = character.items.weapon.stats
-    const damage = calculateDamage(attack, characterStats, minDamage, maxDamage)
-    await dispatch(damageEncounter(damage))
-    await dispatch(animateDamage())
-    await dispatch(attackEffects({ attack, dealtDamage: damage }))
-    setEncounterTurn(true)
-    checkCharacterDefeat()
+  useEffect(() => {
+    const attackCharacter = () => {
+      const minDamage = encounter.minDamage
+      const maxDamage = encounter.maxDamage
+      const damage =
+        Math.floor(Math.random() * (maxDamage - minDamage + 1)) +
+        minDamage +
+        encounter.stats.strength
 
+      dispatch(damageCharacter(damage))
+    }
     setTimeout(() => {
-      if (encounter.hp > 0) {
-        dispatch(animateAttack())
-        recieveDamage()
-        checkCharacterDefeat()
-        setEncounterTurn(false)
+      if (encounterTurn) {
+        if (encounter.hp > 0) {
+          dispatch(attack())
+          attackCharacter()
+        }
+      } else {
+        dispatch(animateIdle())
       }
     }, 500)
-  }
+  }, [encounterTurn, dispatch, encounter, character.hp])
 
-  const checkCharacterDefeat = () => {
-    if (encounter.hp <= 0) {
-      dispatch(battleDefeat())
-    }
-  }
-
-  const recieveDamage = () => {
-    const minDamage = encounter.minDamage
-    const maxDamage = encounter.maxDamage
-    const damage =
-      Math.floor(Math.random() * (maxDamage - minDamage + 1)) +
-      minDamage +
-      encounter.stats.strength
-
-    dispatch(damageCharacter(damage))
+  useEffect(() => {
     if (character.hp <= 0) {
       dispatch(battleDefeat())
     }
+  }, [character.hp, dispatch])
+
+  const invokeAttack = (attack) => {
+    const { minDamage, maxDamage } = character.items.weapon.stats
+    const damage = calculateDamage(attack, characterStats, minDamage, maxDamage)
+    dispatch(damageEncounter(damage))
+    dispatch(attackEffects({ attack, dealtDamage: damage }))
   }
 
   return (
