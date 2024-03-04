@@ -5,15 +5,14 @@
 }
 
 @media (hover: hover) {
-.attack-button:hover{
+  .attack-button:hover {
     filter: drop-shadow(-1px 0 #d27d2c) drop-shadow(1px 0 #d27d2c)
-        drop-shadow(0 -1px #d27d2c) drop-shadow(0 1px #d27d2c);
-}
-.attack-button:disabled:hover {
+      drop-shadow(0 -1px #d27d2c) drop-shadow(0 1px #d27d2c);
+  }
+  .attack-button:disabled:hover {
     filter: drop-shadow(-1px 0 #999) drop-shadow(1px 0 #999)
-        drop-shadow(0 -1px #999) drop-shadow(0 1px #999) grayscale(100%);
-}
-
+      drop-shadow(0 -1px #999) drop-shadow(0 1px #999) grayscale(100%);
+  }
 }
 
 .attack-button:active {
