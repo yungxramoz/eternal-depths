@@ -3,3 +3,7 @@
     border: none;
     cursor: pointer;
 }
+
+.attack-icon {
+    padding: 0.5rem;
+}

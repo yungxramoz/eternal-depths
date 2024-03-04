@@ -60,6 +60,7 @@ const CombatControl = ({ attacks }) => {
         <AttackButton
           key={attack.id}
           disabled={attack.currentCooldown > 0 || encounterTurn}
+          attack={attack}
           text={attack.name}
           onClick={() => invokeAttack(attack)}
         ></AttackButton>
