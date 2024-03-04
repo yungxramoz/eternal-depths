@@ -131,6 +131,13 @@ export const characterSlice = createSlice({
         }
         console.log('selfInflictedAmount', attack.selfInflictedAmount)
       }
+      
+      state.current.attacks.forEach((a) => {
+        if (a.currentCooldown > 0) {
+          a.currentCooldown -= 1
+        }
+      })
+
       state.current.attacks.find((a) => a.id === attack.id).currentCooldown =
         attack.cooldown
         console.log('attack.cooldown', attack.cooldown)

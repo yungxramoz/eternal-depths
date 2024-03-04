@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   attackEffects,
@@ -15,18 +15,28 @@ const CombatControl = ({ attacks }) => {
   const character = useSelector((state) => state.character.current)
   const encounter = useSelector((state) => state.game.encounter)
   const characterStats = useSelector(calculatedCharacterStats)
+  const [encounterTurn, setEncounterTurn] = useState(false)
 
   const invokeAttack = (attack) => {
     const { minDamage, maxDamage } = character.items.weapon.stats
     const damage = calculateDamage(attack, characterStats, minDamage, maxDamage)
     dispatch(damageEncounter(damage))
     dispatch(attackEffects({ attack, dealtDamage: damage }))
+    setEncounterTurn(true)
+    checkCharacterDefeat()
 
-    if (character.hp <= 0) {
+    setTimeout(() => {
+      if (encounter.hp > 0) {
+        recieveDamage()
+        checkCharacterDefeat()
+        setEncounterTurn(false)
+      }
+    }, 500)
+  }
+
+  const checkCharacterDefeat = () => {
+    if (encounter.hp <= 0) {
       dispatch(battleDefeat())
-    }
-    if (encounter.hp > 0) {
-      recieveDamage()
     }
   }
 
@@ -49,6 +59,7 @@ const CombatControl = ({ attacks }) => {
       {attacks.map((attack) => (
         <AttackButton
           key={attack.id}
+          disabled={attack.currentCooldown > 0 || encounterTurn}
           text={attack.name}
           onClick={() => invokeAttack(attack)}
         ></AttackButton>
