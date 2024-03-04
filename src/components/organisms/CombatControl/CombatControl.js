@@ -5,7 +5,12 @@ import {
   calculatedCharacterStats,
   damageCharacter,
 } from '../../../store/character/characterSlice'
-import { battleDefeat, damageEncounter } from '../../../store/game/gameSlice'
+import {
+  animateAttack,
+  animateDamage,
+  battleDefeat,
+  damageEncounter,
+} from '../../../store/game/gameSlice'
 import { calculateDamage } from '../../../utils/attack'
 import AttackButton from '../../molecules/AtackButton/AttackButton'
 import './CombatControl.css'
@@ -17,16 +22,18 @@ const CombatControl = ({ attacks }) => {
   const characterStats = useSelector(calculatedCharacterStats)
   const [encounterTurn, setEncounterTurn] = useState(false)
 
-  const invokeAttack = (attack) => {
+  const invokeAttack = async (attack) => {
     const { minDamage, maxDamage } = character.items.weapon.stats
     const damage = calculateDamage(attack, characterStats, minDamage, maxDamage)
-    dispatch(damageEncounter(damage))
-    dispatch(attackEffects({ attack, dealtDamage: damage }))
+    await dispatch(damageEncounter(damage))
+    await dispatch(animateDamage())
+    await dispatch(attackEffects({ attack, dealtDamage: damage }))
     setEncounterTurn(true)
     checkCharacterDefeat()
 
     setTimeout(() => {
       if (encounter.hp > 0) {
+        dispatch(animateAttack())
         recieveDamage()
         checkCharacterDefeat()
         setEncounterTurn(false)

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { ANIMATION_STATE } from '../../constants/animation-state'
 import GAME_CYCLE_STATE from '../../constants/game-cycle-state'
 import GAME_STATE from '../../constants/game-state'
 import {
@@ -12,6 +13,7 @@ const initialState = {
   gameCycleState: null,
   stage: 0,
   encounter: null,
+  encounterAnimation: '',
   stageFileName: null,
 }
 
@@ -60,6 +62,12 @@ const gameSlice = createSlice({
         state.gameCycleState = GAME_CYCLE_STATE.BATTLE_VICTORY
       }
     },
+    animateAttack(state) {
+      state.encounterAnimation = ANIMATION_STATE.ATTACKING
+    },
+    animateDamage(state) {
+      state.encounterAnimation = ANIMATION_STATE.DAMAGING
+    },
   },
 })
 
@@ -73,6 +81,8 @@ export const {
   resetGame,
   nextStage,
   damageEncounter,
+  animateAttack,
+  animateDamage,
 } = gameSlice.actions
 
 export default gameSlice.reducer

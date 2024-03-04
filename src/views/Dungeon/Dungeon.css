@@ -9,16 +9,16 @@
   padding: 3em 0 3em 0;
 }
 
-.damage-animation {
-  animation: damage 0.5s ease infinite;
+.animate-damaging {
+  animation: damage 0.5s;
 }
 
-.attack-animation {
+.animate-attacking {
   animation: attack 0.5s;
 }
 
-.idle-animation {
-  animation: idle 1s ease infinite;
+.animate-idle-flying {
+  animation: flying 1s ease infinite;
 }
 
 @keyframes damage {
@@ -39,7 +39,7 @@
   }
 }
 
-@keyframes idle {
+@keyframes flying {
   0% {
     transform: translate(0px);
   }

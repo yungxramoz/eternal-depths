@@ -16,6 +16,9 @@ const Dungeon = () => {
   const stageFileName = useSelector((state) => state.game.stageFileName)
   const stage = useSelector((state) => state.game.stage)
   const gameCycleState = useSelector((state) => state.game.gameCycleState)
+  const encounterAnimationState = useSelector(
+    (state) => state.game.encounterAnimation,
+  )
 
   const showEncounter = useMemo(() => {
     return (
@@ -74,7 +77,7 @@ const Dungeon = () => {
       <div className="encounter-container">
         {showEncounter ? (
           <img
-            className="encounter-img"
+            className={`encounter-img ${encounter.idleAnimation} ${encounterAnimationState}`}
             src={encounterImgSrc}
             alt={encounter.name}
             style={encounter.style}
@@ -82,7 +85,11 @@ const Dungeon = () => {
         ) : null}
       </div>
       {gameCycleState === GAME_CYCLE_STATE.BATTLE ? (
-        <HpProgressBar prefix={character.name} currentHp={character.hp} maxHp={character.maxHp} />
+        <HpProgressBar
+          prefix={character.name}
+          currentHp={character.hp}
+          maxHp={character.maxHp}
+        />
       ) : null}
       {encounterActions()}
     </RpgContainer>
