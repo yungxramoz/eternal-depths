@@ -1,21 +1,22 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import AttackButton from '../../components/molecules/AtackButton/AttackButton'
+import HpProgressBar from '../../components/molecules/ProgressBar/HpProgressBar'
 import {
   attackEffects,
   calculatedCharacterStats,
   damageCharacter,
-} from '../../../store/character/characterSlice'
+} from '../../store/character/characterSlice'
 import {
   animateIdle,
   attack,
   battleDefeat,
   damageEncounter,
-} from '../../../store/game/gameSlice'
-import { calculateDamage } from '../../../utils/attack'
-import AttackButton from '../../molecules/AtackButton/AttackButton'
-import './CombatControl.css'
+} from '../../store/game/gameSlice'
+import { calculateDamage } from '../../utils/attack'
+import './DungeonInBattle.css'
 
-const CombatControl = ({ attacks }) => {
+const DungeonInBattle = ({ children }) => {
   const dispatch = useDispatch()
   const character = useSelector((state) => state.character.current)
   const encounter = useSelector((state) => state.game.encounter)
@@ -59,18 +60,26 @@ const CombatControl = ({ attacks }) => {
   }
 
   return (
-    <div className="combat-control-container">
-      {attacks.map((attack) => (
-        <AttackButton
-          key={attack.id}
-          disabled={attack.currentCooldown > 0 || encounterTurn}
-          attack={attack}
-          text={attack.name}
-          onClick={() => invokeAttack(attack)}
-        ></AttackButton>
-      ))}
-    </div>
+    <>
+      {children}
+      <HpProgressBar
+        prefix="Your "
+        currentHp={character.hp}
+        maxHp={character.maxHp}
+      />
+      <div className="combat-control-container">
+        {character.attacks.map((attack) => (
+          <AttackButton
+            key={attack.id}
+            disabled={attack.currentCooldown > 0 || encounterTurn}
+            attack={attack}
+            text={attack.name}
+            onClick={() => invokeAttack(attack)}
+          ></AttackButton>
+        ))}
+      </div>
+    </>
   )
 }
 
-export default CombatControl
+export default DungeonInBattle

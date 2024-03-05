@@ -1,14 +1,3 @@
-.encounter-img {
-  /* width: 50vw; */
-  filter: drop-shadow(-2px 2px 5px black);
-}
-
-.encounter-container {
-  display: flex;
-  flex-grow: 1;
-  padding: 3em 0 3em 0;
-}
-
 .animate-damaging {
   animation: damage 0.5s;
 }
