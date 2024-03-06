@@ -48,7 +48,12 @@ const Dungeon = () => {
   }
 
   return (
-    <RpgContainer className="dungeon-container" bgImg={stageImgSrc} fullPage>
+    <RpgContainer
+      className="dungeon-container"
+      bgImg={stageImgSrc}
+      fullPage
+      scrollable
+    >
       {renderContent()}
     </RpgContainer>
   )

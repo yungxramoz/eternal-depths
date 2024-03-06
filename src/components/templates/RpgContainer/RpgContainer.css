@@ -5,8 +5,12 @@
 
 .container {
   position: relative;
-  overflow: auto;
+  overflow: visible;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.scrollable {
+  overflow: auto !important;
 }

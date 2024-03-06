@@ -8,7 +8,7 @@ import bgImg from '../../assets/images/ui/home.png'
 
 function Home() {
   return (
-    <RpgContainer fullPage className="home-container" bgImg={bgImg}>
+    <RpgContainer className="home-container" bgImg={bgImg} fullPage scrollable>
       <h1 className="main-title">Eternal Depths</h1>
       <RpgSeparator />
       <div className="button-menu">

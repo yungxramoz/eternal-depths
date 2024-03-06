@@ -56,7 +56,7 @@ const NewCharacter = () => {
   }
 
   return (
-    <RpgContainer fullPage>
+    <RpgContainer fullPage scrollable>
       <GoBackButton className="align-self-start" />
       <h1>New Character</h1>
       <CharacterChooser onCharacterChange={setCharacterLook} />

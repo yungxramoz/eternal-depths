@@ -10,6 +10,7 @@ const RpgContainer = ({
   children,
   className,
   bgImg,
+  scrollable = false,
 }) => {
   const containerClasses = ['rpgui-container container']
   if (framed) containerClasses.push('framed')
@@ -17,6 +18,7 @@ const RpgContainer = ({
   if (golden2) containerClasses.push('framed-golden-2')
   if (grey) containerClasses.push('framed-grey')
   if (fullPage) containerClasses.push('full-page')
+  if (scrollable) containerClasses.push('scrollable')
   if (className) containerClasses.push(className)
 
   let bgImgStyle = {}
