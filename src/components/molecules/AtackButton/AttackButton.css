@@ -9,9 +9,8 @@
   height: 61px;
   background: black;
   opacity: 0.3;
-  filter: none !important;
   z-index: 11;
-  transition: width 0.2s linear, visibility 0.1s 0.2s linear;
+  transition: width 0.3s ease-out, visibility 0.1s 0.3s linear;
 }
 
 @media (hover: hover) {
