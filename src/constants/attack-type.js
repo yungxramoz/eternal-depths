@@ -4,6 +4,20 @@ export const ATTACK_TYPE = {
   NORMAL,
 }
 
+export const EMPTY_ATTACK = Object.freeze({
+  name: 'Empty Attack',
+  description: 'An empty attack.',
+  fileName: 'empty-attack.svg',
+  type: 'normal',
+  selfHealAmount: 0,
+  selfInflictedAmount: 0,
+  hitCount: 1,
+  damageIncrease: 0,
+  damageDecrease: 0,
+  criticalChance: 0,
+  cooldown: 0,
+})
+
 export const BASE_ATTACK = Object.freeze({
   name: 'Base Attack',
   description: 'A basic attack that deals damage to the enemy.',

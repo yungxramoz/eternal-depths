@@ -15,6 +15,7 @@ import {
 } from '../../store/game/gameSlice'
 import { calculateDamage } from '../../utils/attack'
 import './DungeonInBattle.css'
+import { EMPTY_ATTACK } from '../../constants/attack-type'
 
 const DungeonInBattle = ({ children }) => {
   const dispatch = useDispatch()
@@ -24,27 +25,24 @@ const DungeonInBattle = ({ children }) => {
   const characterStats = useSelector(calculatedCharacterStats)
 
   useEffect(() => {
-    const attackCharacter = () => {
-      const minDamage = encounter.minDamage
-      const maxDamage = encounter.maxDamage
-      const damage =
-        Math.floor(Math.random() * (maxDamage - minDamage + 1)) +
-        minDamage +
-        encounter.stats.strength
-
-      dispatch(damageCharacter(damage))
-    }
     setTimeout(() => {
       if (encounterTurn) {
         if (encounter.hp > 0) {
           dispatch(attack())
-          attackCharacter()
+          const damage = calculateDamage(
+            EMPTY_ATTACK,
+            encounter.stats,
+            encounter.minDamage,
+            encounter.maxDamage,
+            characterStats,
+          )
+          dispatch(damageCharacter(damage))
         }
       } else {
         dispatch(animateIdle())
       }
     }, 500)
-  }, [encounterTurn, dispatch, encounter, character.hp])
+  }, [encounterTurn, dispatch, encounter, character.hp, characterStats])
 
   useEffect(() => {
     if (character.hp <= 0) {
@@ -54,7 +52,13 @@ const DungeonInBattle = ({ children }) => {
 
   const invokeAttack = (attack) => {
     const { minDamage, maxDamage } = character.items.weapon.stats
-    const damage = calculateDamage(attack, characterStats, minDamage, maxDamage)
+    const damage = calculateDamage(
+      attack,
+      characterStats,
+      minDamage,
+      maxDamage,
+      encounter.stats,
+    )
     dispatch(damageEncounter(damage))
     dispatch(attackEffects({ attack, dealtDamage: damage }))
   }
