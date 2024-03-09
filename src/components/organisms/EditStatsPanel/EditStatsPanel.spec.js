@@ -21,7 +21,7 @@ describe('EditStatsPanel', () => {
         setAssignedPoints={setAssignedPoints}
       />,
     )
-    expect(screen).toMatchSnapshot('EditStatsPanel')
+    expect(document.body).toMatchSnapshot('EditStatsPanel')
   })
 
   it('renders the correct number of available points', () => {
@@ -46,7 +46,7 @@ describe('EditStatsPanel', () => {
       />,
     )
 
-    expect(screen).toMatchSnapshot('EditStatsPanel with 2 attributes')
+    expect(document.body).toMatchSnapshot('EditStatsPanel with 2 attributes')
   })
 
   it('calls setAssignedPoints when "+" button is clicked', () => {

@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react'
 describe('RpgButton', () => {
   it('renders correctly', () => {
     render(<RpgButton />)
-    expect(screen).toMatchSnapshot('RpgButton')
+    expect(document.body).toMatchSnapshot('RpgButton')
   })
   it('has correct text', () => {
     render(<RpgButton text="Test" onClick={() => {}} />)

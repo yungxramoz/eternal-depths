@@ -23,7 +23,7 @@ describe('App', () => {
         </MemoryRouter>
       </Provider>,
     )
-    expect(screen).toMatchSnapshot('App')
+    expect(document.body).toMatchSnapshot('App')
   })
 
   it('renders Home component for root path', async () => {

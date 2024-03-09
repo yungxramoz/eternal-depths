@@ -5,7 +5,7 @@ import HpProgressBar from './HpProgressBar'
 describe('HpProgressBar', () => {
   it('renders correctly', () => {
     render(<HpProgressBar maxHp={100} currentHp={100} />)
-    expect(screen).toMatchSnapshot('HpProgressBar')
+    expect(document.body).toMatchSnapshot('HpProgressBar')
   })
 
   it('displays correct HP values', () => {

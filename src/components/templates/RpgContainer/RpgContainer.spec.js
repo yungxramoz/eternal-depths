@@ -5,7 +5,7 @@ import RpgContainer from './RpgContainer'
 describe('RpgContainer', () => {
   it('renders correctly', () => {
     render(<RpgContainer />)
-    expect(screen).toMatchSnapshot('RpgContainer')
+    expect(document.body).toMatchSnapshot('RpgContainer')
   })
 
   it('applies correct classes based on props', () => {
@@ -22,6 +22,6 @@ describe('RpgContainer', () => {
   })
   it('applies background image based on bgImg prop', () => {
     render(<RpgContainer bgImg="test.png" />)
-    expect(screen).toMatchSnapshot('RpgContainer Background Image')
+    expect(document.body).toMatchSnapshot('RpgContainer Background Image')
   })
 })

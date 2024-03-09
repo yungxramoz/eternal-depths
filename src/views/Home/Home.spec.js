@@ -10,6 +10,6 @@ describe('Home', () => {
         <Home />
       </MemoryRouter>,
     )
-    expect(screen).toMatchSnapshot('Home')
+    expect(document.body).toMatchSnapshot('Home')
   })
 })

@@ -5,6 +5,6 @@ import MinusIcon from './MinusIcon'
 describe('MinusIcon', () => {
   it('renders correctly', () => {
     render(<MinusIcon />)
-    expect(screen).toMatchSnapshot('MinusIcon')
+    expect(document.body).toMatchSnapshot('MinusIcon')
   })
 })

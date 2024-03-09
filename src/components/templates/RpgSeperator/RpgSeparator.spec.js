@@ -5,11 +5,11 @@ import RpgSeparator from './RpgSeparator'
 describe('RpgSeparator', () => {
   it('renders correctly', () => {
     render(<RpgSeparator />)
-    expect(screen).toMatchSnapshot('RpgSeparator')
+    expect(document.body).toMatchSnapshot('RpgSeparator')
   })
 
   it('does not apply golden class when golden prop is false', () => {
     render(<RpgSeparator golden />)
-    expect(screen).toMatchSnapshot('RpgSeparator not golden')
+    expect(document.body).toMatchSnapshot('RpgSeparator not golden')
   })
 })

@@ -16,6 +16,6 @@ describe('NewCharacter', () => {
         </Provider>
       </Router>,
     )
-    expect(screen).toMatchSnapshot('NewCharacter')
+    expect(document.body).toMatchSnapshot('NewCharacter')
   })
 })

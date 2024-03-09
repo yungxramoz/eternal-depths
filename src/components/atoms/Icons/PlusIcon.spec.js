@@ -5,6 +5,6 @@ import PlusIcon from './PlusIcon'
 describe('PlusIcon', () => {
   it('renders correctly', () => {
     render(<PlusIcon />)
-    expect(screen).toMatchSnapshot('PlusIcon')
+    expect(document.body).toMatchSnapshot('PlusIcon')
   })
 })

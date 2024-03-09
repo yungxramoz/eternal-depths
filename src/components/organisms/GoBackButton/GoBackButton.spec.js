@@ -10,7 +10,7 @@ jest.mock('react-router-dom', () => ({
 describe('GoBackButton', () => {
   it('renders correctly according to snapshot', () => {
     render(<GoBackButton />)
-    expect(screen).toMatchSnapshot('GoBackButton')
+    expect(document.body).toMatchSnapshot('GoBackButton')
   })
 
   it('calls navigate with -1 when clicked', () => {

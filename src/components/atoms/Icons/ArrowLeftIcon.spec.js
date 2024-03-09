@@ -5,6 +5,6 @@ import ArrowLeftIcon from './ArrowLeftIcon'
 describe('ArrowLeftIcon', () => {
   it('renders correctly', () => {
     render(<ArrowLeftIcon />)
-    expect(screen).toMatchSnapshot('ArrowLeftIcon')
+    expect(document.body).toMatchSnapshot('ArrowLeftIcon')
   })
 })

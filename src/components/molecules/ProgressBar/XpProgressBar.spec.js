@@ -5,7 +5,7 @@ import XpProgressBar from './XpProgressBar'
 describe('XpProgressBar', () => {
   it('renders correctly', () => {
     render(<XpProgressBar maxXp={100} currentXp={50} />)
-    expect(screen).toMatchSnapshot('XpProgressBar')
+    expect(document.body).toMatchSnapshot('XpProgressBar')
   })
 
   it('displays correct XP values', () => {
