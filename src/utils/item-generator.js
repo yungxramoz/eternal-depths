@@ -13,7 +13,7 @@ const items = [
 
 export const generateItem = (name, item, rarity) => {
   if (!item) {
-    item = items[Math.floor(Math.random() * items.length)]
+    item = { ...items[Math.floor(Math.random() * items.length)] }
   }
   if (!name) {
     name = item.type.charAt(0).toUpperCase() + item.type.slice(1)
@@ -31,12 +31,14 @@ export const generateItem = (name, item, rarity) => {
     }
   }
 
-  generateStats(item, rarity)
+  const stats = { ...item.stats }
+  generateStats(item.type, stats, rarity)
+  item.stats = stats
 
   return { rarity, name, ...item }
 }
 
-const generateStats = (item, rarity) => {
+const generateStats = (type, stats, rarity) => {
   let statIncrease
   switch (rarity) {
     case RARITY.COMMON:
@@ -55,18 +57,18 @@ const generateStats = (item, rarity) => {
       break
   }
 
-  if (item.type === WEAPON_TYPE.SWORD) {
+  if (type === WEAPON_TYPE.SWORD) {
     statIncrease = Math.floor(Math.random() * (statIncrease * 2)) + statIncrease
-    item.stats.minDamage += Math.floor(Math.random() * statIncrease)
-    item.stats.maxDamage += statIncrease - item.stats.minDamage
+    stats.minDamage += Math.floor(Math.random() * statIncrease)
+    stats.maxDamage += statIncrease - stats.minDamage
   } else {
     for (let i = 0; i < statIncrease; i++) {
-      item.stats[randomStat(item)] += 1
+      stats[randomStat(stats)] += 1
     }
   }
 }
 
-const randomStat = (item) => {
-  const stats = Object.keys(item.stats)
-  return stats[Math.floor(Math.random() * stats.length)]
+const randomStat = (stats) => {
+  const statKeys = Object.keys(stats)
+  return statKeys[Math.floor(Math.random() * statKeys.length)]
 }

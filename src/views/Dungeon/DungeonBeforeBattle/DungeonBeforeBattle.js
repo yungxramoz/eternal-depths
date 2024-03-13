@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import RpgButton from '../../components/atoms/RpgButton/RpgButton'
-import { battleStart } from '../../store/game/gameSlice'
+import RpgButton from '../../../components/atoms/RpgButton/RpgButton'
+import { battleStart } from '../../../store/game/gameSlice'
 
 const DungeonBeforeBattle = ({ children }) => {
   const dispatch = useDispatch()
@@ -15,7 +15,7 @@ const DungeonBeforeBattle = ({ children }) => {
     <>
       <h1>Stage {stage}</h1>
       {children}
-      <RpgButton onClick={startBattle} text="Start Battle"/>
+      <RpgButton onClick={startBattle} text="Start Battle" />
     </>
   )
 }

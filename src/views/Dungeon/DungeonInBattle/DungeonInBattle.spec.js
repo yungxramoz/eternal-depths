@@ -2,10 +2,10 @@ import { configureStore } from '@reduxjs/toolkit'
 import { fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'
 import { Provider } from 'react-redux'
-import characterReducer from '../../store/character/characterSlice'
-import gameReducer, { damageEncounter } from '../../store/game/gameSlice'
+import characterReducer from '../../../store/character/characterSlice'
+import gameReducer, { damageEncounter } from '../../../store/game/gameSlice'
 import DungeonInBattle from './DungeonInBattle'
-import { BASE_ATTACK } from '../../constants/attack-type'
+import { BASE_ATTACK } from '../../../constants/attack-type'
 
 describe('DungeonInBattle', () => {
   const initialState = {

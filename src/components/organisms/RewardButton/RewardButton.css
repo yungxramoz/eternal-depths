@@ -1,0 +1,31 @@
+.reward-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  column-gap: 1em;
+}
+
+.reward-button-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  text-align: left;
+}
+
+.reward-title {
+  margin: 0;
+}
+
+.reward-subtitle {
+  margin: 0;
+  font-size: x-small !important;
+}
+
+.reward-description {
+  margin: 0;
+  margin-top: 8px;
+  font-size: xx-small !important;
+  line-height: 18px !important;
+}
