@@ -1,3 +1,7 @@
 .rpgui-progress{
     margin: 0;
 }
+
+.progress-animation{
+    transition: width 0.2s linear;
+}

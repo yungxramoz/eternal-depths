@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DungeonAfterBattle renders correctly: DungeonAfterBattle 1`] = `
+<body>
+  <div>
+    <h1>
+      Stage 
+      0
+    </h1>
+    <div
+      class="action-buttons-container"
+    >
+      <button
+        class="rpgui-button btn"
+      >
+        Escape
+      </button>
+      <button
+        class="rpgui-button btn"
+      >
+        Next Stage
+      </button>
+    </div>
+  </div>
+</body>
+`;

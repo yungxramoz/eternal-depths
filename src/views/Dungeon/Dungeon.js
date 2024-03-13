@@ -1,37 +1,60 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import RpgButton from '../../components/atoms/RpgButton/RpgButton'
+import { useSelector } from 'react-redux'
+import Encounter from '../../components/molecules/Encounter/Encounter'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
-import { nextStage } from '../../store/game/gameSlice'
+import GAME_CYCLE_STATE from '../../constants/game-cycle-state'
 import './Dungeon.css'
+import DungeonBeforeBattle from './DungeonBeforeBattle'
+import DungeonInBattle from './DungeonInBattle'
+import DungeonAfterBattle from './DungeonAfterBattle'
 
 const Dungeon = () => {
-  const dispatch = useDispatch()
   const encounter = useSelector((state) => state.game.encounter)
-  const stage = useSelector((state) => state.game.stage)
+  const stageFileName = useSelector((state) => state.game.stageFileName)
+  const gameCycleState = useSelector((state) => state.game.gameCycleState)
+  const encounterAnimationState = useSelector(
+    (state) => state.game.encounterAnimation,
+  )
 
-  let imgSrc = require('../../assets/images/encounters/' + encounter.fileName)
+  let stageImgSrc = require('../../assets/images/rooms/' + stageFileName)
 
-  let randomRoomType = Math.random() < 0.5 ? 'dungeon' : 'cave'
-  let randomDungeonRoom = require(`../../assets/images/rooms/${randomRoomType}-${Math.floor(
-    Math.random() * 5,
-  )}.png`)
+  const renderContent = () => {
+    switch (gameCycleState) {
+      case GAME_CYCLE_STATE.ENCOUNTER:
+        return (
+          <DungeonBeforeBattle>
+            <Encounter encounter={encounter} />
+          </DungeonBeforeBattle>
+        )
+      case GAME_CYCLE_STATE.BATTLE:
+        return (
+          <DungeonInBattle>
+            <Encounter
+              encounterAnimationState={encounterAnimationState}
+              encounter={encounter}
+              showHp
+            />
+          </DungeonInBattle>
+        )
+      case GAME_CYCLE_STATE.BATTLE_VICTORY:
+        return <DungeonAfterBattle />
+      case GAME_CYCLE_STATE.BATTLE_DEFEAT:
+        return <></>
+      case GAME_CYCLE_STATE.LEVEL_UP:
+        return <></>
+      default:
+        return <></>
+    }
+  }
 
   return (
-    <RpgContainer fullPage bgImg={randomDungeonRoom}>
-      <h1>
-        {encounter.name} Lvl {encounter.level}
-      </h1>
-      <h3>Stage: {stage}</h3>
-      <div className="encounter-container">
-        <img
-          className="encounter-img"
-          src={imgSrc}
-          alt={encounter.name}
-          style={encounter.style}
-        />
-      </div>
-      <RpgButton text="Next Stage" onClick={() => dispatch(nextStage())} />
+    <RpgContainer
+      className="dungeon-container"
+      bgImg={stageImgSrc}
+      fullPage
+      scrollable
+    >
+      {renderContent()}
     </RpgContainer>
   )
 }

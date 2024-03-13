@@ -1,0 +1,41 @@
+.attack-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.cooldown-container {
+  position: absolute;
+  height: 61px;
+  background: black;
+  opacity: 0.3;
+  z-index: 11;
+  transition: width 0.3s ease-out, visibility 0.1s 0.3s linear;
+}
+
+@media (hover: hover) {
+  .attack-button:hover {
+    filter: drop-shadow(-1px 0 #d27d2c) drop-shadow(1px 0 #d27d2c)
+      drop-shadow(0 -1px #d27d2c) drop-shadow(0 1px #d27d2c);
+  }
+  .attack-button:disabled:hover {
+    filter: drop-shadow(-1px 0 #999) drop-shadow(1px 0 #999)
+      drop-shadow(0 -1px #999) drop-shadow(0 1px #999) grayscale(100%);
+  }
+}
+
+.attack-button:active {
+  filter: brightness(0.7);
+}
+
+.attack-button:active:disabled {
+  filter: brightness(0.7) grayscale(100%);
+}
+
+.attack-icon {
+  height: 1.5rem;
+}
+
+.attack-container {
+  padding: 4px !important;
+}

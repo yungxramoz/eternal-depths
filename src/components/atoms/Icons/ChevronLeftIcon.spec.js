@@ -5,6 +5,6 @@ import ChevronLeftIcon from './ChevronLeftIcon'
 describe('ChevronLeftIcon', () => {
   it('renders correctly', () => {
     render(<ChevronLeftIcon />)
-    expect(screen).toMatchSnapshot('ChevronLeftIcon')
+    expect(document.body).toMatchSnapshot('ChevronLeftIcon')
   })
 })

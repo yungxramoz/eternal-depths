@@ -16,13 +16,15 @@ export const generateEncounter = (
 
   const name = encounter.name
   const fileName = encounter.fileName
+  const idleAnimation = encounter.idleAnimation
+  const stages = encounter.stages
   const style = encounter.style
 
   const points = level * 2
   const stats = { ...encounter.baseStats }
   generateStats(points, stats)
 
-  const maxHp = stats.health * 3 + 10
+  const maxHp = stats.health * 4 + 10
   const hp = maxHp
   const minDamage = stats.strength * 2
   const maxDamageRange = isBoss ? 5 : 3
@@ -33,6 +35,8 @@ export const generateEncounter = (
     isBoss,
     name,
     fileName,
+    idleAnimation,
+    stages,
     style,
     stats,
     maxHp,

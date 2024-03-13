@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSelector, createSlice } from '@reduxjs/toolkit'
+import { BASE_ATTACK } from '../../constants/attack-type'
 
 const initialState = {
   current: {
@@ -25,6 +26,13 @@ const initialState = {
       shield: null,
       greaves: null,
     },
+    attacks: [
+      {
+        ...BASE_ATTACK,
+        id: 1,
+        currentCooldown: 0,
+      },
+    ],
   },
   availableAttributePoints: 2,
 }
@@ -32,6 +40,33 @@ const initialState = {
 export const characterSlice = createSlice({
   name: 'character',
   initialState,
+  selectors: {
+    calculatedCharacterStats: createSelector(
+      (state) => state.current,
+      (current) => {
+        const stats = {
+          health: current.stats.health,
+          strength: current.stats.strength,
+          agility: current.stats.agility,
+          precision: current.stats.precision,
+        }
+        const items = [
+          current.items.helmet,
+          current.items.armor,
+          current.items.shield,
+          current.items.greaves,
+        ]
+        for (const item of items) {
+          if (item) {
+            for (const stat in item.stats) {
+              stats[stat] += item.stats[stat]
+            }
+          }
+        }
+        return stats
+      },
+    ),
+  },
   reducers: {
     setName: (state, { payload }) => {
       state.current.name = payload
@@ -50,42 +85,77 @@ export const characterSlice = createSlice({
         state.current.stats.agility += agility
         state.current.stats.precision += precision
         state.availableAttributePoints -= total
+        characterSlice.caseReducers.setHpToMax(state)
       }
     },
-    getCalculatedStats: (state) => {
-      const stats = {
-        health: state.current.stats.health,
-        strength: state.current.stats.strength,
-        agility: state.current.stats.agility,
-        precision: state.current.stats.precision,
+    setHpToMax: (state) => {
+      const maxHp =
+        characterSlice.getSelectors().calculatedCharacterStats(state).health *
+          10 +
+        90
+      state.current.maxHp = maxHp
+      state.current.hp = maxHp
+    },
+    recoverHp: (state, { payload }) => {
+      state.current.hp += payload
+      if (state.current.hp > state.current.maxHp) {
+        state.current.hp = state.current.maxHp
       }
-      const items = [
-        state.current.items.helmet,
-        state.current.items.armor,
-        state.current.items.shield,
-        state.current.items.greaves,
-      ]
-      for (const item of items) {
-        if (item) {
-          for (const stat in item.stats) {
-            stats[stat] += item.stats[stat]
-          }
-        }
-      }
-      return stats
     },
     equipItem: (state, { payload: { slot, item } }) => {
       state.current.items[slot] = item
     },
+    attackEffects: (state, { payload: { attack, dealtDamage } }) => {
+      if (attack.selfHealAmount != null) {
+        let heal = 0
+        if (attack.selfHealAmount === 'auto') {
+          heal = dealtDamage
+        } else {
+          heal = attack.selfHealAmount
+        }
+        console.log('heal', heal)
+        state.current.hp += heal
+        if (state.current.hp > state.current.maxHp) {
+          state.current.hp = state.current.maxHp
+        }
+      }
+      if (attack.selfInflictedAmount > 0) {
+        state.current.hp -= attack.selfInflictedAmount
+        if (state.current.hp <= 0) {
+          state.current.hp = 0
+        }
+        console.log('selfInflictedAmount', attack.selfInflictedAmount)
+      }
+
+      state.current.attacks.forEach((a) => {
+        if (a.currentCooldown > 0) {
+          a.currentCooldown -= 1
+        }
+      })
+
+      state.current.attacks.find((a) => a.id === attack.id).currentCooldown =
+        attack.cooldown
+      console.log('attack.cooldown', attack.cooldown)
+    },
+    damageCharacter: (state, { payload }) => {
+      state.current.hp -= payload
+      if (state.current.hp <= 0) {
+        state.current.hp = 0
+      }
+    },
   },
 })
 
+export const { calculatedCharacterStats } = characterSlice.selectors
 export const {
   setName,
   setLook,
   assignAttributePoint,
-  getCalculatedStats,
+  setHpToMax,
+  recoverHp,
   equipItem,
+  damageCharacter,
+  attackEffects,
 } = characterSlice.actions
 
 export default characterSlice.reducer

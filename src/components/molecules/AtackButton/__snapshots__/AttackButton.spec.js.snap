@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AttackButton hides cooldown container when currentCooldown is 0: AttackButton no cooldown 1`] = `
+<body>
+  <div>
+    <button
+      class="attack-button"
+    >
+      <div
+        class="cooldown-container"
+        style="width: 61px; visibility: hidden;"
+      />
+      <div
+        class="rpgui-container container framed framed-golden-2 attack-container"
+      >
+        <img
+          alt="Test Attack"
+          class="attack-icon"
+          src="test-file-stub"
+        />
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`AttackButton is disabled when disabled prop is true: AttackButton disabled 1`] = `
+<body>
+  <div>
+    <button
+      class="attack-button"
+      disabled=""
+    >
+      <div
+        class="cooldown-container"
+        style="width: 61px; visibility: hidden;"
+      />
+      <div
+        class="rpgui-container container framed framed-golden-2 attack-container"
+      >
+        <img
+          alt="Test Attack"
+          class="attack-icon"
+          src="test-file-stub"
+        />
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`AttackButton renders correctly: AttackButton 1`] = `
+<body>
+  <div>
+    <button
+      class="attack-button"
+    >
+      <div
+        class="cooldown-container"
+        style="width: 61px; visibility: hidden;"
+      />
+      <div
+        class="rpgui-container container framed framed-golden-2 attack-container"
+      >
+        <img
+          alt="Test Attack"
+          class="attack-icon"
+          src="test-file-stub"
+        />
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`AttackButton shows cooldown container when currentCooldown is not 0: AttackButton with cooldown 1`] = `
+<body>
+  <div>
+    <button
+      class="attack-button"
+    >
+      <div
+        class="cooldown-container"
+        style="width: 30.5px; visibility: visible;"
+      />
+      <div
+        class="rpgui-container container framed framed-golden-2 attack-container"
+      >
+        <img
+          alt="Test Attack"
+          class="attack-icon"
+          src="test-file-stub"
+        />
+      </div>
+    </button>
+  </div>
+</body>
+`;
