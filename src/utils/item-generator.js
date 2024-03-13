@@ -35,6 +35,9 @@ export const generateItem = (name, item, rarity) => {
   generateStats(item.type, stats, rarity)
   item.stats = stats
 
+  //TODO currently only swords are weapons
+  item.type = item.type === 'sword' ? 'weapon' : item.type
+
   return { rarity, name, ...item }
 }
 

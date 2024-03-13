@@ -12,8 +12,12 @@ const RewardButton = ({
   description,
 }) => {
   return (
-    <GoldenButton onClick={onClick} disabled={disabled}>
-      <div className="reward-button">
+    <GoldenButton
+      className="reward-button"
+      onClick={onClick}
+      disabled={disabled}
+    >
+      <div className="reward-button-container">
         <RpgIcon icon={icon} />
         <div className="reward-button-content">
           <p className="reward-title">{title}</p>

@@ -2,12 +2,13 @@ import React, { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import RpgButton from '../../../components/atoms/RpgButton/RpgButton'
 import Modal from '../../../components/organisms/Modal/Modal'
+import RewardButton from '../../../components/organisms/RewardButton/RewardButton'
+import RpgSeparator from '../../../components/templates/RpgSeperator/RpgSeparator'
+import { RPGUI_ICON } from '../../../constants/rpgui-icon'
 import { equipItem, recoverHp } from '../../../store/character/characterSlice'
 import { gameWon, nextStage } from '../../../store/game/gameSlice'
 import { generateItem } from '../../../utils/item-generator'
 import './DungeonAfterBattle.css'
-import RewardButton from '../../../components/organisms/RewardButton/RewardButton'
-import { RPGUI_ICON } from '../../../constants/rpgui-icon'
 
 const DungeonAfterBattle = () => {
   const dispatch = useDispatch()
@@ -18,7 +19,7 @@ const DungeonAfterBattle = () => {
 
   const gearIcon = useMemo(() => {
     switch (gearReward.type) {
-      case 'sword':
+      case 'weapon':
         return RPGUI_ICON.SWORD
       case 'shield':
         return RPGUI_ICON.SHIELD
@@ -35,7 +36,7 @@ const DungeonAfterBattle = () => {
 
   const itemStats = () => {
     return Object.entries(gearReward.stats)
-      .filter(([key, value]) => value > 0)
+      .filter(([_, value]) => value > 0)
       .map(([key, value]) => `${key.slice(0, 3).toUpperCase()}:${value}`)
       .join(', ')
   }
@@ -72,11 +73,10 @@ const DungeonAfterBattle = () => {
               description={itemStats()}
               onClick={() => selectGear()}
             ></RewardButton>
-
+            <RpgSeparator golden />
             <RewardButton
               icon={RPGUI_ICON.POTION_RED}
               title="HP Recovery"
-              subtitle="Common"
               description={`Recover ${hpReward} HP`}
               onClick={() => selectHpRecovery()}
             ></RewardButton>

@@ -1,16 +1,18 @@
 .reward-button {
+  width: 100%;
+}
+
+.reward-button-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
   column-gap: 1em;
+  width: 100%;
 }
 
 .reward-button-content {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
+  flex-grow: 1;
   text-align: left;
 }
 
