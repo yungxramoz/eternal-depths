@@ -98,6 +98,8 @@ export const {
   nextStage,
   damageEncounter,
   attack,
+  animateAttack,
+  animateDamage,
   animateIdle,
 } = gameSlice.actions
 

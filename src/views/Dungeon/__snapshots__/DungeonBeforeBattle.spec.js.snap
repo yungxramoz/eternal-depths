@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DungeonBeforeBattle renders correctly: DungeonBeforeBattle 1`] = `
+<body>
+  <div>
+    <h1>
+      Stage 
+      0
+    </h1>
+    <button
+      class="rpgui-button btn"
+    >
+      Start Battle
+    </button>
+  </div>
+</body>
+`;

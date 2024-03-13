@@ -1,17 +1,15 @@
+import { configureStore } from '@reduxjs/toolkit'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 import TestRenderer from 'react-test-renderer'
 import ROUTE from '../constants/routes'
-import {
+import gameReducer, {
   gameOver,
+  gameStart,
   gameWon,
-  resetGame,
-  startGame,
 } from '../store/game/gameSlice'
 import GameStateRoute from './GameStateRoute'
-import { configureStore } from '@reduxjs/toolkit'
-import gameReducer from '../store/game/gameSlice'
 
 describe('GameStateRoute', () => {
   let store
@@ -23,7 +21,7 @@ describe('GameStateRoute', () => {
     })
   })
   it('renders home route when game state is idle', async () => {
-    store.dispatch(resetGame())
+    store.dispatch(gameStart())
     const testRenderer = TestRenderer.create(
       <Provider store={store}>
         <MemoryRouter initialEntries={[ROUTE.HOME]}>
@@ -65,7 +63,7 @@ describe('GameStateRoute', () => {
   })
 
   it('renders dungeon route when game state is playing', async () => {
-    store.dispatch(startGame())
+    store.dispatch(gameStart())
     const testRenderer = TestRenderer.create(
       <Provider store={store}>
         <MemoryRouter initialEntries={[ROUTE.DUNGEON]}>

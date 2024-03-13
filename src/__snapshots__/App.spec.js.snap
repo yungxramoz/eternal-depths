@@ -8,7 +8,7 @@ exports[`App renders correctly: App 1`] = `
     >
       <div
         class="rpgui-container container framed full-page scrollable home-container"
-        style="background-image: url(home.png); background-repeat: no-repeat; background-size: cover; background-position: bottom;"
+        style="background-image: url(test-file-stub); background-repeat: no-repeat; background-size: cover; background-position: bottom;"
       >
         <h1
           class="main-title"

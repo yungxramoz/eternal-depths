@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EncounterImg renders correctly: EncounterImg 1`] = `
+<body>
+  <div>
+    <div
+      class="encounter-container"
+    >
+      <img
+        alt="Test Encounter"
+        class="encounter-img test-animation-state"
+        src="test-file-stub"
+        style="width: 100px; height: 100px;"
+      />
+    </div>
+  </div>
+</body>
+`;
