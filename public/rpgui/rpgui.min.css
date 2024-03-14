@@ -361,6 +361,18 @@ ul.rpgui-dropdown-imp {
 .rpgui-icon.shield {
   background-image: url(img/icons/shield.png);
 }
+.rpgui-icon.armor {
+  background-image: url(img/icons/armor.png);
+}
+.rpgui-icon.helmet {
+  background-image: url(img/icons/helmet.png);
+}
+.rpgui-icon.shoes {
+  background-image: url(img/icons/shoes.png);
+}
+.rpgui-icon.gloves {
+  background-image: url(img/icons/gloves.png);
+}
 .rpgui-icon.exclamation {
   background-image: url(img/icons/exclamation.png);
 }

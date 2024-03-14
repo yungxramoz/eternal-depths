@@ -24,13 +24,13 @@ const DungeonAfterBattle = () => {
       case 'shield':
         return RPGUI_ICON.SHIELD
       case 'armor':
-        return RPGUI_ICON.ARMOR_SLOT
+        return RPGUI_ICON.ARMOR
       case 'helmet':
-        return RPGUI_ICON.HELMET_SLOT
+        return RPGUI_ICON.HELMET
       case 'greaves':
-        return RPGUI_ICON.SHOES_SLOT
+        return RPGUI_ICON.SHOES
       default:
-        return RPGUI_ICON.EMPTY_SLOT
+        return RPGUI_ICON.GLOVES
     }
   }, [gearReward.type])
 
