@@ -14,7 +14,7 @@ const DungeonAfterBattle = () => {
   const dispatch = useDispatch()
   const stage = useSelector((state) => state.game.stage)
   const [gearReward] = useState(generateItem())
-  const [hpReward] = useState(Math.floor(stage / 5) * 10 + 5) //TODO move to utils
+  const [hpReward] = useState(Math.min(Math.floor(stage / 5) * 10 + 5, 50))
   const [showReward, setShowReward] = useState(true)
 
   const gearIcon = useMemo(() => {
