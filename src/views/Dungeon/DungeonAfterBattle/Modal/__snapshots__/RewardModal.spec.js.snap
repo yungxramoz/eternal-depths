@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RewardModal renders correctly: RewardModal 1`] = `
+<body>
+  <div>
+    <div
+      class="modal-container"
+    >
+      <div
+        class="rpgui-container container framed framed-golden modal"
+      >
+        <div
+          class="modal-header"
+        >
+          <h2>
+            Encounter slayed!
+          </h2>
+          <hr
+            class="separator"
+          />
+        </div>
+        <div
+          class="modal-body"
+        >
+          <p>
+            Choose your reward:
+          </p>
+          <div
+            class="reward-selection-container"
+          >
+            <button
+              class="golden-button reward-button"
+            >
+              <div
+                class="rpgui-container container framed framed-golden-2 golden-container"
+              >
+                <div
+                  class="reward-button-container"
+                >
+                  <div
+                    class="rpgui-icon test-icon reward-icon"
+                  />
+                  <div
+                    class="reward-button-content"
+                  >
+                    <p
+                      class="reward-title"
+                    >
+                      Test Item
+                    </p>
+                    <p
+                      class="reward-subtitle"
+                    >
+                      <i>
+                        Common
+                      </i>
+                    </p>
+                    <p
+                      class="reward-description"
+                    >
+                      STR:10
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </button>
+            <hr
+              class="separator golden"
+            />
+            <button
+              class="golden-button reward-button"
+            >
+              <div
+                class="rpgui-container container framed framed-golden-2 golden-container"
+              >
+                <div
+                  class="reward-button-container"
+                >
+                  <div
+                    class="rpgui-icon potion-red reward-icon"
+                  />
+                  <div
+                    class="reward-button-content"
+                  >
+                    <p
+                      class="reward-title"
+                    >
+                      Food
+                    </p>
+                    <p
+                      class="reward-subtitle"
+                    >
+                      <i />
+                    </p>
+                    <p
+                      class="reward-description"
+                    >
+                      Recover 5 HP
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+        <div
+          class="modal-footer"
+        >
+          <hr
+            class="separator"
+          />
+        </div>
+      </div>
+      <div
+        class="modal-background"
+      />
+    </div>
+  </div>
+</body>
+`;

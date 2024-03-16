@@ -66,6 +66,16 @@ Für das State Management der Webapplikation, wird Redux eingesetzt. Der Zustand
 - **Character:** Der character Slice beinhaltet alle Daten, die den Spielercharakter betreffen. Dazu zählen sowohl die Attribute des Charakters als auch die Ausrüstung und die Attacken. Die Verwaltung dieser Daten in einem dedizierten Slice ermöglicht es, Änderungen am Spielercharakter effizient zu handhaben und auf Aktionen wie Level-Up, das Erlernen neuer Attacken oder die Veränderung von Ausrüstungsgegenständen reagieren zu können.
 - **Game:** Der game Slice verwaltet alle Daten, die den aktuellen Spielstand betreffen, einschliesslich der Stage, der Gegner und des allgemeinen Spielzyklus.
 
+## 🎨 Artwork Attribution
+
+| Component           | Attribution         |
+| ------------------- | ------------------- |
+| Attack Icons        | game-icons.net      |
+| Encounters & Stages | Sandro Gerber       |
+| Item Icons          | Pixeltiers Tiny RPG |
+| UI-Elemente         | RPGUI               |
+
+
 
 ## 📫 Kontakt
 

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSelector, createSlice } from '@reduxjs/toolkit'
 import { ANIMATION_STATE } from '../../constants/animation-state'
 import GAME_CYCLE_STATE from '../../constants/game-cycle-state'
 import GAME_STATE from '../../constants/game-state'
@@ -21,6 +21,12 @@ const initialState = {
 const gameSlice = createSlice({
   name: 'game',
   initialState,
+  selectors: {
+    calculatedHpReward: createSelector(
+      (state) => state.stage,
+      (stage) => Math.min(Math.floor(stage / 5) * 10 + 5, 50),
+    ),
+  },
   reducers: {
     gameStart(state) {
       state.gameState = GAME_STATE.PLAYING
@@ -87,6 +93,7 @@ const gameSlice = createSlice({
   },
 })
 
+export const { calculatedHpReward } = gameSlice.selectors
 export const {
   gameStart,
   gameOver,

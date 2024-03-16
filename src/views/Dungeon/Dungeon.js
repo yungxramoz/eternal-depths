@@ -4,9 +4,9 @@ import Encounter from '../../components/molecules/Encounter/Encounter'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
 import GAME_CYCLE_STATE from '../../constants/game-cycle-state'
 import './Dungeon.css'
-import DungeonBeforeBattle from './DungeonBeforeBattle'
-import DungeonInBattle from './DungeonInBattle'
-import DungeonAfterBattle from './DungeonAfterBattle'
+import DungeonAfterBattle from './DungeonAfterBattle/DungeonAfterBattle'
+import DungeonBeforeBattle from './DungeonBeforeBattle/DungeonBeforeBattle'
+import DungeonInBattle from './DungeonInBattle/DungeonInBattle'
 
 const Dungeon = () => {
   const encounter = useSelector((state) => state.game.encounter)

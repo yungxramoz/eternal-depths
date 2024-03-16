@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalHeader renders correctly: ModalBody 1`] = `
+<body>
+  <div>
+    <div
+      class="modal-header"
+    >
+      <h2 />
+      <hr
+        class="separator"
+      />
+    </div>
+  </div>
+</body>
+`;

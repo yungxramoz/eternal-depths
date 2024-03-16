@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import AttackButton from '../../components/molecules/AtackButton/AttackButton'
-import HpProgressBar from '../../components/molecules/ProgressBar/HpProgressBar'
+import AttackButton from '../../../components/molecules/AtackButton/AttackButton'
+import HpProgressBar from '../../../components/molecules/ProgressBar/HpProgressBar'
 import {
   attackEffects,
   calculatedCharacterStats,
   damageCharacter,
-} from '../../store/character/characterSlice'
+} from '../../../store/character/characterSlice'
 import {
   animateIdle,
   attack,
   battleDefeat,
   damageEncounter,
-} from '../../store/game/gameSlice'
-import { calculateDamage } from '../../utils/attack'
+} from '../../../store/game/gameSlice'
+import { calculateDamage } from '../../../utils/attack'
 import './DungeonInBattle.css'
-import { EMPTY_ATTACK } from '../../constants/attack-type'
+import { EMPTY_ATTACK } from '../../../constants/attack-type'
 
 const DungeonInBattle = ({ children }) => {
   const dispatch = useDispatch()

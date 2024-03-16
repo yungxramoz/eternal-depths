@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RpgIcon renders correctly: RpgIcon 1`] = `
+<body>
+  <div>
+    <div
+      class="rpgui-icon sword "
+    />
+  </div>
+</body>
+`;

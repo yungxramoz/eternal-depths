@@ -8,7 +8,7 @@ const AttackButton = ({ onClick, attack, disabled }) => {
   const cooldownPercentage =
     attack.currentCooldown === 0
       ? 61
-      : 61 - ((attack.currentCooldown / attack.cooldown) * 61)
+      : 61 - (attack.currentCooldown / attack.cooldown) * 61
   const cooldownStyle = {
     width: `${cooldownPercentage}px`,
     visibility: attack.currentCooldown === 0 ? 'hidden' : 'visible',

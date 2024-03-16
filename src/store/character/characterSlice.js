@@ -96,14 +96,22 @@ export const characterSlice = createSlice({
       state.current.maxHp = maxHp
       state.current.hp = maxHp
     },
+    recalculateMaxHp: (state) => {
+      const maxHp =
+        characterSlice.getSelectors().calculatedCharacterStats(state).health *
+          10 +
+        90
+      state.current.maxHp = maxHp
+    },
     recoverHp: (state, { payload }) => {
       state.current.hp += payload
       if (state.current.hp > state.current.maxHp) {
         state.current.hp = state.current.maxHp
       }
     },
-    equipItem: (state, { payload: { slot, item } }) => {
-      state.current.items[slot] = item
+    equipItem: (state, { payload }) => {
+      state.current.items[payload.type] = payload
+      characterSlice.caseReducers.recalculateMaxHp(state)
     },
     attackEffects: (state, { payload: { attack, dealtDamage } }) => {
       if (attack.selfHealAmount != null) {

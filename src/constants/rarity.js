@@ -1,7 +1,7 @@
-export const COMMON = 'common'
-export const RARE = 'rare'
-export const EPIC = 'epic'
-export const LEGENDARY = 'legendary'
+export const COMMON = 'Common'
+export const RARE = 'Rare'
+export const EPIC = 'Epic'
+export const LEGENDARY = 'Legendary'
 
 const RARITY = {
   COMMON,

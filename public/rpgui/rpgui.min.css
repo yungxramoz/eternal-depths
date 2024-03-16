@@ -352,20 +352,39 @@ ul.rpgui-dropdown-imp {
   display: inline-block;
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  width: 64px;
-  height: 64px;
+  width: 44px;
+  height: 44px;
 }
 .rpgui-icon.sword {
-  background-image: url(img/icons/sword.png);
+  /* background-image: url(img/icons/sword.png); */
+  background-image: url(img/tiny-rpg/sword_001.png);
 }
 .rpgui-icon.shield {
-  background-image: url(img/icons/shield.png);
+  /* background-image: url(img/icons/shield.png); */
+  background-image: url(img/tiny-rpg/shield_008.png);
+}
+.rpgui-icon.armor {
+  /* background-image: url(img/icons/armor.png); */
+  background-image: url(img/tiny-rpg/armor_008.png);
+}
+.rpgui-icon.helmet {
+  /* background-image: url(img/icons/helmet.png); */
+  background-image: url(img/tiny-rpg/helmet_008.png);
+}
+.rpgui-icon.shoes {
+  /* background-image: url(img/icons/shoes.png); */
+  background-image: url(img/tiny-rpg/shoes_008.png);
+}
+.rpgui-icon.gloves {
+  /* background-image: url(img/icons/gloves.png); */
+  background-image: url(img/tiny-rpg/gloves_008.png);
 }
 .rpgui-icon.exclamation {
   background-image: url(img/icons/exclamation.png);
 }
 .rpgui-icon.potion-red {
-  background-image: url(img/icons/potion-red.png);
+  /* background-image: url(img/icons/potion-red.png); */
+  background-image: url(img/tiny-rpg/fruit_001.png);
 }
 .rpgui-icon.potion-green {
   background-image: url(img/icons/potion-green.png);
