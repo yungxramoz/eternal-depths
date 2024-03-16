@@ -1,5 +1,5 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit'
-import { ATTACK, BASE_ATTACK } from '../../constants/attack-type'
+import { BASE_ATTACK } from '../../constants/attack-type'
 
 const initialState = {
   current: {
@@ -30,11 +30,6 @@ const initialState = {
       {
         ...BASE_ATTACK,
         id: 1,
-        currentCooldown: 0,
-      },
-      {
-        ...ATTACK.DEATH_BLOW,
-        id: 2,
         currentCooldown: 0,
       },
     ],

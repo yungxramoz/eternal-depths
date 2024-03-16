@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import gameReducer from '../../../store/game/gameSlice'
 import DungeonAfterBattle from './DungeonAfterBattle'
 
+jest.mock('./Modal/RewardModal', () => () => <div>RewardModal</div>)
+
 describe('DungeonAfterBattle', () => {
   const store = configureStore({
     reducer: {

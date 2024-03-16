@@ -91,20 +91,18 @@ describe('characterSlice', () => {
       availableAttributePoints: 0,
     })
   })
-  it('equipItem equips an item to the character', () => {
+  it('equipItem equips an item to the character that updates hp', () => {
     const item = {
-      name: 'Iron Helmet',
+      type: 'helmet',
       stats: {
         health: 1,
-        strength: 1,
-        agility: 1,
-        precision: 1,
       },
     }
-    expect(reducer(initialState, equipItem({ slot: 'helmet', item }))).toEqual({
+    expect(reducer(initialState, equipItem(item))).toEqual({
       ...initialState,
       current: {
         ...initialState.current,
+        maxHp: 110,
         items: {
           ...initialState.current.items,
           helmet: item,

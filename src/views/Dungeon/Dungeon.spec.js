@@ -18,6 +18,15 @@ const store = configureStore({
 })
 
 jest.mock('../../components/molecules/Encounter/Encounter')
+jest.mock('./DungeonAfterBattle/DungeonAfterBattle', () => () => (
+  <div>DungeonAfterBattle</div>
+))
+jest.mock('./DungeonBeforeBattle/DungeonBeforeBattle', () => () => (
+  <div>DungeonBeforeBattle</div>
+))
+jest.mock('./DungeonInBattle/DungeonInBattle', () => () => (
+  <div>DungeonInBattle</div>
+))
 
 store.dispatch(gameStart())
 

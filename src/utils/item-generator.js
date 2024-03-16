@@ -12,6 +12,7 @@ const items = [
 ]
 
 export const generateItem = (name, item, rarity) => {
+  item = item ? { ...item } : null
   if (!item) {
     item = { ...items[Math.floor(Math.random() * items.length)] }
   }
@@ -20,11 +21,11 @@ export const generateItem = (name, item, rarity) => {
   }
   if (!rarity) {
     const randomRarity = Math.random()
-    if (randomRarity < 0.65) {
+    if (randomRarity <= 0.65) {
       rarity = RARITY.COMMON
-    } else if (randomRarity < 0.85) {
+    } else if (randomRarity <= 0.85) {
       rarity = RARITY.RARE
-    } else if (randomRarity < 0.95) {
+    } else if (randomRarity <= 0.95) {
       rarity = RARITY.EPIC
     } else {
       rarity = RARITY.LEGENDARY
@@ -38,7 +39,7 @@ export const generateItem = (name, item, rarity) => {
   //TODO currently only swords are weapons
   item.type = item.type === 'sword' ? 'weapon' : item.type
 
-  return { rarity, name, ...item }
+  return { ...item, rarity, name }
 }
 
 const generateStats = (type, stats, rarity) => {
@@ -60,7 +61,7 @@ const generateStats = (type, stats, rarity) => {
       break
   }
 
-  if (type === WEAPON_TYPE.SWORD) {
+  if (type === WEAPON_TYPE.SWORD.type) {
     statIncrease = Math.floor(Math.random() * (statIncrease * 2)) + statIncrease
     stats.minDamage += Math.floor(Math.random() * statIncrease)
     stats.maxDamage += statIncrease - stats.minDamage

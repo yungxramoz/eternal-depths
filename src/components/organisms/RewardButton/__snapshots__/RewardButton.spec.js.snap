@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RewardButton renders correctly when disabled: RewardButton disabled 1`] = `
+<body>
+  <div>
+    <button
+      class="golden-button reward-button"
+      disabled=""
+    >
+      <div
+        class="rpgui-container container framed framed-golden-2 golden-container"
+      >
+        <div
+          class="reward-button-container"
+        >
+          <div
+            class="rpgui-icon test-icon reward-icon"
+          />
+          <div
+            class="reward-button-content"
+          >
+            <p
+              class="reward-title"
+            >
+              Test Title
+            </p>
+            <p
+              class="reward-subtitle"
+            >
+              <i>
+                Test Subtitle
+              </i>
+            </p>
+            <p
+              class="reward-description"
+            >
+              Test Description
+            </p>
+          </div>
+        </div>
+      </div>
+    </button>
+  </div>
+</body>
+`;
+
+exports[`RewardButton renders correctly: RewardButton 1`] = `
+<body>
+  <div>
+    <button
+      class="golden-button reward-button"
+    >
+      <div
+        class="rpgui-container container framed framed-golden-2 golden-container"
+      >
+        <div
+          class="reward-button-container"
+        >
+          <div
+            class="rpgui-icon test-icon reward-icon"
+          />
+          <div
+            class="reward-button-content"
+          >
+            <p
+              class="reward-title"
+            >
+              Test Title
+            </p>
+            <p
+              class="reward-subtitle"
+            >
+              <i>
+                Test Subtitle
+              </i>
+            </p>
+            <p
+              class="reward-description"
+            >
+              Test Description
+            </p>
+          </div>
+        </div>
+      </div>
+    </button>
+  </div>
+</body>
+`;

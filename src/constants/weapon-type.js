@@ -1,5 +1,8 @@
+import { RPGUI_ICON } from './rpgui-icon'
+
 export const SWORD = Object.freeze({
   type: 'sword',
+  icon: RPGUI_ICON.SWORD,
   stats: {
     minDamage: 2,
     maxDamage: 5,
@@ -7,6 +10,7 @@ export const SWORD = Object.freeze({
 })
 export const SHIELD = Object.freeze({
   type: 'shield',
+  icon: RPGUI_ICON.SHIELD,
   stats: {
     health: 0,
   },

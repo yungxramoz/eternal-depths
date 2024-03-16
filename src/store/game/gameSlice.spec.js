@@ -9,6 +9,7 @@ import gameReducer, {
   battleDefeat,
   battleStart,
   battleVictory,
+  calculatedHpReward,
   damageEncounter,
   gameOver,
   gameStart,
@@ -162,6 +163,17 @@ describe('gameSlice', () => {
     expect(gameReducer(stateWithEncounter, animateIdle())).toEqual({
       ...stateWithEncounter,
       encounterAnimation: ANIMATION_STATE.IDLE_STANDING,
+    })
+  })
+  describe('selectors', () => {
+    it('calculatedHpReward returns the correct HP reward based on the stage', () => {
+      const state = { game: { stage: 10 } }
+      expect(calculatedHpReward(state)).toBe(25)
+    })
+
+    it('calculatedHpReward returns 50 if the stage is high enough', () => {
+      const state = { game: { stage: 100 } }
+      expect(calculatedHpReward(state)).toBe(50)
     })
   })
 })

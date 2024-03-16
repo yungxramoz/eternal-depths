@@ -18,7 +18,7 @@ const RewardButton = ({
       disabled={disabled}
     >
       <div className="reward-button-container">
-        <RpgIcon icon={icon} />
+        <RpgIcon className="reward-icon" icon={icon} />
         <div className="reward-button-content">
           <p className="reward-title">{title}</p>
           <p className="reward-subtitle">

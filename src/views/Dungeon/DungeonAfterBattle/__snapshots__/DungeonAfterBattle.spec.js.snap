@@ -3,6 +3,9 @@
 exports[`DungeonAfterBattle renders correctly: DungeonAfterBattle 1`] = `
 <body>
   <div>
+    <div>
+      RewardModal
+    </div>
     <h1>
       Stage 
       0

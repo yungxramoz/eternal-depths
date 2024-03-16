@@ -352,8 +352,8 @@ ul.rpgui-dropdown-imp {
   display: inline-block;
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  width: 64px;
-  height: 64px;
+  width: 44px;
+  height: 44px;
 }
 .rpgui-icon.sword {
   /* background-image: url(img/icons/sword.png); */

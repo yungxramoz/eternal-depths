@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal renders correctly: Modal 1`] = `
+<body>
+  <div>
+    <div
+      class="modal-container"
+    >
+      <div
+        class="rpgui-container container framed framed-golden modal"
+      >
+        <div
+          class="modal-header"
+        >
+          <h2>
+            Test Title
+          </h2>
+          <hr
+            class="separator"
+          />
+        </div>
+        <div
+          class="modal-body"
+        >
+          <div>
+            Test Content
+          </div>
+        </div>
+        <div
+          class="modal-footer"
+        >
+          <hr
+            class="separator"
+          />
+          <button
+            class="rpgui-button btn"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+      <div
+        class="modal-background"
+      />
+    </div>
+  </div>
+</body>
+`;

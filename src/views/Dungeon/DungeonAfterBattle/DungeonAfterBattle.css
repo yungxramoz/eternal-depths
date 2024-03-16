@@ -4,11 +4,3 @@
   flex-direction: column;
   justify-content: flex-end;
 }
-
-.reward-selection-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
-}

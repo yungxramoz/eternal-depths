@@ -11,6 +11,12 @@
   width: 100%;
 }
 
+.reward-icon {
+  flex-grow: 0;
+  flex-basis: 44px;
+  flex-shrink: 0;
+}
+
 .reward-button-content {
   flex-grow: 1;
   text-align: left;

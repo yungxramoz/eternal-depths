@@ -1,7 +1,7 @@
 import React from 'react'
 
-const RpgIcon = ({ icon }) => {
-  return <div className={`rpgui-icon ${icon}`}></div>
+const RpgIcon = ({ icon, className = '' }) => {
+  return <div className={`rpgui-icon ${icon} ${className}`}></div>
 }
 
 export default RpgIcon
