@@ -12,8 +12,8 @@ export const FIRE_DRAGON = Object.freeze({
     precision: 2,
   },
   style: {
-    maxWidth: '90vw',
-    maxHeight: '90dvh',
+    maxWidth: '80vw',
+    maxHeight: '80dvh',
     alignSelf: 'flex-end',
   },
 })
@@ -66,8 +66,8 @@ export const SHADOW_DRAGON = Object.freeze({
     precision: 2,
   },
   style: {
-    maxWidth: '90vw',
-    maxHeight: '90dvh',
+    maxWidth: '80vw',
+    maxHeight: '80dvh',
     alignSelf: 'flex-start',
   },
 })

@@ -11,6 +11,9 @@ import { generateAttack } from '../../../../utils/attack'
 const LevelUpModal = ({ isOpen, setIsOpen }) => {
   const dispatch = useDispatch()
   const characterLevel = useSelector((state) => state.character.current.level)
+  const characterAttacks = useSelector(
+    (state) => state.character.current.attacks,
+  )
   const [attackReward] = useState(generateAttack())
 
   const selectAttackReward = () => {
@@ -42,6 +45,7 @@ const LevelUpModal = ({ isOpen, setIsOpen }) => {
               title="Attribute"
               description="Improve 2 attributes"
               onClick={selectStatReward}
+              disabled={characterAttacks.length >= 3}
             ></RewardButton>
           </div>
         </Modal>
