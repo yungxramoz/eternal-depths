@@ -61,7 +61,7 @@ const generateStats = (type, stats, rarity) => {
       break
   }
 
-  if (type === WEAPON_TYPE.SWORD.type) {
+  if (type === 'weapon') {
     statIncrease = Math.floor(Math.random() * (statIncrease * 2)) + statIncrease
     stats.minDamage += Math.floor(Math.random() * statIncrease)
     stats.maxDamage += statIncrease - stats.minDamage
