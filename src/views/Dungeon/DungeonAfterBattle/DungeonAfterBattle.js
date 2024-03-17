@@ -1,65 +1,26 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import RpgButton from '../../../components/atoms/RpgButton/RpgButton'
 import {
-  gainXp,
-  levelUp,
-  maxHp,
-  maxXp,
-  recoverHp,
-} from '../../../store/character/characterSlice'
-import { gameWon, nextStage } from '../../../store/game/gameSlice'
+  characterRecoverHp,
+  gameWon,
+  nextStage,
+} from '../../../store/game/gameSlice'
 import RewardModal from './Modal/RewardModal'
 import './DungeonAfterBattle.css'
-import CharacterHeader from '../../../components/organisms/CharacterHeader/CharacterHeader'
-import LevelUpModal from './Modal/LevelUpModal'
 
 const DungeonAfterBattle = () => {
   const dispatch = useDispatch()
-  const stage = useSelector((state) => state.game.stage)
-  const character = useSelector((state) => state.character.current)
-  const characterMaxHp = useSelector(maxHp)
-  const characterMaxXp = useSelector(maxXp)
   const [showReward, setShowReward] = useState(true)
-  const [showLevelUp, setShowLevelUp] = useState(false)
-
-  useEffect(() => {
-    if (character.xp >= characterMaxXp) {
-      setShowLevelUp(true)
-      dispatch(levelUp())
-    }
-  }, [character.xp, characterMaxXp, dispatch])
-
-  const localGainXp = () => {
-    let xp = 0
-    if (stage < 5) xp = 5
-    else if (stage < 10) xp = 8
-    else if (stage < 15) xp = 12
-    else if (stage < 20) xp = 20
-    else xp = 30
-    dispatch(gainXp(xp))
-  }
 
   const localNextStage = () => {
     dispatch(nextStage())
-    dispatch(recoverHp(15))
-  }
-
-  const rewardSelected = () => {
-    setShowReward(false)
-    localGainXp()
+    dispatch(characterRecoverHp(15))
   }
 
   return (
     <>
-      <RewardModal isOpen={showReward} setIsOpen={rewardSelected} />
-      <LevelUpModal isOpen={showLevelUp} setIsOpen={setShowLevelUp} />
-      <h2>Stage {stage}</h2>
-      <CharacterHeader
-        character={character}
-        maxHp={characterMaxHp}
-        maxXp={characterMaxXp}
-      />
+      <RewardModal isOpen={showReward} setIsOpen={setShowReward} />
       <div className="action-buttons-container">
         <RpgButton onClick={() => dispatch(gameWon())} text="Escape" />
         <RpgButton onClick={localNextStage} text="Next Stage" />

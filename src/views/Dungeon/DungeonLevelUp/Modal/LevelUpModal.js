@@ -4,20 +4,22 @@ import Modal from '../../../../components/organisms/Modal/Modal'
 import RewardButton from '../../../../components/organisms/RewardButton/RewardButton'
 import RpgSeparator from '../../../../components/templates/RpgSeperator/RpgSeparator'
 import { RPGUI_ICON } from '../../../../constants/rpgui-icon'
-import { learnAttack } from '../../../../store/character/characterSlice'
-import './RewardModal.css'
+import './LevelUpModal.css'
 import { generateAttack } from '../../../../utils/attack'
+import { characterLearnAttack } from '../../../../store/game/gameSlice'
 
 const LevelUpModal = ({ isOpen, setIsOpen }) => {
   const dispatch = useDispatch()
-  const characterLevel = useSelector((state) => state.character.current.level)
+  const characterLevel = useSelector(
+    (state) => state.game.character.current.level,
+  )
   const characterAttacks = useSelector(
-    (state) => state.character.current.attacks,
+    (state) => state.game.character.current.attacks,
   )
   const [attackReward] = useState(generateAttack())
 
   const selectAttackReward = () => {
-    dispatch(learnAttack(attackReward))
+    dispatch(characterLearnAttack(attackReward))
     setIsOpen(false)
   }
 

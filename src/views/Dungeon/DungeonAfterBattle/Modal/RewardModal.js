@@ -5,10 +5,10 @@ import RewardButton from '../../../../components/organisms/RewardButton/RewardBu
 import RpgSeparator from '../../../../components/templates/RpgSeperator/RpgSeparator'
 import { RPGUI_ICON } from '../../../../constants/rpgui-icon'
 import {
-  equipItem,
-  recoverHp,
-} from '../../../../store/character/characterSlice'
-import { calculatedHpReward } from '../../../../store/game/gameSlice'
+  calculatedHpReward,
+  characterEquipItem,
+  characterRecoverHp,
+} from '../../../../store/game/gameSlice'
 import { generateItem } from '../../../../utils/item-generator'
 import './RewardModal.css'
 
@@ -26,12 +26,12 @@ const RewardModal = ({ isOpen, setIsOpen }) => {
   }
 
   const selectGear = () => {
-    dispatch(equipItem(gearReward))
+    dispatch(characterEquipItem(gearReward))
     setIsOpen(false)
   }
 
   const selectHpRecovery = () => {
-    dispatch(recoverHp(hpReward))
+    dispatch(characterRecoverHp(hpReward))
     setIsOpen(false)
   }
   return (

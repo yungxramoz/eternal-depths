@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit'
 import { fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'
 import { Provider } from 'react-redux'
-import characterReducer from '../../../store/character/characterSlice'
 import gameReducer, { damageEncounter } from '../../../store/game/gameSlice'
 import DungeonInBattle from './DungeonInBattle'
 import { BASE_ATTACK } from '../../../constants/attack-type'
@@ -47,7 +46,6 @@ describe('DungeonInBattle', () => {
   beforeEach(() => {
     store = configureStore({
       reducer: {
-        character: characterReducer,
         game: gameReducer,
       },
       preloadedState: {
@@ -69,7 +67,7 @@ describe('DungeonInBattle', () => {
           },
         },
         game: {
-          encounterTurn: false,
+          isEncounterTurn: false,
           encounter: {
             hp: 100,
             maxHp: 100,
@@ -118,7 +116,7 @@ describe('DungeonInBattle', () => {
       }),
     )
   })
-  it('dispatches animateIdle action when encounterTurn is false', async () => {
+  it('dispatches animateIdle action when isEncounterTurn is false', async () => {
     jest.useFakeTimers()
     store.dispatch = jest.fn()
     render(
@@ -131,7 +129,7 @@ describe('DungeonInBattle', () => {
       expect.objectContaining({ type: 'game/animateIdle' }),
     )
   })
-  it('dispatches attack and damageCharacter actions when encounterTurn is true', async () => {
+  it('dispatches attack and damageCharacter actions when isEncounterTurn is true', async () => {
     store.dispatch(damageEncounter(1))
 
     jest.useFakeTimers()

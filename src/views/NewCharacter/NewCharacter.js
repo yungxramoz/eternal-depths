@@ -6,19 +6,19 @@ import EditStatsPanel from '../../components/organisms/EditStatsPanel/EditStatsP
 import GoBackButton from '../../components/organisms/GoBackButton/GoBackButton'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
 import RpgSeparator from '../../components/templates/RpgSeperator/RpgSeparator'
-import {
-  assignAttributePoint,
-  setLook,
-  setName,
-} from '../../store/character/characterSlice'
 import './NewCharacter.css'
-import { gameStart } from '../../store/game/gameSlice'
+import {
+  characterAssignAttributePoint,
+  characterSetLook,
+  characterSetName,
+  gameStart,
+} from '../../store/game/gameSlice'
 
 const NewCharacter = () => {
   const dispatch = useDispatch()
-  const character = useSelector((state) => state.character.current)
+  const character = useSelector((state) => state.game.character.current)
   const initialPoints = useSelector(
-    (state) => state.character.availableAttributePoints,
+    (state) => state.game.character.availableAttributePoints,
   )
   const [localName, setLocalName] = useState(character.name)
   const [assignedPoints, setAssignedPoints] = useState({
@@ -37,9 +37,9 @@ const NewCharacter = () => {
   }
 
   const createCharacter = (assignedPoints) => {
-    dispatch(setName(localName))
-    dispatch(setLook(characterLook))
-    dispatch(assignAttributePoint(assignedPoints))
+    dispatch(characterSetName(localName))
+    dispatch(characterSetLook(characterLook))
+    dispatch(characterAssignAttributePoint(assignedPoints))
     resetLocalFields()
     dispatch(gameStart())
   }

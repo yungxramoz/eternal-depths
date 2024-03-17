@@ -1,17 +1,13 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import RpgButton from '../../../components/atoms/RpgButton/RpgButton'
-import CharacterHeader from '../../../components/organisms/CharacterHeader/CharacterHeader'
-import { maxHp, maxXp } from '../../../store/character/characterSlice'
+import Encounter from '../../../components/molecules/Encounter/Encounter'
 import { battleStart } from '../../../store/game/gameSlice'
 import './DungeonBeforeBattle.css'
 
 const DungeonBeforeBattle = ({ children }) => {
   const dispatch = useDispatch()
-  const stage = useSelector((state) => state.game.stage)
-  const character = useSelector((state) => state.character.current)
-  const characterMaxXp = useSelector(maxXp)
-  const characterMaxHp = useSelector(maxHp)
+  const encounter = useSelector((state) => state.game.encounter.current)
 
   const startBattle = () => {
     dispatch(battleStart())
@@ -19,13 +15,7 @@ const DungeonBeforeBattle = ({ children }) => {
 
   return (
     <>
-      <h2>Stage {stage}</h2>
-      <CharacterHeader
-        character={character}
-        maxHp={characterMaxHp}
-        maxXp={characterMaxXp}
-      />
-      {children}
+      <Encounter encounter={encounter} />
       <RpgButton onClick={startBattle} text="Start Battle" />
     </>
   )

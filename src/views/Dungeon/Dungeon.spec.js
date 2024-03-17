@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit'
 import { render } from '@testing-library/react'
 import React from 'react'
 import { Provider } from 'react-redux'
-import characterReducer from '../../store/character/characterSlice'
 import gameReducer, {
   battleStart,
   battleVictory,
@@ -13,7 +12,6 @@ import Dungeon from './Dungeon'
 const store = configureStore({
   reducer: {
     game: gameReducer,
-    character: characterReducer,
   },
 })
 
