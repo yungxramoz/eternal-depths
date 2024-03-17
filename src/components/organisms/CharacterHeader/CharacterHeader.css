@@ -1,0 +1,18 @@
+.character-information {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  padding: 1em 2em 8em 2em;
+  width: 100%;
+}
+
+.character-stats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  flex-grow: 1;
+}

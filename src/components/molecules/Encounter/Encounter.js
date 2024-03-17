@@ -6,9 +6,9 @@ import './Encounter.css'
 const Encounter = ({ encounterAnimationState, encounter, showHp }) => {
   return (
     <>
-      <h1>
+      <p>
         {encounter.name} Lvl {encounter.level}
-      </h1>
+      </p>
       {showHp ? (
         <HpProgressBar currentHp={encounter.hp} maxHp={encounter.maxHp} />
       ) : null}

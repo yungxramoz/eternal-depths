@@ -66,6 +66,11 @@ export const characterSlice = createSlice({
         return stats
       },
     ),
+    maxXp: (state) => Math.pow(state.current.level, 2) * 10,
+    maxHp: (state) =>
+      characterSlice.getSelectors().calculatedCharacterStats(state).health *
+        10 +
+      90,
   },
   reducers: {
     setName: (state, { payload }) => {
@@ -89,29 +94,24 @@ export const characterSlice = createSlice({
       }
     },
     setHpToMax: (state) => {
-      const maxHp =
-        characterSlice.getSelectors().calculatedCharacterStats(state).health *
-          10 +
-        90
-      state.current.maxHp = maxHp
-      state.current.hp = maxHp
-    },
-    recalculateMaxHp: (state) => {
-      const maxHp =
-        characterSlice.getSelectors().calculatedCharacterStats(state).health *
-          10 +
-        90
-      state.current.maxHp = maxHp
+      state.current.hp = characterSlice.getSelectors().maxHp(state)
     },
     recoverHp: (state, { payload }) => {
       state.current.hp += payload
-      if (state.current.hp > state.current.maxHp) {
-        state.current.hp = state.current.maxHp
+      const maxHp = characterSlice.getSelectors().maxHp(state)
+      if (state.current.hp > maxHp) {
+        state.current.hp = maxHp
+      }
+    },
+    gainXp: (state, { payload }) => {
+      state.current.xp += payload
+      if (state.current.xp >= characterSlice.getSelectors().maxXp(state)) {
+        state.current.level += 1
+        state.current.xp = 0
       }
     },
     equipItem: (state, { payload }) => {
       state.current.items[payload.type] = payload
-      characterSlice.caseReducers.recalculateMaxHp(state)
     },
     attackEffects: (state, { payload: { attack, dealtDamage } }) => {
       if (attack.selfHealAmount != null) {
@@ -122,10 +122,7 @@ export const characterSlice = createSlice({
           heal = attack.selfHealAmount
         }
         console.log('heal', heal)
-        state.current.hp += heal
-        if (state.current.hp > state.current.maxHp) {
-          state.current.hp = state.current.maxHp
-        }
+        characterSlice.caseReducers.recoverHp(state, { payload: heal })
       }
       if (attack.selfInflictedAmount > 0) {
         state.current.hp -= attack.selfInflictedAmount
@@ -154,13 +151,15 @@ export const characterSlice = createSlice({
   },
 })
 
-export const { calculatedCharacterStats } = characterSlice.selectors
+export const { calculatedCharacterStats, maxXp, maxHp } =
+  characterSlice.selectors
 export const {
   setName,
   setLook,
   assignAttributePoint,
   setHpToMax,
   recoverHp,
+  gainXp,
   equipItem,
   damageCharacter,
   attackEffects,

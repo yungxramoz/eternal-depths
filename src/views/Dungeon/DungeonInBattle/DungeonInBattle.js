@@ -6,6 +6,7 @@ import {
   attackEffects,
   calculatedCharacterStats,
   damageCharacter,
+  maxHp,
 } from '../../../store/character/characterSlice'
 import {
   animateIdle,
@@ -23,6 +24,7 @@ const DungeonInBattle = ({ children }) => {
   const encounter = useSelector((state) => state.game.encounter)
   const encounterTurn = useSelector((state) => state.game.encounterTurn)
   const characterStats = useSelector(calculatedCharacterStats)
+  const characterMaxHp = useSelector(maxHp)
 
   useEffect(() => {
     setTimeout(() => {
@@ -69,7 +71,7 @@ const DungeonInBattle = ({ children }) => {
       <HpProgressBar
         prefix="Your "
         currentHp={character.hp}
-        maxHp={character.maxHp}
+        maxHp={characterMaxHp}
       />
       <div className="combat-control-container">
         {character.attacks.map((attack) => (

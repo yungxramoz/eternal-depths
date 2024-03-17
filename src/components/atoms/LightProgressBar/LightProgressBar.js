@@ -1,7 +1,7 @@
 import React from 'react'
-import './RpgProgressBar.css'
+import './LightProgressBar.css'
 
-const RpgProgressBar = ({ max, current, type }) => {
+const LightProgressBar = ({ current, max, type }) => {
   const progress = (current / max) * 100
   let color = 'red'
   switch (type) {
@@ -9,24 +9,21 @@ const RpgProgressBar = ({ max, current, type }) => {
       color = 'red'
       break
     case 'xp':
-      color = 'purple'
+      color = 'blue'
       break
     default:
       break
   }
-
   return (
-    <div className="rpgui-progress" data-rpguitype="progress">
-      <div className=" rpgui-progress-track">
+    <div className="light-progress-bar">
+      <div className="rpgui-progress-track light-progress-track">
         <div
           className={`rpgui-progress-fill ${color} progress-animation`}
           style={{ left: '0px', width: `${progress}%` }}
         ></div>
       </div>
-      <div className=" rpgui-progress-left-edge"></div>
-      <div className=" rpgui-progress-right-edge"></div>
     </div>
   )
 }
 
-export default RpgProgressBar
+export default LightProgressBar
