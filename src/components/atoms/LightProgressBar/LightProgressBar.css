@@ -2,7 +2,7 @@
   display: block;
   position: relative;
   width: 100%;
-  height: 18px;
+  height: 9px;
 }
 
 .light-progress-track {
@@ -11,13 +11,13 @@
   background-color: dimgrey;
   box-shadow: -2px 2px 1px black;
   background-image: none;
-  height: 18px;
+  height: 9px;
 }
 
 .light-progress-track > .rpgui-progress-fill {
   top: 0;
   bottom: 0;
-  height: 18px;
+  height: 9px;
 }
 
 .progress-animation {
