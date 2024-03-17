@@ -19,12 +19,12 @@ const DungeonBeforeBattle = ({ children }) => {
 
   return (
     <>
+      <h2>Stage {stage}</h2>
       <CharacterHeader
         character={character}
         maxHp={characterMaxHp}
         maxXp={characterMaxXp}
       />
-      <h2>Stage {stage}</h2>
       {children}
       <RpgButton onClick={startBattle} text="Start Battle" />
     </>

@@ -43,12 +43,12 @@ const DungeonAfterBattle = () => {
   return (
     <>
       <RewardModal isOpen={showReward} setIsOpen={rewardSelected} />
+      <h2>Stage {stage}</h2>
       <CharacterHeader
         character={character}
         maxHp={characterMaxHp}
         maxXp={characterMaxXp}
       />
-      <h2>Stage {stage}</h2>
       <div className="action-buttons-container">
         <RpgButton onClick={() => dispatch(gameWon())} text="Escape" />
         <RpgButton onClick={localNextStage} text="Next Stage" />
