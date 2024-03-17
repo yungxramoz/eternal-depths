@@ -105,10 +105,6 @@ export const characterSlice = createSlice({
     },
     gainXp: (state, { payload }) => {
       state.current.xp += payload
-      if (state.current.xp >= characterSlice.getSelectors().maxXp(state)) {
-        state.current.level += 1
-        state.current.xp = 0
-      }
     },
     equipItem: (state, { payload }) => {
       state.current.items[payload.type] = payload
@@ -148,6 +144,19 @@ export const characterSlice = createSlice({
         state.current.hp = 0
       }
     },
+    levelUp: (state) => {
+      state.current.xp -= characterSlice.getSelectors().maxXp(state)
+      state.current.level += 1
+      characterSlice.caseReducers.setHpToMax(state)
+    },
+    learnAttack: (state, { payload }) => {
+      const attack = {
+        ...payload,
+        id: state.current.attacks.length + 1,
+        currentCooldown: payload.cooldown,
+      }
+      state.current.attacks.push(attack)
+    },
   },
 })
 
@@ -163,6 +172,8 @@ export const {
   equipItem,
   damageCharacter,
   attackEffects,
+  levelUp,
+  learnAttack,
 } = characterSlice.actions
 
 export default characterSlice.reducer

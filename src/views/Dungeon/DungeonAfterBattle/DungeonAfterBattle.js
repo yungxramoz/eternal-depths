@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import RpgButton from '../../../components/atoms/RpgButton/RpgButton'
 import {
   gainXp,
+  levelUp,
   maxHp,
   maxXp,
   recoverHp,
@@ -11,6 +12,7 @@ import { gameWon, nextStage } from '../../../store/game/gameSlice'
 import RewardModal from './Modal/RewardModal'
 import './DungeonAfterBattle.css'
 import CharacterHeader from '../../../components/organisms/CharacterHeader/CharacterHeader'
+import LevelUpModal from './Modal/LevelUpModal'
 
 const DungeonAfterBattle = () => {
   const dispatch = useDispatch()
@@ -19,6 +21,14 @@ const DungeonAfterBattle = () => {
   const characterMaxHp = useSelector(maxHp)
   const characterMaxXp = useSelector(maxXp)
   const [showReward, setShowReward] = useState(true)
+  const [showLevelUp, setShowLevelUp] = useState(false)
+
+  useEffect(() => {
+    if (character.xp >= characterMaxXp) {
+      setShowLevelUp(true)
+      dispatch(levelUp())
+    }
+  }, [character.xp, characterMaxXp, dispatch])
 
   const localGainXp = () => {
     let xp = 0
@@ -43,6 +53,7 @@ const DungeonAfterBattle = () => {
   return (
     <>
       <RewardModal isOpen={showReward} setIsOpen={rewardSelected} />
+      <LevelUpModal isOpen={showLevelUp} setIsOpen={setShowLevelUp} />
       <h2>Stage {stage}</h2>
       <CharacterHeader
         character={character}
