@@ -39,6 +39,7 @@ const LevelUpModal = ({ isOpen, setIsOpen }) => {
               title={attackReward.name}
               subtitle={`Cooldown: ${attackReward.cooldown}`}
               description={attackReward.description}
+              disabled={characterAttacks.length >= 3}
               onClick={selectAttackReward}
             ></RewardButton>
             <RpgSeparator golden />
@@ -47,7 +48,6 @@ const LevelUpModal = ({ isOpen, setIsOpen }) => {
               title="Attribute"
               description="Improve 2 attributes"
               onClick={selectStatReward}
-              disabled={characterAttacks.length >= 3}
             ></RewardButton>
           </div>
         </Modal>
