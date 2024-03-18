@@ -5,7 +5,6 @@ import Encounter from '../../../components/molecules/Encounter/Encounter'
 import HpProgressBar from '../../../components/molecules/ProgressBar/HpProgressBar'
 import { EMPTY_ATTACK } from '../../../constants/attack-type'
 import {
-  battleDefeat,
   calculatedCharacterStats,
   characterAttackEffects,
   characterDamage,
@@ -47,12 +46,6 @@ const DungeonInBattle = () => {
       }
     }, 500)
   }, [isEncounterTurn, dispatch, encounter, character.hp, characterStats])
-
-  useEffect(() => {
-    if (character.hp <= 0) {
-      dispatch(battleDefeat())
-    }
-  }, [character.hp, dispatch])
 
   const invokeAttack = (attack) => {
     const { minDamage, maxDamage } = character.items.weapon.stats

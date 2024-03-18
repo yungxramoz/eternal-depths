@@ -3,10 +3,9 @@
 exports[`DungeonBeforeBattle renders correctly: DungeonBeforeBattle 1`] = `
 <body>
   <div>
-    <h1>
-      Stage 
-      0
-    </h1>
+    <div>
+      Encounter
+    </div>
     <button
       class="rpgui-button btn"
     >

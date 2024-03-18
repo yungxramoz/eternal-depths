@@ -1,10 +1,10 @@
+import { configureStore } from '@reduxjs/toolkit'
 import { fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { MemoryRouter as Router } from 'react-router-dom'
+import gameSlice from '../../store/game/gameSlice'
 import NewCharacter from './NewCharacter'
-import { configureStore } from '@reduxjs/toolkit'
-import characterSlice from '../../store/character/characterSlice'
 
 jest.mock(
   '../../components/organisms/CharacterChooser/CharacterChooser',
@@ -16,18 +16,20 @@ jest.mock(
 )
 
 const preloadedState = {
-  character: {
-    current: {
-      characterLook: 1,
-      name: '',
-      stats: {
-        health: 1,
-        strength: 1,
-        agility: 1,
-        precision: 1,
+  game: {
+    character: {
+      current: {
+        characterLook: 1,
+        name: '',
+        stats: {
+          health: 1,
+          strength: 1,
+          agility: 1,
+          precision: 1,
+        },
       },
+      availableAttributePoints: 2,
     },
-    availableAttributePoints: 2,
   },
 }
 
@@ -36,7 +38,7 @@ describe('NewCharacter', () => {
   beforeEach(() => {
     store = configureStore({
       reducer: {
-        character: characterSlice,
+        game: gameSlice,
       },
       preloadedState,
     })
@@ -79,12 +81,15 @@ describe('NewCharacter', () => {
   it('dispatches actions when "Create" button is clicked', () => {
     store = configureStore({
       reducer: {
-        character: characterSlice,
+        game: gameSlice,
       },
       preloadedState: {
-        character: {
-          ...preloadedState.character,
-          availableAttributePoints: 0,
+        game: {
+          ...preloadedState.game,
+          character: {
+            ...preloadedState.game.character,
+            availableAttributePoints: 0,
+          },
         },
       },
     })
@@ -104,13 +109,13 @@ describe('NewCharacter', () => {
     fireEvent.click(screen.getByText('Create'))
 
     expect(store.dispatch).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'character/setName' }),
+      expect.objectContaining({ type: 'game/characterSetName' }),
     )
     expect(store.dispatch).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'character/setLook' }),
+      expect.objectContaining({ type: 'game/characterSetLook' }),
     )
     expect(store.dispatch).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'character/assignAttributePoint' }),
+      expect.objectContaining({ type: 'game/characterAssignAttributePoint' }),
     )
     expect(store.dispatch).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'game/gameStart' }),

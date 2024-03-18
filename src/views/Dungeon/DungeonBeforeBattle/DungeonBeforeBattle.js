@@ -5,7 +5,7 @@ import Encounter from '../../../components/molecules/Encounter/Encounter'
 import { battleStart } from '../../../store/game/gameSlice'
 import './DungeonBeforeBattle.css'
 
-const DungeonBeforeBattle = ({ children }) => {
+const DungeonBeforeBattle = () => {
   const dispatch = useDispatch()
   const encounter = useSelector((state) => state.game.encounter.current)
 

@@ -6,10 +6,6 @@ exports[`DungeonAfterBattle renders correctly: DungeonAfterBattle 1`] = `
     <div>
       RewardModal
     </div>
-    <h1>
-      Stage 
-      0
-    </h1>
     <div
       class="action-buttons-container"
     >

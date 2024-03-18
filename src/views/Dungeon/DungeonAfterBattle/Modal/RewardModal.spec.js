@@ -42,7 +42,7 @@ describe('RewardModal', () => {
     )
     fireEvent.click(screen.getByText('Test Item'))
     expect(dispatchSpy).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'character/equipItem' }),
+      expect.objectContaining({ type: 'game/characterEquipItem' }),
     )
   })
 
@@ -55,7 +55,7 @@ describe('RewardModal', () => {
     )
     fireEvent.click(screen.getByText('Food'))
     expect(dispatchSpy).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'character/recoverHp' }),
+      expect.objectContaining({ type: 'game/characterRecoverHp' }),
     )
   })
 })

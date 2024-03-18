@@ -2,45 +2,62 @@ import { configureStore } from '@reduxjs/toolkit'
 import { fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'
 import { Provider } from 'react-redux'
-import gameReducer, { damageEncounter } from '../../../store/game/gameSlice'
-import DungeonInBattle from './DungeonInBattle'
 import { BASE_ATTACK } from '../../../constants/attack-type'
+import gameReducer, { encounterDamage } from '../../../store/game/gameSlice'
+import DungeonInBattle from './DungeonInBattle'
+import GAME_STATE from '../../../constants/game-state'
+import GAME_CYCLE_STATE from '../../../constants/game-cycle-state'
+
+jest.mock('../../../components/molecules/Encounter/Encounter', () => () => (
+  <div>Encounter</div>
+))
 
 describe('DungeonInBattle', () => {
   const initialState = {
-    current: {
-      look: 1,
-      name: '',
-      level: 1,
-      xp: 0,
-      stats: {
-        health: 1,
-        strength: 1,
-        agility: 1,
-        precision: 1,
-      },
-      items: {
-        helmet: null,
-        armor: null,
-        weapon: {
-          name: 'Rusty Sword',
-          stats: {
-            minDamage: 1,
-            maxDamage: 3,
-          },
-        },
-        shield: null,
-        greaves: null,
-      },
-      attacks: [
-        {
-          ...BASE_ATTACK,
-          id: 1,
-          currentCooldown: 0,
-        },
-      ],
+    gameState: GAME_STATE.PLAYING,
+    gameCycleState: GAME_CYCLE_STATE.BATTLE,
+    isEncounterTurn: false,
+    stage: 0,
+    encounter: {
+      current: null,
+      animation: '',
+      stageFileName: null,
     },
-    availableAttributePoints: 2,
+    character: {
+      current: {
+        look: 1,
+        name: '',
+        level: 1,
+        xp: 0,
+        stats: {
+          health: 1,
+          strength: 1,
+          agility: 1,
+          precision: 1,
+        },
+        items: {
+          helmet: null,
+          armor: null,
+          weapon: {
+            name: 'Rusty Sword',
+            stats: {
+              minDamage: 1,
+              maxDamage: 3,
+            },
+          },
+          shield: null,
+          greaves: null,
+        },
+        attacks: [
+          {
+            ...BASE_ATTACK,
+            id: 1,
+            currentCooldown: 0,
+          },
+        ],
+      },
+      availableAttributePoints: 2,
+    },
   }
   let store
   beforeEach(() => {
@@ -49,31 +66,33 @@ describe('DungeonInBattle', () => {
         game: gameReducer,
       },
       preloadedState: {
-        character: {
-          ...initialState,
-          current: {
-            ...initialState.current,
-            hp: 100,
-            maxHp: 100,
-            attacks: [
-              {
-                id: 1,
-                name: 'Attack 1',
-                currentCooldown: 0,
-                fileName: 'mockAttack.png',
-              },
-            ],
-            stats: { health: 1, strength: 1, agility: 1, precision: 1 },
-          },
-        },
         game: {
+          ...initialState,
           isEncounterTurn: false,
           encounter: {
-            hp: 100,
-            maxHp: 100,
-            minDamage: 1,
-            maxDamage: 3,
-            stats: { health: 1, strength: 1, agility: 1, precision: 1 },
+            current: {
+              hp: 100,
+              maxHp: 100,
+              minDamage: 1,
+              maxDamage: 3,
+              stats: { health: 1, strength: 1, agility: 1, precision: 1 },
+            },
+          },
+          character: {
+            ...initialState.character,
+            current: {
+              ...initialState.character.current,
+              hp: 100,
+              attacks: [
+                {
+                  id: 1,
+                  name: 'Attack 1',
+                  currentCooldown: 0,
+                  fileName: 'mockAttack.png',
+                },
+              ],
+              stats: { health: 1, strength: 1, agility: 1, precision: 1 },
+            },
           },
         },
       },
@@ -102,13 +121,13 @@ describe('DungeonInBattle', () => {
     expect(store.dispatch).toHaveBeenCalledTimes(2)
     expect(store.dispatch).toHaveBeenCalledWith(
       expect.objectContaining({
-        type: 'game/damageEncounter',
+        type: 'game/encounterDamage',
         payload: expect.any(Number),
       }),
     )
     expect(store.dispatch).toHaveBeenCalledWith(
       expect.objectContaining({
-        type: 'character/attackEffects',
+        type: 'game/characterAttackEffects',
         payload: {
           attack: expect.any(Object),
           dealtDamage: expect.any(Number),
@@ -126,11 +145,11 @@ describe('DungeonInBattle', () => {
     )
     jest.runAllTimers()
     expect(store.dispatch).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'game/animateIdle' }),
+      expect.objectContaining({ type: 'game/encounterAnimateIdle' }),
     )
   })
   it('dispatches attack and damageCharacter actions when isEncounterTurn is true', async () => {
-    store.dispatch(damageEncounter(1))
+    store.dispatch(encounterDamage(1))
 
     jest.useFakeTimers()
     store.dispatch = jest.fn()
@@ -143,11 +162,11 @@ describe('DungeonInBattle', () => {
     jest.runAllTimers()
     expect(store.dispatch).toHaveBeenCalledTimes(2)
     expect(store.dispatch).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'game/attack' }),
+      expect.objectContaining({ type: 'game/encounterAttack' }),
     )
     expect(store.dispatch).toHaveBeenCalledWith(
       expect.objectContaining({
-        type: 'character/damageCharacter',
+        type: 'game/characterDamage',
         payload: expect.any(Number),
       }),
     )

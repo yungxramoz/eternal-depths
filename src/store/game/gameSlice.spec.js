@@ -16,17 +16,17 @@ import gameReducer, {
   characterSetLook,
   characterSetName,
   damageEncounter,
-  encounterAnimateIdle,
   encounterAnimateAttack,
   encounterAnimateDamage,
+  encounterAnimateIdle,
   encounterAttack,
+  encounterDamage,
   gameOver,
+  gameReset,
   gameStart,
   gameWon,
   nextStage,
   resetGame,
-  encounterDamage,
-  gameReset,
 } from './gameSlice'
 
 let initialState
@@ -199,12 +199,20 @@ describe('gameSlice', () => {
   })
 
   it('attack attacks the encounter', () => {
-    expect(gameReducer(initialState, encounterAttack())).toEqual({
+    const stateWithEncounter = {
+      ...initialState,
+      encounter: {
+        ...initialState.encounter,
+        current: { hp: 50 },
+      },
+    }
+    expect(gameReducer(stateWithEncounter, encounterAttack())).toEqual({
       ...initialState,
       isEncounterTurn: false,
       encounter: {
         ...initialState.encounter,
         animation: ANIMATION_STATE.ATTACKING,
+        current: expect.any(Object),
       },
     })
   })
@@ -367,6 +375,10 @@ describe('gameSlice', () => {
   it('damageCharacter damages the character', () => {
     const state = {
       ...initialState,
+      encounter: {
+        ...initialState.encounter,
+        current: { hp: 50 },
+      },
       character: {
         ...initialState.character,
         current: {
@@ -389,6 +401,10 @@ describe('gameSlice', () => {
   it('damageCharacter does not go below 0', () => {
     const state = {
       ...initialState,
+      encounter: {
+        ...initialState.encounter,
+        current: { hp: 50 },
+      },
       character: {
         ...initialState.character,
         current: {
@@ -399,6 +415,7 @@ describe('gameSlice', () => {
     }
     expect(gameReducer(state, characterDamage(10))).toEqual({
       ...state,
+      gameCycleState: GAME_CYCLE_STATE.BATTLE_DEFEAT,
       character: {
         ...state.character,
         current: {
@@ -411,6 +428,10 @@ describe('gameSlice', () => {
   it('attackEffects applies self heal auto', () => {
     const state = {
       ...initialState,
+      encounter: {
+        ...initialState.encounter,
+        current: { hp: 50 },
+      },
       character: {
         ...initialState.character,
         current: {
@@ -462,6 +483,10 @@ describe('gameSlice', () => {
   it('attackEffects applies self heal fixed', () => {
     const state = {
       ...initialState,
+      encounter: {
+        ...initialState.encounter,
+        current: { hp: 50 },
+      },
       character: {
         ...initialState.character,
         current: {
@@ -513,6 +538,10 @@ describe('gameSlice', () => {
   it('attackEffects applies self inflicted damage', () => {
     const state = {
       ...initialState,
+      encounter: {
+        ...initialState.encounter,
+        current: { hp: 50 },
+      },
       character: {
         ...initialState.character,
         current: {
@@ -564,6 +593,10 @@ describe('gameSlice', () => {
   it('attackEffects applies self inflicted damage does not go below 0', () => {
     const state = {
       ...initialState,
+      encounter: {
+        ...initialState.encounter,
+        current: { hp: 50 },
+      },
       character: {
         ...initialState.character,
         current: {
@@ -593,6 +626,7 @@ describe('gameSlice', () => {
       gameReducer(state, characterAttackEffects({ attack, dealtDamage })),
     ).toEqual({
       ...state,
+      gameCycleState: GAME_CYCLE_STATE.BATTLE_DEFEAT,
       character: {
         ...state.character,
         current: {
@@ -615,6 +649,10 @@ describe('gameSlice', () => {
   it('attackEffects heal does not overheal', () => {
     const state = {
       ...initialState,
+      encounter: {
+        ...initialState.encounter,
+        current: { hp: 50 },
+      },
       character: {
         ...initialState.character,
         current: {
@@ -666,6 +704,10 @@ describe('gameSlice', () => {
   it('attackEffects applies correct cooldown', () => {
     const state = {
       ...initialState,
+      encounter: {
+        ...initialState.encounter,
+        current: { hp: 50 },
+      },
       character: {
         ...initialState.character,
         current: {

@@ -3,11 +3,11 @@
 exports[`Encounter renders correctly with showHp: Encounter with showHp 1`] = `
 <body>
   <div>
-    <h1>
+    <p>
       Test Encounter
        Lvl 
       1
-    </h1>
+    </p>
     <div
       class="progress-container"
     >
@@ -46,11 +46,13 @@ exports[`Encounter renders correctly with showHp: Encounter with showHp 1`] = `
 exports[`Encounter renders correctly: Encounter 1`] = `
 <body>
   <div>
-    <h1>
+    <p
+      class="encounter-name"
+    >
       Test Encounter
        Lvl 
       1
-    </h1>
+    </p>
   </div>
 </body>
 `;

@@ -3,6 +3,9 @@
 exports[`DungeonInBattle renders correctly: DungeonInBattle 1`] = `
 <body>
   <div>
+    <div>
+      Encounter
+    </div>
     <div
       class="progress-container"
     >

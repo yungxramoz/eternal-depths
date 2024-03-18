@@ -5,11 +5,30 @@ import { Provider } from 'react-redux'
 import gameReducer from '../../../store/game/gameSlice'
 import DungeonBeforeBattle from './DungeonBeforeBattle'
 
-describe('DungeonBeforeBattle', () => {
-  const store = configureStore({
-    reducer: {
-      game: gameReducer,
+jest.mock('../../../components/molecules/Encounter/Encounter', () => () => (
+  <div>Encounter</div>
+))
+
+const preloadedState = {
+  game: {
+    encounter: {
+      current: {
+        name: 'Mock Encounter',
+        level: 1,
+      },
     },
+  },
+}
+
+describe('DungeonBeforeBattle', () => {
+  let store
+  beforeEach(() => {
+    store = configureStore({
+      reducer: {
+        game: gameReducer,
+      },
+      preloadedState,
+    })
   })
   it('renders correctly', () => {
     render(

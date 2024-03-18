@@ -15,7 +15,6 @@ const store = configureStore({
   },
 })
 
-jest.mock('../../components/molecules/Encounter/Encounter')
 jest.mock('./DungeonAfterBattle/DungeonAfterBattle', () => () => (
   <div>DungeonAfterBattle</div>
 ))
@@ -24,6 +23,12 @@ jest.mock('./DungeonBeforeBattle/DungeonBeforeBattle', () => () => (
 ))
 jest.mock('./DungeonInBattle/DungeonInBattle', () => () => (
   <div>DungeonInBattle</div>
+))
+jest.mock('./DungeonLevelUp/DungeonLevelUp', () => () => (
+  <div>DungeonLevelUp</div>
+))
+jest.mock('../../components/organisms/CharacterHeader/CharacterHeader', () => () => (
+  <div>CharacterHeader</div>
 ))
 
 store.dispatch(gameStart())
