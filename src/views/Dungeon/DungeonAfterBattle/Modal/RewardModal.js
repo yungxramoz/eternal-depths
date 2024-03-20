@@ -16,7 +16,8 @@ const RewardModal = ({ isOpen, setIsOpen }) => {
   const dispatch = useDispatch()
 
   const hpReward = useSelector(calculatedHpReward)
-  const [gearReward] = useState(generateItem())
+  const level = useSelector((state) => state.game.character.current.level)
+  const [gearReward] = useState(generateItem({ level }))
 
   const itemStats = () => {
     return Object.entries(gearReward.stats)
