@@ -60,12 +60,6 @@ Atomic Design ist eine Methodologie, die von Brad Frost  entwickelt wurde, um Be
 - **Pages:** Auf der höchsten Ebene stehen die Seiten, gefüllt mit realen Inhalten und Daten. Im Gegensatz zu den anderen Ebenen dürfen Seiten auf den Redux Store zugreifen, um globale Zustände abzurufen oder zu manipulieren. Dies ermöglicht eine klare Trennung der Zuständigkeiten, wobei die Verwaltung des Anwendungszustands auf der höchsten Ebene zentralisiert ist.
 Pages können zur Übersicht in weitere Subkomponente unterteilt werden.
 
-### Store
-Für das State Management der Webapplikation, wird Redux eingesetzt. Der Zustand der Anwendung ist in zwei Hauptbereiche unterteilt: game und character. Diese Modularisierung des Stores ermöglicht eine klare Trennung der Anwendungslogik und erleichtert die Verwaltung des Zustands, da sich die Zuständigkeiten spezifisch auf verschiedene Aspekte des Spiels beziehen.
-
-- **Character:** Der character Slice beinhaltet alle Daten, die den Spielercharakter betreffen. Dazu zählen sowohl die Attribute des Charakters als auch die Ausrüstung und die Attacken. Die Verwaltung dieser Daten in einem dedizierten Slice ermöglicht es, Änderungen am Spielercharakter effizient zu handhaben und auf Aktionen wie Level-Up, das Erlernen neuer Attacken oder die Veränderung von Ausrüstungsgegenständen reagieren zu können.
-- **Game:** Der game Slice verwaltet alle Daten, die den aktuellen Spielstand betreffen, einschliesslich der Stage, der Gegner und des allgemeinen Spielzyklus.
-
 ## 🎨 Artwork Attribution
 
 | Component           | Attribution         |
