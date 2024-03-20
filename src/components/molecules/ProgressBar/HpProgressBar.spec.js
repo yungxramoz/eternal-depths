@@ -12,4 +12,9 @@ describe('HpProgressBar', () => {
     render(<HpProgressBar maxHp={100} currentHp={50} />)
     expect(screen.getByText('HP 50/100')).toBeInTheDocument()
   })
+
+  it('handles negative currentHp correctly', () => {
+    render(<HpProgressBar maxHp={100} currentHp={-10} />)
+    expect(screen.getByText('HP 0/100')).toBeInTheDocument()
+  })
 })

@@ -4,9 +4,9 @@ import Modal from '../../../../components/organisms/Modal/Modal'
 import RewardButton from '../../../../components/organisms/RewardButton/RewardButton'
 import RpgSeparator from '../../../../components/templates/RpgSeperator/RpgSeparator'
 import { RPGUI_ICON } from '../../../../constants/rpgui-icon'
-import './LevelUpModal.css'
-import { generateAttack } from '../../../../utils/attack'
 import { characterLearnAttack } from '../../../../store/game/gameSlice'
+import { generateAttack } from '../../../../utils/attack'
+import './LevelUpModal.css'
 
 const LevelUpModal = ({ isOpen, setIsOpen }) => {
   const dispatch = useDispatch()

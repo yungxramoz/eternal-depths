@@ -32,12 +32,12 @@ export const generateItem = ({ name, item, rarity, level = 1 } = {}) => {
     }
   }
 
+  //TODO currently only swords are weapons
+  item.type = item.type === 'sword' ? 'weapon' : item.type
+
   const stats = { ...item.stats }
   generateStats(item.type, stats, rarity, level)
   item.stats = stats
-
-  //TODO currently only swords are weapons
-  item.type = item.type === 'sword' ? 'weapon' : item.type
 
   return { ...item, rarity, name }
 }
@@ -64,8 +64,11 @@ const generateStats = (type, stats, rarity, level) => {
 
   if (type === 'weapon') {
     statIncrease = Math.floor(Math.random() * (statIncrease * 2)) + statIncrease
-    stats.minDamage += Math.floor(Math.random() * statIncrease)
+    stats.minDamage += Math.floor(Math.random() * statIncrease) + 1
     stats.maxDamage += statIncrease - stats.minDamage
+    if (stats.maxDamage < stats.minDamage) {
+      stats.maxDamage = stats.minDamage
+    }
   } else {
     for (let i = 0; i < statIncrease; i++) {
       stats[randomStat(stats)] += 1

@@ -292,7 +292,6 @@ export const {
   characterAssignAttributePoint,
   characterSetHpToMax,
   characterRecoverHp,
-  characterGainXp,
   characterEquipItem,
   characterAttackEffects,
   characterDamage,
