@@ -4,6 +4,9 @@ const HELMET = 'helmet'
 const ARMOR = 'armor'
 const SHOES = 'shoes'
 const GLOVES = 'gloves'
+const FOOD = 'food'
+const BOOK = 'book'
+const POTION = 'potion'
 const EXCLAMATION = 'exclamation'
 const POTION_RED = 'potion-red'
 const POTION_BLUE = 'potion-blue'
@@ -25,6 +28,9 @@ export const RPGUI_ICON = {
   ARMOR,
   SHOES,
   GLOVES,
+  FOOD,
+  BOOK,
+  POTION,
   EXCLAMATION,
   POTION_RED,
   POTION_BLUE,

@@ -50,7 +50,7 @@ const RewardModal = ({ isOpen, setIsOpen }) => {
             ></RewardButton>
             <RpgSeparator golden />
             <RewardButton
-              icon={RPGUI_ICON.POTION_RED}
+              icon={RPGUI_ICON.FOOD}
               title="Food"
               description={`Recover ${hpReward} HP`}
               onClick={selectHpRecovery}

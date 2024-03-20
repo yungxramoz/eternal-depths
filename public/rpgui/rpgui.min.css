@@ -382,9 +382,17 @@ ul.rpgui-dropdown-imp {
 .rpgui-icon.exclamation {
   background-image: url(img/icons/exclamation.png);
 }
-.rpgui-icon.potion-red {
-  /* background-image: url(img/icons/potion-red.png); */
+.rpgui-icon.food {
   background-image: url(img/tiny-rpg/fruit_001.png);
+}
+.rpgui-icon.potion {
+  background-image: url(img/tiny-rpg/potion_020.png);
+}
+.rpgui-icon.book {
+  background-image: url(img/tiny-rpg/book_004.png);
+}
+.rpgui-icon.potion-red {
+  background-image: url(img/icons/potion-red.png);
 }
 .rpgui-icon.potion-green {
   background-image: url(img/icons/potion-green.png);

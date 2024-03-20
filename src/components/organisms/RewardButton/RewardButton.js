@@ -17,10 +17,10 @@ const RewardButton = ({
       onClick={onClick}
       disabled={disabled}
     >
+      <p className="reward-title">{title}</p>
       <div className="reward-button-container">
         <RpgIcon className="reward-icon" icon={icon} />
         <div className="reward-button-content">
-          <p className="reward-title">{title}</p>
           <p className="reward-subtitle">
             <i>{subtitle}</i>
           </p>

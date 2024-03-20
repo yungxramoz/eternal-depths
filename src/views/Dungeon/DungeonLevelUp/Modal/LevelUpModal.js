@@ -35,7 +35,7 @@ const LevelUpModal = ({ isOpen, setIsOpen }) => {
           <p>Choose your reward:</p>
           <div className="reward-selection-container">
             <RewardButton
-              icon={attackReward.icon}
+              icon={RPGUI_ICON.BOOK}
               title={attackReward.name}
               subtitle={`Cooldown: ${attackReward.cooldown}`}
               description={attackReward.description}
@@ -44,7 +44,7 @@ const LevelUpModal = ({ isOpen, setIsOpen }) => {
             ></RewardButton>
             <RpgSeparator golden />
             <RewardButton
-              icon={RPGUI_ICON.POTION_RED}
+              icon={RPGUI_ICON.POTION}
               title="Attribute"
               description="Improve 2 attributes"
               onClick={selectStatReward}
