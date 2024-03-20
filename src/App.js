@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import ROUTE from './constants/routes'
-import GameStateRoute from './utils/GameStateRoute'
+import GameStateRoute from './route/GameStateRoute'
 import Dungeon from './views/Dungeon/Dungeon'
 import Home from './views/Home/Home'
 import NewCharacter from './views/NewCharacter/NewCharacter'
