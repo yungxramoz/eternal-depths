@@ -190,6 +190,9 @@ const gameSlice = createSlice({
         gameSlice.caseReducers.characterSetHpToMax(state)
       }
     },
+    characterSetAssignablePoints: (state, { payload }) => {
+      state.character.availableAttributePoints = payload
+    },
     characterSetHpToMax: (state) => {
       state.character.current.hp = gameSlice
         .getSelectors()
@@ -290,6 +293,7 @@ export const {
   characterSetName,
   characterSetLook,
   characterAssignAttributePoint,
+  characterSetAssignablePoints,
   characterSetHpToMax,
   characterRecoverHp,
   characterEquipItem,

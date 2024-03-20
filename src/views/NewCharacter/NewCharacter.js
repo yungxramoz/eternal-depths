@@ -68,7 +68,7 @@ const NewCharacter = () => {
       />
       <RpgSeparator />
       <EditStatsPanel
-        localStats={character.stats}
+        stats={character.stats}
         initialPoints={initialPoints}
         assignedPoints={assignedPoints}
         setAssignedPoints={setAssignedPoints}
