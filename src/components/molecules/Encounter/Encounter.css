@@ -11,20 +11,17 @@
 }
 
 .animate-idle-flying {
-  animation: flying 1.2s ease infinite;
+  animation: flying 1.2s step-end infinite;
 }
 
 .animate-idle-standing {
-  animation: standing 2s linear infinite;
+  animation: standing 1s step-end infinite;
 }
 
 @keyframes damage {
-  0% {
-    transform: rotate(3deg);
-  }
   25% {
     filter: grayscale(1) drop-shadow(-2px 2px 5px black);
-    opacity: 0.8;
+    opacity: 0.5;
   }
   50% {
     filter: grayscale(0.3) drop-shadow(-2px 2px 5px black);
@@ -42,8 +39,8 @@
     transform: translate(0px);
   }
   50% {
-    transform: translateY(3px);
-    filter: drop-shadow(-2px 2px 4px black);
+    transform: translateY(2px);
+    filter: drop-shadow(-2px 1px 4px black);
   }
   100% {
     transform: translate(0px);
@@ -52,6 +49,6 @@
 
 @keyframes standing {
   50% {
-    transform: translateX(2px) rotate(1deg);
+    transform: scaleY(1.003) translateY(-0.5px);
   }
 }
