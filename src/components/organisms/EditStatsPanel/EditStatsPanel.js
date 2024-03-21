@@ -9,7 +9,6 @@ const EditStatsPanel = ({
   initialPoints,
   assignedPoints,
   setAssignedPoints,
-  grey = false,
 }) => {
   const [points, setPoints] = useState(initialPoints)
 
@@ -32,7 +31,7 @@ const EditStatsPanel = ({
   }
 
   return (
-    <RpgContainer golden={!grey} grey={grey} className="attribute-container">
+    <RpgContainer golden className="attribute-container">
       <h2>Attributes</h2>
       <p>Available points: {points}</p>
       <RpgSeparator golden={false} />

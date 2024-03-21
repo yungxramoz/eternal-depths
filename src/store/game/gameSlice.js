@@ -109,8 +109,7 @@ const gameSlice = createSlice({
       state.gameState = GAME_STATE.OVER
     },
     gameReset(state) {
-      state.gameState = GAME_STATE.IDLE
-      state.gameCycleState = null
+      state = initialState
     },
     battleStart(state, { payload }) {
       if (payload < state.encounter.current.stats.agility) {

@@ -9,6 +9,7 @@ import DungeonAfterBattle from './DungeonAfterBattle/DungeonAfterBattle'
 import DungeonBeforeBattle from './DungeonBeforeBattle/DungeonBeforeBattle'
 import DungeonInBattle from './DungeonInBattle/DungeonInBattle'
 import DungeonLevelUp from './DungeonLevelUp/DungeonLevelUp'
+import DungeonBattleDefeat from './DungeonBattleDefeat/DungeonBattleDefeat'
 
 const Dungeon = () => {
   const stageFileName = useSelector(
@@ -22,6 +23,16 @@ const Dungeon = () => {
 
   let stageImgSrc = require('../../assets/images/rooms/' + stageFileName)
 
+  const getImgSrc = () => {
+    switch (gameCycleState) {
+      case GAME_CYCLE_STATE.BATTLE_DEFEAT:
+      case GAME_CYCLE_STATE.LEVEL_UP:
+        return null
+      default:
+        return stageImgSrc
+    }
+  }
+
   const renderContent = () => {
     switch (gameCycleState) {
       case GAME_CYCLE_STATE.ENCOUNTER:
@@ -31,7 +42,7 @@ const Dungeon = () => {
       case GAME_CYCLE_STATE.BATTLE_VICTORY:
         return <DungeonAfterBattle />
       case GAME_CYCLE_STATE.BATTLE_DEFEAT:
-        return <></>
+        return <DungeonBattleDefeat />
       case GAME_CYCLE_STATE.LEVEL_UP:
         return <DungeonLevelUp />
       default:
@@ -41,7 +52,6 @@ const Dungeon = () => {
   const renderCharacterHeader = () => {
     switch (gameCycleState) {
       case GAME_CYCLE_STATE.BATTLE_VICTORY:
-      case GAME_CYCLE_STATE.LEVEL_UP:
       case GAME_CYCLE_STATE.ENCOUNTER:
         return (
           <>
@@ -53,6 +63,14 @@ const Dungeon = () => {
             />
           </>
         )
+      case GAME_CYCLE_STATE.LEVEL_UP:
+        return (
+          <CharacterHeader
+            character={character}
+            maxHp={charMaxHp}
+            maxXp={charMaxXp}
+          />
+        )
       default:
         return <></>
     }
@@ -61,7 +79,7 @@ const Dungeon = () => {
   return (
     <RpgContainer
       className="dungeon-container"
-      bgImg={stageImgSrc}
+      bgImg={getImgSrc()}
       fullPage
       scrollable
     >
