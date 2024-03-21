@@ -5,10 +5,10 @@ import RewardButton from '../../../../components/organisms/RewardButton/RewardBu
 import RpgSeparator from '../../../../components/templates/RpgSeperator/RpgSeparator'
 import { RPGUI_ICON } from '../../../../constants/rpgui-icon'
 import {
-  equipItem,
-  recoverHp,
-} from '../../../../store/character/characterSlice'
-import { calculatedHpReward } from '../../../../store/game/gameSlice'
+  calculatedHpReward,
+  characterEquipItem,
+  characterRecoverHp,
+} from '../../../../store/game/gameSlice'
 import { generateItem } from '../../../../utils/item-generator'
 import './RewardModal.css'
 
@@ -16,7 +16,8 @@ const RewardModal = ({ isOpen, setIsOpen }) => {
   const dispatch = useDispatch()
 
   const hpReward = useSelector(calculatedHpReward)
-  const [gearReward] = useState(generateItem())
+  const level = useSelector((state) => state.game.character.current.level)
+  const [gearReward] = useState(generateItem({ level }))
 
   const itemStats = () => {
     return Object.entries(gearReward.stats)
@@ -26,12 +27,12 @@ const RewardModal = ({ isOpen, setIsOpen }) => {
   }
 
   const selectGear = () => {
-    dispatch(equipItem(gearReward))
+    dispatch(characterEquipItem(gearReward))
     setIsOpen(false)
   }
 
   const selectHpRecovery = () => {
-    dispatch(recoverHp(hpReward))
+    dispatch(characterRecoverHp(hpReward))
     setIsOpen(false)
   }
   return (
@@ -49,7 +50,7 @@ const RewardModal = ({ isOpen, setIsOpen }) => {
             ></RewardButton>
             <RpgSeparator golden />
             <RewardButton
-              icon={RPGUI_ICON.POTION_RED}
+              icon={RPGUI_ICON.FOOD}
               title="Food"
               description={`Recover ${hpReward} HP`}
               onClick={selectHpRecovery}

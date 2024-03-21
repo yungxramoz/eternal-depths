@@ -1,11 +1,15 @@
-import { generateItem } from './item-generator'
 import ARMOR_TYPE from '../constants/armor-type'
 import RARITY from '../constants/rarity'
 import WEAPON_TYPE from '../constants/weapon-type'
+import { generateItem } from './item-generator'
 
 describe('item-generator', () => {
   it('generateItem creates an item with the correct properties', () => {
-    const item = generateItem('Test Item', ARMOR_TYPE.HELMET, RARITY.COMMON)
+    const item = generateItem({
+      name: 'Test Item',
+      item: ARMOR_TYPE.HELMET,
+      rarity: RARITY.COMMON,
+    })
     expect(item).toHaveProperty('name', 'Test Item')
     expect(item).toHaveProperty('type', ARMOR_TYPE.HELMET.type)
     expect(item).toHaveProperty('rarity', RARITY.COMMON)
@@ -24,7 +28,11 @@ describe('item-generator', () => {
       type: ARMOR_TYPE.HELMET.type,
       stats: { strength: 0 },
     }
-    const generatedItem = generateItem('Test Item', item, RARITY.COMMON)
+    const generatedItem = generateItem({
+      name: 'Test Item',
+      item,
+      rarity: RARITY.COMMON,
+    })
     expect(generatedItem.stats.strength).toBe(1)
   })
   it('increases the stats of a RARE item by 3', () => {
@@ -32,7 +40,11 @@ describe('item-generator', () => {
       type: ARMOR_TYPE.HELMET.type,
       stats: { strength: 0 },
     }
-    const generatedItem = generateItem('Test Item', item, RARITY.RARE)
+    const generatedItem = generateItem({
+      name: 'Test Item',
+      item,
+      rarity: RARITY.RARE,
+    })
     expect(generatedItem.stats.strength).toBe(3)
   })
   it('increases the stats of an EPIC item by 5', () => {
@@ -40,7 +52,11 @@ describe('item-generator', () => {
       type: ARMOR_TYPE.HELMET.type,
       stats: { strength: 0 },
     }
-    const generatedItem = generateItem('Test Item', item, RARITY.EPIC)
+    const generatedItem = generateItem({
+      name: 'Test Item',
+      item,
+      rarity: RARITY.EPIC,
+    })
     expect(generatedItem.stats.strength).toBe(5)
   })
   it('increases the stats of a LEGENDARY item by 8', () => {
@@ -48,7 +64,11 @@ describe('item-generator', () => {
       type: ARMOR_TYPE.HELMET.type,
       stats: { strength: 0 },
     }
-    const generatedItem = generateItem('Test Item', item, RARITY.LEGENDARY)
+    const generatedItem = generateItem({
+      name: 'Test Item',
+      item,
+      rarity: RARITY.LEGENDARY,
+    })
     expect(generatedItem.stats.strength).toBe(8)
   })
   it('increases the max and min stat of a weapon item', () => {
@@ -56,9 +76,26 @@ describe('item-generator', () => {
       type: WEAPON_TYPE.SWORD.type,
       stats: { minDamage: 0, maxDamage: 0 },
     }
-    const generatedItem = generateItem('Test Item', item, RARITY.LEGENDARY)
+    const generatedItem = generateItem({
+      name: 'Test Item',
+      item,
+      rarity: RARITY.LEGENDARY,
+    })
     expect(generatedItem.stats.minDamage).toBeGreaterThan(0)
     expect(generatedItem.stats.maxDamage).toBeGreaterThan(0)
+  })
+  it('increases stat by level', () => {
+    const item = {
+      type: ARMOR_TYPE.HELMET.type,
+      stats: { strength: 0 },
+    }
+    const generatedItem = generateItem({
+      name: 'Test Item',
+      item,
+      rarity: RARITY.COMMON,
+      level: 5,
+    })
+    expect(generatedItem.stats.strength).toBe(5)
   })
   it('generates common item by 65% chance', () => {
     jest.spyOn(global.Math, 'random').mockReturnValue(0.65)

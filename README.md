@@ -2,6 +2,8 @@
 
 Willkommen bei Eternal Depths, dem ultimativen rundenbasierten RPG für unterwegs! Tauche ein in die unendlichen Tiefen zufällig generierter Dungeons, stelle dich furchteinflößenden Gegnern und sammle Schätze, die deinen Charakter stärken. Entwickelt mit ReactJS, bietet dieses Spiel ein nahtloses und spannendes Erlebnis direkt in deinem Browser.
 
+🎮 Tauche ein in das Abenteuer! Spiele jetzt [Eternal Depths](https://yungxramoz.github.io) und entdecke die unendlichen Tiefen! 🐉
+
 ## 🌟 Features
 
 - **Rundenbasierte Kämpfe:** Nutze Strategie und Geschick, um in intensiven Kämpfen zu triumphieren.
@@ -34,6 +36,11 @@ Du kannst auch Lint-Fehler in der Konsole sehen.
 Startet den Test-Runner im interaktiven Watch-Modus.\
 Siehe den Abschnitt über [das Ausführen von Tests](https://facebook.github.io/create-react-app/docs/running-tests) für weitere Informationen.
 
+#### `npm run coverage`
+
+Start the test runner and generate a coverage report.\
+Der Coverage-Report wird in der Konsole angezeigt. Es wird eine Coverage von 80% erwartet.
+
 #### `npm run build`
 
 Erstellt die App für die Produktion im `build`-Ordner.\
@@ -60,20 +67,14 @@ Atomic Design ist eine Methodologie, die von Brad Frost  entwickelt wurde, um Be
 - **Pages:** Auf der höchsten Ebene stehen die Seiten, gefüllt mit realen Inhalten und Daten. Im Gegensatz zu den anderen Ebenen dürfen Seiten auf den Redux Store zugreifen, um globale Zustände abzurufen oder zu manipulieren. Dies ermöglicht eine klare Trennung der Zuständigkeiten, wobei die Verwaltung des Anwendungszustands auf der höchsten Ebene zentralisiert ist.
 Pages können zur Übersicht in weitere Subkomponente unterteilt werden.
 
-### Store
-Für das State Management der Webapplikation, wird Redux eingesetzt. Der Zustand der Anwendung ist in zwei Hauptbereiche unterteilt: game und character. Diese Modularisierung des Stores ermöglicht eine klare Trennung der Anwendungslogik und erleichtert die Verwaltung des Zustands, da sich die Zuständigkeiten spezifisch auf verschiedene Aspekte des Spiels beziehen.
-
-- **Character:** Der character Slice beinhaltet alle Daten, die den Spielercharakter betreffen. Dazu zählen sowohl die Attribute des Charakters als auch die Ausrüstung und die Attacken. Die Verwaltung dieser Daten in einem dedizierten Slice ermöglicht es, Änderungen am Spielercharakter effizient zu handhaben und auf Aktionen wie Level-Up, das Erlernen neuer Attacken oder die Veränderung von Ausrüstungsgegenständen reagieren zu können.
-- **Game:** Der game Slice verwaltet alle Daten, die den aktuellen Spielstand betreffen, einschliesslich der Stage, der Gegner und des allgemeinen Spielzyklus.
-
 ## 🎨 Artwork Attribution
 
 | Component           | Attribution         |
 | ------------------- | ------------------- |
-| Attack Icons        | game-icons.net      |
+| Attack Icons        | [game-icons.net](https://game-icons.net)      |
 | Encounters & Stages | Sandro Gerber       |
-| Item Icons          | Pixeltiers Tiny RPG |
-| UI-Elemente         | RPGUI               |
+| Item Icons          | [Pixeltiers Tiny RPG](https://pixeltier.itch.io/pixeltiers-tiny-rpg-assets) |
+| UI-Elemente         | [RPGUI](https://ronenness.github.io/RPGUI/) |
 
 
 

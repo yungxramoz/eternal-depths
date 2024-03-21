@@ -1,11 +1,13 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import RpgButton from '../../../components/atoms/RpgButton/RpgButton'
+import Encounter from '../../../components/molecules/Encounter/Encounter'
 import { battleStart } from '../../../store/game/gameSlice'
+import './DungeonBeforeBattle.css'
 
-const DungeonBeforeBattle = ({ children }) => {
+const DungeonBeforeBattle = () => {
   const dispatch = useDispatch()
-  const stage = useSelector((state) => state.game.stage)
+  const encounter = useSelector((state) => state.game.encounter.current)
 
   const startBattle = () => {
     dispatch(battleStart())
@@ -13,8 +15,7 @@ const DungeonBeforeBattle = ({ children }) => {
 
   return (
     <>
-      <h1>Stage {stage}</h1>
-      {children}
+      <Encounter encounter={encounter} />
       <RpgButton onClick={startBattle} text="Start Battle" />
     </>
   )

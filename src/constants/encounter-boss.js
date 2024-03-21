@@ -1,4 +1,4 @@
-import { ANIMATION_STATE } from "./animation-state"
+import { ANIMATION_STATE } from './animation-state'
 
 export const FIRE_DRAGON = Object.freeze({
   name: 'Fire Dragon',
@@ -12,8 +12,8 @@ export const FIRE_DRAGON = Object.freeze({
     precision: 2,
   },
   style: {
-    maxWidth: '95vw',
-    maxHeight: '95dvh',
+    maxWidth: '80vw',
+    maxHeight: '80dvh',
     alignSelf: 'flex-end',
   },
 })
@@ -66,8 +66,8 @@ export const SHADOW_DRAGON = Object.freeze({
     precision: 2,
   },
   style: {
-    maxWidth: '95vw',
-    maxHeight: '95dvh',
+    maxWidth: '80vw',
+    maxHeight: '80dvh',
     alignSelf: 'flex-start',
   },
 })

@@ -10,6 +10,11 @@ exports[`RewardButton renders correctly when disabled: RewardButton disabled 1`]
       <div
         class="rpgui-container container framed framed-golden-2 golden-container"
       >
+        <p
+          class="reward-title"
+        >
+          Test Title
+        </p>
         <div
           class="reward-button-container"
         >
@@ -19,11 +24,6 @@ exports[`RewardButton renders correctly when disabled: RewardButton disabled 1`]
           <div
             class="reward-button-content"
           >
-            <p
-              class="reward-title"
-            >
-              Test Title
-            </p>
             <p
               class="reward-subtitle"
             >
@@ -53,6 +53,11 @@ exports[`RewardButton renders correctly: RewardButton 1`] = `
       <div
         class="rpgui-container container framed framed-golden-2 golden-container"
       >
+        <p
+          class="reward-title"
+        >
+          Test Title
+        </p>
         <div
           class="reward-button-container"
         >
@@ -62,11 +67,6 @@ exports[`RewardButton renders correctly: RewardButton 1`] = `
           <div
             class="reward-button-content"
           >
-            <p
-              class="reward-title"
-            >
-              Test Title
-            </p>
             <p
               class="reward-subtitle"
             >

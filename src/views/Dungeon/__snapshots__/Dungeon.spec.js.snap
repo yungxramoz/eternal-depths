@@ -7,6 +7,13 @@ exports[`Dungeon renders DungeonAfterBattle component on battle victory state: D
       class="rpgui-container container framed full-page scrollable dungeon-container"
       style="background-image: url(test-file-stub); background-repeat: no-repeat; background-size: cover; background-position: bottom;"
     >
+      <h2>
+        Stage 
+        1
+      </h2>
+      <div>
+        CharacterHeader
+      </div>
       <div>
         DungeonAfterBattle
       </div>
@@ -22,6 +29,13 @@ exports[`Dungeon renders DungeonBeforeBattle component on encounter state: Dunge
       class="rpgui-container container framed full-page scrollable dungeon-container"
       style="background-image: url(test-file-stub); background-repeat: no-repeat; background-size: cover; background-position: bottom;"
     >
+      <h2>
+        Stage 
+        1
+      </h2>
+      <div>
+        CharacterHeader
+      </div>
       <div>
         DungeonBeforeBattle
       </div>
@@ -45,6 +59,23 @@ exports[`Dungeon renders DungeonInBattle component on battle state: DungeonInBat
 </body>
 `;
 
+exports[`Dungeon renders DungeonLevelUp component on level up state: DungeonLevelUp 1`] = `
+<body>
+  <div>
+    <div
+      class="rpgui-container container framed full-page scrollable dungeon-container"
+    >
+      <div>
+        CharacterHeader
+      </div>
+      <div>
+        DungeonLevelUp
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
 exports[`Dungeon renders without crashing: Dungeon 1`] = `
 <body>
   <div>
@@ -52,6 +83,13 @@ exports[`Dungeon renders without crashing: Dungeon 1`] = `
       class="rpgui-container container framed full-page scrollable dungeon-container"
       style="background-image: url(test-file-stub); background-repeat: no-repeat; background-size: cover; background-position: bottom;"
     >
+      <h2>
+        Stage 
+        1
+      </h2>
+      <div>
+        CharacterHeader
+      </div>
       <div>
         DungeonBeforeBattle
       </div>

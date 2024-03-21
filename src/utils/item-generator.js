@@ -11,7 +11,7 @@ const items = [
   WEAPON_TYPE.SHIELD,
 ]
 
-export const generateItem = (name, item, rarity) => {
+export const generateItem = ({ name, item, rarity, level = 1 } = {}) => {
   item = item ? { ...item } : null
   if (!item) {
     item = { ...items[Math.floor(Math.random() * items.length)] }
@@ -32,17 +32,17 @@ export const generateItem = (name, item, rarity) => {
     }
   }
 
-  const stats = { ...item.stats }
-  generateStats(item.type, stats, rarity)
-  item.stats = stats
-
   //TODO currently only swords are weapons
   item.type = item.type === 'sword' ? 'weapon' : item.type
+
+  const stats = { ...item.stats }
+  generateStats(item.type, stats, rarity, level)
+  item.stats = stats
 
   return { ...item, rarity, name }
 }
 
-const generateStats = (type, stats, rarity) => {
+const generateStats = (type, stats, rarity, level) => {
   let statIncrease
   switch (rarity) {
     case RARITY.COMMON:
@@ -60,11 +60,15 @@ const generateStats = (type, stats, rarity) => {
     default:
       break
   }
+  statIncrease += level - 1
 
-  if (type === WEAPON_TYPE.SWORD.type) {
+  if (type === 'weapon') {
     statIncrease = Math.floor(Math.random() * (statIncrease * 2)) + statIncrease
-    stats.minDamage += Math.floor(Math.random() * statIncrease)
+    stats.minDamage += Math.floor(Math.random() * statIncrease) + 1
     stats.maxDamage += statIncrease - stats.minDamage
+    if (stats.maxDamage < stats.minDamage) {
+      stats.maxDamage = stats.minDamage
+    }
   } else {
     for (let i = 0; i < statIncrease; i++) {
       stats[randomStat(stats)] += 1

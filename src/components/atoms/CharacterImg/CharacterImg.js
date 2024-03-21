@@ -1,7 +1,8 @@
 import React from 'react'
 import './CharacterImg.css'
 
-const CharacterImg = ({ number }) => {
+const CharacterImg = ({ number, className = '', small = false }) => {
+  const classes = small ? `character-img-small ${className}` : className
   const getCharacterImage = () => {
     const context = require.context(
       '../../../assets/images/characters',
@@ -16,7 +17,7 @@ const CharacterImg = ({ number }) => {
 
   return (
     <img
-      className="character-img"
+      className={`character-img ${classes}`}
       src={characterImage}
       alt={`Character ${number}`}
     />

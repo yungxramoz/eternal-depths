@@ -1,34 +1,37 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import AttackButton from '../../../components/molecules/AtackButton/AttackButton'
+import Encounter from '../../../components/molecules/Encounter/Encounter'
 import HpProgressBar from '../../../components/molecules/ProgressBar/HpProgressBar'
+import { EMPTY_ATTACK } from '../../../constants/attack-type'
 import {
-  attackEffects,
   calculatedCharacterStats,
-  damageCharacter,
-} from '../../../store/character/characterSlice'
-import {
-  animateIdle,
-  attack,
-  battleDefeat,
-  damageEncounter,
+  characterAttackEffects,
+  characterDamage,
+  characterMaxHp,
+  encounterAnimateIdle,
+  encounterAttack,
+  encounterDamage,
 } from '../../../store/game/gameSlice'
 import { calculateDamage } from '../../../utils/attack'
 import './DungeonInBattle.css'
-import { EMPTY_ATTACK } from '../../../constants/attack-type'
 
-const DungeonInBattle = ({ children }) => {
+const DungeonInBattle = () => {
   const dispatch = useDispatch()
-  const character = useSelector((state) => state.character.current)
-  const encounter = useSelector((state) => state.game.encounter)
-  const encounterTurn = useSelector((state) => state.game.encounterTurn)
+  const character = useSelector((state) => state.game.character.current)
+  const encounter = useSelector((state) => state.game.encounter.current)
+  const isEncounterTurn = useSelector((state) => state.game.isEncounterTurn)
+  const encounterAnimationState = useSelector(
+    (state) => state.game.encounter.animation,
+  )
   const characterStats = useSelector(calculatedCharacterStats)
+  const charMaxHp = useSelector(characterMaxHp)
 
   useEffect(() => {
     setTimeout(() => {
-      if (encounterTurn) {
+      if (isEncounterTurn) {
         if (encounter.hp > 0) {
-          dispatch(attack())
+          dispatch(encounterAttack())
           const damage = calculateDamage(
             EMPTY_ATTACK,
             encounter.stats,
@@ -36,19 +39,13 @@ const DungeonInBattle = ({ children }) => {
             encounter.maxDamage,
             characterStats,
           )
-          dispatch(damageCharacter(damage))
+          dispatch(characterDamage(damage))
         }
       } else {
-        dispatch(animateIdle())
+        dispatch(encounterAnimateIdle())
       }
     }, 500)
-  }, [encounterTurn, dispatch, encounter, character.hp, characterStats])
-
-  useEffect(() => {
-    if (character.hp <= 0) {
-      dispatch(battleDefeat())
-    }
-  }, [character.hp, dispatch])
+  }, [isEncounterTurn, dispatch, encounter, character.hp, characterStats])
 
   const invokeAttack = (attack) => {
     const { minDamage, maxDamage } = character.items.weapon.stats
@@ -59,23 +56,27 @@ const DungeonInBattle = ({ children }) => {
       maxDamage,
       encounter.stats,
     )
-    dispatch(damageEncounter(damage))
-    dispatch(attackEffects({ attack, dealtDamage: damage }))
+    dispatch(encounterDamage(damage))
+    dispatch(characterAttackEffects({ attack, dealtDamage: damage }))
   }
 
   return (
     <>
-      {children}
+      <Encounter
+        encounterAnimationState={encounterAnimationState}
+        encounter={encounter}
+        showHp
+      />
       <HpProgressBar
         prefix="Your "
         currentHp={character.hp}
-        maxHp={character.maxHp}
+        maxHp={charMaxHp}
       />
       <div className="combat-control-container">
         {character.attacks.map((attack) => (
           <AttackButton
             key={attack.id}
-            disabled={attack.currentCooldown > 0 || encounterTurn}
+            disabled={attack.currentCooldown > 0 || isEncounterTurn}
             attack={attack}
             text={attack.name}
             onClick={() => invokeAttack(attack)}

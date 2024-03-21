@@ -46,7 +46,7 @@ describe('DungeonAfterBattle', () => {
     expect(store.dispatch).toHaveBeenCalledTimes(2)
     expect(store.dispatch).toHaveBeenCalledWith({ type: 'game/nextStage' })
     expect(store.dispatch).toHaveBeenCalledWith({
-      type: 'character/recoverHp',
+      type: 'game/characterRecoverHp',
       payload: 15,
     })
   })

@@ -22,7 +22,7 @@ export const generateEncounter = (
 
   const points = level * 2
   const stats = { ...encounter.baseStats }
-  generateStats(points, stats)
+  generateStats(points, stats, level)
 
   const maxHp = stats.health * 4 + 10
   const hp = maxHp
@@ -50,7 +50,12 @@ export const encounterLevel = (stage) => {
   return Math.floor((stage - 1) / 5) + 1
 }
 
-const generateStats = (points, stats) => {
+const generateStats = (points, stats, level) => {
+  const levelModification = level - 1
+  stats.health += levelModification
+  stats.strength += levelModification
+  stats.agility += levelModification
+  stats.precision += levelModification
   for (let i = 0; i < points; i++) {
     const randomStat = Math.floor(Math.random() * 4)
     switch (randomStat) {

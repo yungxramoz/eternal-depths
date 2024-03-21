@@ -34,6 +34,11 @@ exports[`RewardModal renders correctly: RewardModal 1`] = `
               <div
                 class="rpgui-container container framed framed-golden-2 golden-container"
               >
+                <p
+                  class="reward-title"
+                >
+                  Test Item
+                </p>
                 <div
                   class="reward-button-container"
                 >
@@ -43,11 +48,6 @@ exports[`RewardModal renders correctly: RewardModal 1`] = `
                   <div
                     class="reward-button-content"
                   >
-                    <p
-                      class="reward-title"
-                    >
-                      Test Item
-                    </p>
                     <p
                       class="reward-subtitle"
                     >
@@ -73,20 +73,20 @@ exports[`RewardModal renders correctly: RewardModal 1`] = `
               <div
                 class="rpgui-container container framed framed-golden-2 golden-container"
               >
+                <p
+                  class="reward-title"
+                >
+                  Food
+                </p>
                 <div
                   class="reward-button-container"
                 >
                   <div
-                    class="rpgui-icon potion-red reward-icon"
+                    class="rpgui-icon food reward-icon"
                   />
                   <div
                     class="reward-button-content"
                   >
-                    <p
-                      class="reward-title"
-                    >
-                      Food
-                    </p>
                     <p
                       class="reward-subtitle"
                     >
