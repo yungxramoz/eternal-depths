@@ -2,6 +2,8 @@
 
 Willkommen bei Eternal Depths, dem ultimativen rundenbasierten RPG für unterwegs! Tauche ein in die unendlichen Tiefen zufällig generierter Dungeons, stelle dich furchteinflößenden Gegnern und sammle Schätze, die deinen Charakter stärken. Entwickelt mit ReactJS, bietet dieses Spiel ein nahtloses und spannendes Erlebnis direkt in deinem Browser.
 
+🎮 Tauche ein in das Abenteuer! Spiele jetzt [Eternal Depths](https://yungxramoz.github.io) und entdecke die unendlichen Tiefen! 🐉
+
 ## 🌟 Features
 
 - **Rundenbasierte Kämpfe:** Nutze Strategie und Geschick, um in intensiven Kämpfen zu triumphieren.
@@ -34,6 +36,11 @@ Du kannst auch Lint-Fehler in der Konsole sehen.
 Startet den Test-Runner im interaktiven Watch-Modus.\
 Siehe den Abschnitt über [das Ausführen von Tests](https://facebook.github.io/create-react-app/docs/running-tests) für weitere Informationen.
 
+#### `npm run coverage`
+
+Start the test runner and generate a coverage report.\
+Der Coverage-Report wird in der Konsole angezeigt. Es wird eine Coverage von 80% erwartet.
+
 #### `npm run build`
 
 Erstellt die App für die Produktion im `build`-Ordner.\
@@ -64,10 +71,10 @@ Pages können zur Übersicht in weitere Subkomponente unterteilt werden.
 
 | Component           | Attribution         |
 | ------------------- | ------------------- |
-| Attack Icons        | game-icons.net      |
+| Attack Icons        | [game-icons.net](https://game-icons.net)      |
 | Encounters & Stages | Sandro Gerber       |
-| Item Icons          | Pixeltiers Tiny RPG |
-| UI-Elemente         | RPGUI               |
+| Item Icons          | [Pixeltiers Tiny RPG](https://pixeltier.itch.io/pixeltiers-tiny-rpg-assets) |
+| UI-Elemente         | [RPGUI](https://ronenness.github.io/RPGUI/) |
 
 
 

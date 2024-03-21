@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DungeonBattleDefeat renders correctly: DungeonBattleDefeat 1`] = `
+<body>
+  <div>
+    <div
+      class="defeat-container"
+    >
+      <h2>
+        You Died!
+      </h2>
+      <h3>
+        Stage 
+        0
+      </h3>
+      <div
+        class="rpgui-icon skull "
+      />
+      <p>
+        In the heat of a fierce battle, you met your end. Your name, once whispered in the winds, will now fade into silence of oblivion.
+      </p>
+      <button
+        class="rpgui-button btn"
+      >
+        End
+      </button>
+    </div>
+  </div>
+</body>
+`;

@@ -64,12 +64,7 @@ exports[`Dungeon renders DungeonLevelUp component on level up state: DungeonLeve
   <div>
     <div
       class="rpgui-container container framed full-page scrollable dungeon-container"
-      style="background-image: url(test-file-stub); background-repeat: no-repeat; background-size: cover; background-position: bottom;"
     >
-      <h2>
-        Stage 
-        1
-      </h2>
       <div>
         CharacterHeader
       </div>
