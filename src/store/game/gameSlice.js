@@ -109,7 +109,45 @@ const gameSlice = createSlice({
       state.gameState = GAME_STATE.OVER
     },
     gameReset(state) {
-      state = initialState
+      state.gameState = GAME_STATE.IDLE
+      state.gameCycleState = null
+      state.stage = 0
+      state.encounter.current = null
+      state.encounter.animation = ''
+      state.encounter.stageFileName = null
+      state.character.current = {
+        look: 1,
+        name: '',
+        level: 1,
+        xp: 0,
+        stats: {
+          health: 1,
+          strength: 1,
+          agility: 1,
+          precision: 1,
+        },
+        items: {
+          helmet: null,
+          armor: null,
+          weapon: {
+            name: 'Rusty Sword',
+            stats: {
+              minDamage: 1,
+              maxDamage: 3,
+            },
+          },
+          shield: null,
+          greaves: null,
+        },
+        attacks: [
+          {
+            ...BASE_ATTACK,
+            id: 1,
+            currentCooldown: 0,
+          },
+        ],
+      }
+      state.character.availableAttributePoints = 2
     },
     battleStart(state, { payload }) {
       if (payload < state.encounter.current.stats.agility) {
