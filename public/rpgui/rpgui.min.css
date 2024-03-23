@@ -397,6 +397,9 @@ ul.rpgui-dropdown-imp {
 .rpgui-icon.torch {
   background-image: url(img/tiny-rpg/torch_001.png);
 }
+.rpgui-icon.treasure {
+  background-image: url(img/tiny-rpg/bagpack_002.png);
+}
 .rpgui-icon.potion-red {
   background-image: url(img/icons/potion-red.png);
 }

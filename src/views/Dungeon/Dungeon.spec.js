@@ -28,6 +28,7 @@ jest.mock('./DungeonInBattle/DungeonInBattle', () => () => (
 jest.mock('./DungeonLevelUp/DungeonLevelUp', () => () => (
   <div>DungeonLevelUp</div>
 ))
+jest.mock('./DungeonReward/DungeonReward', () => () => <div>DungeonReward</div>)
 jest.mock(
   '../../components/organisms/CharacterHeader/CharacterHeader',
   () => () => <div>CharacterHeader</div>,
@@ -79,5 +80,14 @@ describe('Dungeon', () => {
       </Provider>,
     )
     expect(document.body).toMatchSnapshot('DungeonLevelUp')
+  })
+  it('renders DungeonReward component on reward state', () => {
+    store.dispatch(battleVictory())
+    render(
+      <Provider store={store}>
+        <Dungeon />
+      </Provider>,
+    )
+    expect(document.body).toMatchSnapshot('DungeonReward')
   })
 })

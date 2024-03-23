@@ -161,6 +161,9 @@ const gameSlice = createSlice({
     battleDefeat(state) {
       state.gameCycleState = GAME_CYCLE_STATE.BATTLE_DEFEAT
     },
+    battleReward(state) {
+      state.gameCycleState = GAME_CYCLE_STATE.REWARD
+    },
     nextStage(state) {
       state.stage += 1
       const level = encounterLevel(state.stage)
@@ -183,7 +186,7 @@ const gameSlice = createSlice({
         ) {
           gameSlice.caseReducers.characterLevelUp(state)
         } else {
-          gameSlice.caseReducers.battleVictory(state)
+          gameSlice.caseReducers.battleReward(state)
         }
       }
     },
@@ -321,6 +324,7 @@ export const {
   battleStart,
   battleVictory,
   battleDefeat,
+  battleReward,
   nextStage,
   encounterDamage,
   encounterAttack,

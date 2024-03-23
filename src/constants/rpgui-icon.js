@@ -9,6 +9,7 @@ const BOOK = 'book'
 const POTION = 'potion'
 const SKULL = 'skull'
 const TORCH = 'torch'
+const TREASURE = 'treasure'
 
 export const RPGUI_ICON = {
   SWORD,
@@ -22,4 +23,5 @@ export const RPGUI_ICON = {
   POTION,
   SKULL,
   TORCH,
+  TREASURE,
 }

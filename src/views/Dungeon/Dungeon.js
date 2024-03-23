@@ -6,10 +6,11 @@ import GAME_CYCLE_STATE from '../../constants/game-cycle-state'
 import { characterMaxHp, characterMaxXp } from '../../store/game/gameSlice'
 import './Dungeon.css'
 import DungeonAfterBattle from './DungeonAfterBattle/DungeonAfterBattle'
+import DungeonBattleDefeat from './DungeonBattleDefeat/DungeonBattleDefeat'
 import DungeonBeforeBattle from './DungeonBeforeBattle/DungeonBeforeBattle'
 import DungeonInBattle from './DungeonInBattle/DungeonInBattle'
 import DungeonLevelUp from './DungeonLevelUp/DungeonLevelUp'
-import DungeonBattleDefeat from './DungeonBattleDefeat/DungeonBattleDefeat'
+import DungeonReward from './DungeonReward/DungeonReward'
 
 const Dungeon = () => {
   const stageFileName = useSelector(
@@ -27,6 +28,7 @@ const Dungeon = () => {
     switch (gameCycleState) {
       case GAME_CYCLE_STATE.BATTLE_DEFEAT:
       case GAME_CYCLE_STATE.LEVEL_UP:
+      case GAME_CYCLE_STATE.REWARD:
         return null
       default:
         return stageImgSrc
@@ -45,6 +47,8 @@ const Dungeon = () => {
         return <DungeonBattleDefeat />
       case GAME_CYCLE_STATE.LEVEL_UP:
         return <DungeonLevelUp />
+      case GAME_CYCLE_STATE.REWARD:
+        return <DungeonReward />
       default:
         return <></>
     }
@@ -53,6 +57,7 @@ const Dungeon = () => {
     switch (gameCycleState) {
       case GAME_CYCLE_STATE.BATTLE_VICTORY:
       case GAME_CYCLE_STATE.ENCOUNTER:
+      case GAME_CYCLE_STATE.REWARD:
         return (
           <>
             <h2>Stage {stage}</h2>

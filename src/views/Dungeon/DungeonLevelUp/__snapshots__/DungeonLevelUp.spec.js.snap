@@ -246,11 +246,6 @@ exports[`DungeonLevelUp renders correctly: DungeonLevelUp 1`] = `
           <div
             class="rpgui-container container framed framed-golden-2 golden-container"
           >
-            <p
-              class="reward-title"
-            >
-              Test Attack
-            </p>
             <div
               class="reward-button-container"
             >
@@ -260,6 +255,11 @@ exports[`DungeonLevelUp renders correctly: DungeonLevelUp 1`] = `
               <div
                 class="reward-button-content"
               >
+                <p
+                  class="reward-title"
+                >
+                  Test Attack
+                </p>
                 <p
                   class="reward-subtitle"
                 >
@@ -285,11 +285,6 @@ exports[`DungeonLevelUp renders correctly: DungeonLevelUp 1`] = `
           <div
             class="rpgui-container container framed framed-golden-2 golden-container"
           >
-            <p
-              class="reward-title"
-            >
-              Attribute
-            </p>
             <div
               class="reward-button-container"
             >
@@ -299,6 +294,11 @@ exports[`DungeonLevelUp renders correctly: DungeonLevelUp 1`] = `
               <div
                 class="reward-button-content"
               >
+                <p
+                  class="reward-title"
+                >
+                  Attribute
+                </p>
                 <p
                   class="reward-subtitle"
                 >

@@ -4,6 +4,7 @@ import RpgButton from '../../../components/atoms/RpgButton/RpgButton'
 import RpgIcon from '../../../components/atoms/RpgIcon/RpgIcon'
 import { gameReset } from '../../../store/game/gameSlice'
 import './DungeonBattleDefeat.css'
+import { RPGUI_ICON } from '../../../constants/rpgui-icon'
 
 const DungeonBattleDefeat = () => {
   const dispatch = useDispatch()
@@ -17,7 +18,7 @@ const DungeonBattleDefeat = () => {
     <div className="defeat-container">
       <h2>You Died!</h2>
       <h3>Stage {stage}</h3>
-      <RpgIcon icon="skull" />
+      <RpgIcon icon={RPGUI_ICON.SKULL} />
       <p>
         In the heat of a fierce battle, you met your end. Your name, once
         whispered in the winds, will now fade into silence of oblivion.
