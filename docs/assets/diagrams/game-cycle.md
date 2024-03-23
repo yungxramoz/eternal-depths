@@ -10,17 +10,19 @@ stateDiagram-v2
     state PLAYING {
         [*] --> Encounter
         Encounter --> Battle: Encounter Enemy
-        Battle --> BattleVictory: Win
+        Battle --> Reward: Win, Gain XP
         Battle --> BattleDefeat: Lose
-        BattleVictory --> LevelUp: Gain XP
-        LevelUp --> Encounter: Next Encounter
+        Battle --> LevelUp: Win, Gain XP
+        Reward --> BattleVictory: Continue
+        LevelUp --> Reward: reward selected
+        BattleVictory --> Encounter: Next Encounter
         BattleDefeat --> [*]: Exit to OVER
         Battle: Battle Cycle
         
         state Battle {
             [*] --> EncounterTurn
             EncounterTurn --> PlayerTurn: Enemy Attack
-            PlayerTurn --> EncounterTurn: Player Decision
+            PlayerTurn --> EncounterTurn: Player Attack
         }
     }
     
@@ -28,8 +30,9 @@ stateDiagram-v2
     Over: OVER - Game Over Page
     Won: WON - Game Won Page
     Encounter: ENCOUNTER - Show encounter
-    BattleVictory: BATLE_VICTORY - Choose HP Regen or Item
+    BattleVictory: BATLE_VICTORY - Choose Escape or Continue
     BattleDefeat: BATTLE_DEFEAT - Game Over Screen
     LevelUp: LEVEL_UP - Improve attributes or learn new attacks
+    Reward: REWARD - Choose HP Regen or Item
 
 ```
