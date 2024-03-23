@@ -25,28 +25,28 @@ exports[`RewardModal renders correctly: RewardModal 1`] = `
             class="rpgui-container container framed framed-golden-2 golden-container"
           >
             <div
-              class="reward-button-container"
+              class="item-container"
             >
               <div
-                class="rpgui-icon test-icon reward-icon"
+                class="rpgui-icon test-icon item-icon"
               />
               <div
-                class="reward-button-content"
+                class="item-content"
               >
                 <p
-                  class="reward-title"
+                  class="item-title"
                 >
                   Test Item
                 </p>
                 <p
-                  class="reward-subtitle"
+                  class="item-subtitle"
                 >
                   <i>
                     Common
                   </i>
                 </p>
                 <p
-                  class="reward-description"
+                  class="item-description"
                 >
                   STR:10
                 </p>
@@ -64,26 +64,26 @@ exports[`RewardModal renders correctly: RewardModal 1`] = `
             class="rpgui-container container framed framed-golden-2 golden-container"
           >
             <div
-              class="reward-button-container"
+              class="item-container"
             >
               <div
-                class="rpgui-icon food reward-icon"
+                class="rpgui-icon food item-icon"
               />
               <div
-                class="reward-button-content"
+                class="item-content"
               >
                 <p
-                  class="reward-title"
+                  class="item-title"
                 >
                   Food
                 </p>
                 <p
-                  class="reward-subtitle"
+                  class="item-subtitle"
                 >
                   <i />
                 </p>
                 <p
-                  class="reward-description"
+                  class="item-description"
                 >
                   Recover 5 HP
                 </p>

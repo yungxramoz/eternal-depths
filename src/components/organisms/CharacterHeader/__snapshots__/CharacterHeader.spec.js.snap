@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CharacterHeader renders correctly 1`] = `
+exports[`CharacterHeader renders correctly: CharacterHeader 1`] = `
 <body>
   <div>
     <div

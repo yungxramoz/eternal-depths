@@ -20,6 +20,6 @@ describe('CharacterHeader', () => {
     render(
       <CharacterHeader character={character} maxHp={maxHp} maxXp={maxXp} />,
     )
-    expect(document.body).toMatchSnapshot()
+    expect(document.body).toMatchSnapshot('CharacterHeader')
   })
 })

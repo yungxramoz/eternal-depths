@@ -3,6 +3,7 @@ import { render } from '@testing-library/react'
 import React from 'react'
 import { Provider } from 'react-redux'
 import gameReducer, {
+  battleReward,
   battleStart,
   battleVictory,
   characterLevelUp,
@@ -82,7 +83,7 @@ describe('Dungeon', () => {
     expect(document.body).toMatchSnapshot('DungeonLevelUp')
   })
   it('renders DungeonReward component on reward state', () => {
-    store.dispatch(battleVictory())
+    store.dispatch(battleReward())
     render(
       <Provider store={store}>
         <Dungeon />

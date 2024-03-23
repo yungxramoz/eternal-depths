@@ -81,7 +81,6 @@ exports[`Dungeon renders DungeonReward component on reward state: DungeonReward 
   <div>
     <div
       class="rpgui-container container framed full-page scrollable dungeon-container"
-      style="background-image: url(test-file-stub); background-repeat: no-repeat; background-size: cover; background-position: bottom;"
     >
       <h2>
         Stage 
@@ -91,7 +90,7 @@ exports[`Dungeon renders DungeonReward component on reward state: DungeonReward 
         CharacterHeader
       </div>
       <div>
-        DungeonAfterBattle
+        DungeonReward
       </div>
     </div>
   </div>

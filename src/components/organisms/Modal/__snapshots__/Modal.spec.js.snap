@@ -32,11 +32,9 @@ exports[`Modal renders correctly: Modal 1`] = `
           <hr
             class="separator"
           />
-          <button
-            class="rpgui-button btn"
-          >
-            Close
-          </button>
+          <div>
+            Test Footer
+          </div>
         </div>
       </div>
       <div

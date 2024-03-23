@@ -11,28 +11,28 @@ exports[`RewardButton renders correctly when disabled: RewardButton disabled 1`]
         class="rpgui-container container framed framed-golden-2 golden-container"
       >
         <div
-          class="reward-button-container"
+          class="item-container"
         >
           <div
-            class="rpgui-icon test-icon reward-icon"
+            class="rpgui-icon test-icon item-icon"
           />
           <div
-            class="reward-button-content"
+            class="item-content"
           >
             <p
-              class="reward-title"
+              class="item-title"
             >
               Test Title
             </p>
             <p
-              class="reward-subtitle"
+              class="item-subtitle"
             >
               <i>
                 Test Subtitle
               </i>
             </p>
             <p
-              class="reward-description"
+              class="item-description"
             >
               Test Description
             </p>
@@ -54,28 +54,28 @@ exports[`RewardButton renders correctly: RewardButton 1`] = `
         class="rpgui-container container framed framed-golden-2 golden-container"
       >
         <div
-          class="reward-button-container"
+          class="item-container"
         >
           <div
-            class="rpgui-icon test-icon reward-icon"
+            class="rpgui-icon test-icon item-icon"
           />
           <div
-            class="reward-button-content"
+            class="item-content"
           >
             <p
-              class="reward-title"
+              class="item-title"
             >
               Test Title
             </p>
             <p
-              class="reward-subtitle"
+              class="item-subtitle"
             >
               <i>
                 Test Subtitle
               </i>
             </p>
             <p
-              class="reward-description"
+              class="item-description"
             >
               Test Description
             </p>

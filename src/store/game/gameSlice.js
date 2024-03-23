@@ -1,6 +1,6 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit'
 import { ANIMATION_STATE } from '../../constants/animation-state'
-import { BASE_ATTACK } from '../../constants/attack-type'
+import { ATTACK, BASE_ATTACK } from '../../constants/attack-type'
 import GAME_CYCLE_STATE from '../../constants/game-cycle-state'
 import GAME_STATE from '../../constants/game-state'
 import {
@@ -306,6 +306,16 @@ const gameSlice = createSlice({
       }
       state.character.current.attacks.push(attack)
     },
+    characterReplaceAttack: (state, { payload: { newAttack, attackId } }) => {
+      const attackIndex = state.character.current.attacks.findIndex(
+        (a) => a.id === attackId,
+      )
+      state.character.current.attacks[attackIndex] = {
+        ...newAttack,
+        id: attackId,
+        currentCooldown: newAttack.cooldown,
+      }
+    },
   },
 })
 
@@ -342,6 +352,7 @@ export const {
   characterDamage,
   characterLevelUp,
   characterLearnAttack,
+  characterReplaceAttack,
 } = gameSlice.actions
 
 export default gameSlice.reducer

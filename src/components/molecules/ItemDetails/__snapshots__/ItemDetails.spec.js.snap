@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ItemDetails renders correctly: ItemDetails 1`] = `
+<body>
+  <div>
+    <div
+      class="item-container"
+    >
+      <div
+        class="rpgui-icon test-icon item-icon"
+      />
+      <div
+        class="item-content"
+      >
+        <p
+          class="item-title"
+        >
+          test-title
+        </p>
+        <p
+          class="item-subtitle"
+        >
+          <i>
+            test-subtitle
+          </i>
+        </p>
+        <p
+          class="item-description"
+        >
+          test-description
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+`;
