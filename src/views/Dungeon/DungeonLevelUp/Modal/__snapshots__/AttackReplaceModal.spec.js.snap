@@ -33,14 +33,12 @@ exports[`AttackReplaceModal renders correctly: AttackReplaceModal 1`] = `
             >
               <input
                 class="rpgui-radio golden"
-                id="1"
                 name="radio-golden"
                 type="radio"
-                value="1"
+                value=""
               />
               <label
                 class="item-radio-label"
-                for="1"
               >
                 <div
                   class="item-container"
@@ -51,19 +49,89 @@ exports[`AttackReplaceModal renders correctly: AttackReplaceModal 1`] = `
                     <p
                       class="item-title"
                     >
-                      Base Attack
+                      Test Attack 1
                     </p>
                     <p
                       class="item-subtitle"
                     >
                       <i>
-                        Cooldown: 0
+                        Cooldown: 1
                       </i>
                     </p>
                     <p
                       class="item-description"
                     >
-                      A basic attack that deals damage to the enemy.
+                      Test Description 1
+                    </p>
+                  </div>
+                </div>
+              </label>
+              <input
+                class="rpgui-radio golden"
+                name="radio-golden"
+                type="radio"
+                value=""
+              />
+              <label
+                class="item-radio-label"
+              >
+                <div
+                  class="item-container"
+                >
+                  <div
+                    class="item-content"
+                  >
+                    <p
+                      class="item-title"
+                    >
+                      Test Attack 2
+                    </p>
+                    <p
+                      class="item-subtitle"
+                    >
+                      <i>
+                        Cooldown: 1
+                      </i>
+                    </p>
+                    <p
+                      class="item-description"
+                    >
+                      Test Description 2
+                    </p>
+                  </div>
+                </div>
+              </label>
+              <input
+                class="rpgui-radio golden"
+                name="radio-golden"
+                type="radio"
+                value=""
+              />
+              <label
+                class="item-radio-label"
+              >
+                <div
+                  class="item-container"
+                >
+                  <div
+                    class="item-content"
+                  >
+                    <p
+                      class="item-title"
+                    >
+                      Test Attack 3
+                    </p>
+                    <p
+                      class="item-subtitle"
+                    >
+                      <i>
+                        Cooldown: 1
+                      </i>
+                    </p>
+                    <p
+                      class="item-description"
+                    >
+                      Test Description 3
                     </p>
                   </div>
                 </div>
