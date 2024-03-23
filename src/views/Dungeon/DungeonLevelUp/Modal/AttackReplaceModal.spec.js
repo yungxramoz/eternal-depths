@@ -10,7 +10,32 @@ describe('AttackReplaceModal', () => {
   let onRewardSelected
 
   beforeEach(() => {
-    store = configureStore({ reducer: { game: gameReducer } })
+    const preloadedState = {
+      game: {
+        character: {
+          current: {
+            attacks: [
+              {
+                name: 'Test Attack 1',
+                cooldown: 1,
+                description: 'Test Description 1',
+              },
+              {
+                name: 'Test Attack 2',
+                cooldown: 1,
+                description: 'Test Description 2',
+              },
+              {
+                name: 'Test Attack 3',
+                cooldown: 1,
+                description: 'Test Description 3',
+              },
+            ],
+          },
+        },
+      },
+    }
+    store = configureStore({ reducer: { game: gameReducer }, preloadedState })
     onRewardSelected = jest.fn()
   })
 
@@ -28,17 +53,25 @@ describe('AttackReplaceModal', () => {
 
   it('dispatches characterReplaceAttack action and calls onRewardSelected when Replace button is clicked', () => {
     const dispatchSpy = jest.spyOn(store, 'dispatch')
+    const newAttack = {
+      name: 'Test Attack',
+      cooldown: 1,
+      description: 'Test Description',
+    }
     render(
       <Provider store={store}>
         <AttackReplaceModal
-          newAttack={{}}
+          newAttack={newAttack}
           onRewardSelected={onRewardSelected}
         />
       </Provider>,
     )
     fireEvent.click(screen.getByText('Replace'))
     expect(dispatchSpy).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'game/characterReplaceAttack' }),
+      expect.objectContaining({
+        type: 'game/characterReplaceAttack',
+        payload: expect.objectContaining({ newAttack, attackId: 2 }),
+      }),
     )
     expect(onRewardSelected).toHaveBeenCalled()
   })

@@ -9,7 +9,7 @@ const AttackReplaceModal = ({ newAttack, onClose, onRewardSelected }) => {
   const dispatch = useDispatch()
   const attacks = useSelector((state) => state.game.character.current.attacks)
   const [selectedAttackId, setSelectedAttackId] = useState(2)
-  const filteredAttacks = attacks.filter((attack) => attack.id !== newAttack.id)
+  const filteredAttacks = attacks.filter((attack) => attack.id !== 1)
 
   const handleReplace = () => {
     dispatch(characterReplaceAttack({ newAttack, attackId: selectedAttackId }))
