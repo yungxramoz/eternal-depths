@@ -5,17 +5,13 @@ import ModalHeader from '../../molecules/ModalHeader/ModalHeader'
 import './Modal.css'
 import RpgContainer from '../../templates/RpgContainer/RpgContainer'
 
-const Modal = ({ title, children, onClose, dismissable = true }) => {
-  if (onClose === undefined) {
-    onClose = () => {}
-  }
-
+const Modal = ({ title, content, footerContent }) => {
   return (
     <div className="modal-container">
       <RpgContainer golden className="modal">
         <ModalHeader title={title} />
-        <ModalBody>{children}</ModalBody>
-        <ModalFooter onClose={onClose} dismissable={dismissable} />
+        <ModalBody>{content}</ModalBody>
+        <ModalFooter>{footerContent}</ModalFooter>
       </RpgContainer>
       <div className="modal-background" />
     </div>

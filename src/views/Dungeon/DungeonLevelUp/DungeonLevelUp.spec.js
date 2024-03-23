@@ -10,6 +10,10 @@ jest.mock('../../../utils/attack', () => ({
   generateAttack: jest.fn(),
 }))
 
+jest.mock('./Modal/AttackReplaceModal', () => () => (
+  <div>AttackReplaceModal</div>
+))
+
 describe('DungeonLevelUp', () => {
   let store
   let attack
@@ -96,5 +100,48 @@ describe('DungeonLevelUp', () => {
         payload: attack,
       }),
     )
+  })
+  it('opens attack replace modal on attack reward selection', () => {
+    store = configureStore({
+      reducer: {
+        game: gameReducer,
+      },
+      preloadedState: {
+        game: {
+          ...store.getState().game,
+          character: {
+            ...store.getState().game.character,
+            current: {
+              ...store.getState().game.character.current,
+
+              attacks: [
+                {
+                  id: 1,
+                  name: 'Attack 1',
+                  currentCooldown: 0,
+                },
+                {
+                  id: 2,
+                  name: 'Attack 2',
+                  currentCooldown: 0,
+                },
+                {
+                  id: 3,
+                  name: 'Attack 3',
+                  currentCooldown: 0,
+                },
+              ],
+            },
+          },
+        },
+      },
+    })
+    render(
+      <Provider store={store}>
+        <DungeonLevelUp />
+      </Provider>,
+    )
+    fireEvent.click(screen.getByText('Test Attack'))
+    expect(screen.getByText('AttackReplaceModal')).toBeTruthy()
   })
 })

@@ -1,39 +1,3 @@
 .reward-button {
   width: 100%;
 }
-
-.reward-button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  column-gap: 1em;
-  width: 100%;
-}
-
-.reward-icon {
-  flex-grow: 0;
-  flex-basis: 44px;
-  flex-shrink: 0;
-}
-
-.reward-button-content {
-  flex-grow: 1;
-  text-align: left;
-}
-
-.reward-title {
-  margin: 0 0 1em 0;
-}
-
-.reward-subtitle {
-  margin: 0;
-  font-size: x-small !important;
-}
-
-.reward-description {
-  margin: 0;
-  margin-top: 4px;
-  font-size: xx-small !important;
-  line-height: 18px !important;
-}

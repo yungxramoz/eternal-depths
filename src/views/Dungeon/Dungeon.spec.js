@@ -3,6 +3,7 @@ import { render } from '@testing-library/react'
 import React from 'react'
 import { Provider } from 'react-redux'
 import gameReducer, {
+  battleReward,
   battleStart,
   battleVictory,
   characterLevelUp,
@@ -28,6 +29,7 @@ jest.mock('./DungeonInBattle/DungeonInBattle', () => () => (
 jest.mock('./DungeonLevelUp/DungeonLevelUp', () => () => (
   <div>DungeonLevelUp</div>
 ))
+jest.mock('./DungeonReward/DungeonReward', () => () => <div>DungeonReward</div>)
 jest.mock(
   '../../components/organisms/CharacterHeader/CharacterHeader',
   () => () => <div>CharacterHeader</div>,
@@ -79,5 +81,14 @@ describe('Dungeon', () => {
       </Provider>,
     )
     expect(document.body).toMatchSnapshot('DungeonLevelUp')
+  })
+  it('renders DungeonReward component on reward state', () => {
+    store.dispatch(battleReward())
+    render(
+      <Provider store={store}>
+        <Dungeon />
+      </Provider>,
+    )
+    expect(document.body).toMatchSnapshot('DungeonReward')
   })
 })

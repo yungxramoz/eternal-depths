@@ -4,6 +4,7 @@ import GAME_CYCLE_STATE from '../../constants/game-cycle-state'
 import GAME_STATE from '../../constants/game-state'
 import gameReducer, {
   battleDefeat,
+  battleReward,
   battleStart,
   battleVictory,
   calculatedCharacterStats,
@@ -174,7 +175,7 @@ describe('gameSlice', () => {
       }
       expect(gameReducer(stateWithEncounter, encounterDamage(5))).toEqual({
         ...stateWithEncounter,
-        gameCycleState: GAME_CYCLE_STATE.BATTLE_VICTORY,
+        gameCycleState: GAME_CYCLE_STATE.REWARD,
         isEncounterTurn: expect.any(Boolean),
         encounter: expect.any(Object),
         character: expect.any(Object),
@@ -246,6 +247,15 @@ describe('gameSlice', () => {
       expect(gameReducer(initialState, battleVictory())).toEqual({
         ...initialState,
         gameCycleState: GAME_CYCLE_STATE.BATTLE_VICTORY,
+      })
+    })
+  })
+
+  describe('battleReward', () => {
+    it('sets the reward cycle state', () => {
+      expect(gameReducer(initialState, battleReward())).toEqual({
+        ...initialState,
+        gameCycleState: GAME_CYCLE_STATE.REWARD,
       })
     })
   })

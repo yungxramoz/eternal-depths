@@ -1,7 +1,7 @@
 import React from 'react'
 import './RewardButton.css'
 import GoldenButton from '../../molecules/GoldenButton/GoldenButton'
-import RpgIcon from '../../atoms/RpgIcon/RpgIcon'
+import ItemDetails from '../../molecules/ItemDetails/ItemDetails'
 
 const RewardButton = ({
   onClick,
@@ -17,16 +17,12 @@ const RewardButton = ({
       onClick={onClick}
       disabled={disabled}
     >
-      <p className="reward-title">{title}</p>
-      <div className="reward-button-container">
-        <RpgIcon className="reward-icon" icon={icon} />
-        <div className="reward-button-content">
-          <p className="reward-subtitle">
-            <i>{subtitle}</i>
-          </p>
-          <p className="reward-description">{description}</p>
-        </div>
-      </div>
+      <ItemDetails
+        title={title}
+        subtitle={subtitle}
+        description={description}
+        icon={icon}
+      />
     </GoldenButton>
   )
 }

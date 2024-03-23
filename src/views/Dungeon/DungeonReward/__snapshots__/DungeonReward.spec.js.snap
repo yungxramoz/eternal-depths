@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RewardModal renders correctly: RewardModal 1`] = `
+<body>
+  <div>
+    <div
+      class="reward-container"
+    >
+      <h2>
+        Encounter slayed!
+      </h2>
+      <div
+        class="rpgui-icon treasure "
+      />
+      <p>
+        Choose your reward:
+      </p>
+      <div
+        class="reward-selection-container"
+      >
+        <button
+          class="golden-button reward-button"
+        >
+          <div
+            class="rpgui-container container framed framed-golden-2 golden-container"
+          >
+            <div
+              class="item-container"
+            >
+              <div
+                class="rpgui-icon test-icon item-icon"
+              />
+              <div
+                class="item-content"
+              >
+                <p
+                  class="item-title"
+                >
+                  Test Item
+                </p>
+                <p
+                  class="item-subtitle"
+                >
+                  <i>
+                    Common
+                  </i>
+                </p>
+                <p
+                  class="item-description"
+                >
+                  STR:10
+                </p>
+              </div>
+            </div>
+          </div>
+        </button>
+        <hr
+          class="separator golden"
+        />
+        <button
+          class="golden-button reward-button"
+        >
+          <div
+            class="rpgui-container container framed framed-golden-2 golden-container"
+          >
+            <div
+              class="item-container"
+            >
+              <div
+                class="rpgui-icon food item-icon"
+              />
+              <div
+                class="item-content"
+              >
+                <p
+                  class="item-title"
+                >
+                  Food
+                </p>
+                <p
+                  class="item-subtitle"
+                >
+                  <i />
+                </p>
+                <p
+                  class="item-description"
+                >
+                  Recover 5 HP
+                </p>
+              </div>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+`;

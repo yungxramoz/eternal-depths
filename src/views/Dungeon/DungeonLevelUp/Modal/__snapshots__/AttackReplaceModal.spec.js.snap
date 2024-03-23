@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AttackReplaceModal renders correctly: AttackReplaceModal 1`] = `
+<body>
+  <div>
+    <div
+      class="modal-container"
+    >
+      <div
+        class="rpgui-container container framed framed-golden modal"
+      >
+        <div
+          class="modal-header"
+        >
+          <h2>
+            Replace Attack
+          </h2>
+          <hr
+            class="separator"
+          />
+        </div>
+        <div
+          class="modal-body"
+        >
+          <div
+            class="attack-replace-modal"
+          >
+            <p>
+              Select an attack to replace:
+            </p>
+            <form
+              class="attack-list"
+            >
+              <input
+                class="rpgui-radio golden"
+                id="1"
+                name="radio-golden"
+                type="radio"
+                value="1"
+              />
+              <label
+                class="item-radio-label"
+                for="1"
+              >
+                <div
+                  class="item-container"
+                >
+                  <div
+                    class="item-content"
+                  >
+                    <p
+                      class="item-title"
+                    >
+                      Base Attack
+                    </p>
+                    <p
+                      class="item-subtitle"
+                    >
+                      <i>
+                        Cooldown: 0
+                      </i>
+                    </p>
+                    <p
+                      class="item-description"
+                    >
+                      A basic attack that deals damage to the enemy.
+                    </p>
+                  </div>
+                </div>
+              </label>
+            </form>
+          </div>
+        </div>
+        <div
+          class="modal-footer"
+        >
+          <hr
+            class="separator"
+          />
+          <button
+            class="rpgui-button btn"
+          >
+            Replace
+          </button>
+        </div>
+      </div>
+      <div
+        class="modal-background"
+      />
+    </div>
+  </div>
+</body>
+`;

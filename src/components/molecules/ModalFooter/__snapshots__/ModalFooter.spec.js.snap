@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalFooter renders correctly: ModalFooter 1`] = `
+<body>
+  <div>
+    <div
+      class="modal-footer"
+    >
+      <hr
+        class="separator"
+      />
+      Test Content
+    </div>
+  </div>
+</body>
+`;

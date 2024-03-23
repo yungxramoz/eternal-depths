@@ -246,29 +246,29 @@ exports[`DungeonLevelUp renders correctly: DungeonLevelUp 1`] = `
           <div
             class="rpgui-container container framed framed-golden-2 golden-container"
           >
-            <p
-              class="reward-title"
-            >
-              Test Attack
-            </p>
             <div
-              class="reward-button-container"
+              class="item-container"
             >
               <div
-                class="rpgui-icon book reward-icon"
+                class="rpgui-icon book item-icon"
               />
               <div
-                class="reward-button-content"
+                class="item-content"
               >
                 <p
-                  class="reward-subtitle"
+                  class="item-title"
+                >
+                  Test Attack
+                </p>
+                <p
+                  class="item-subtitle"
                 >
                   <i>
                     Cooldown: 1
                   </i>
                 </p>
                 <p
-                  class="reward-description"
+                  class="item-description"
                 >
                   Test Description
                 </p>
@@ -285,27 +285,27 @@ exports[`DungeonLevelUp renders correctly: DungeonLevelUp 1`] = `
           <div
             class="rpgui-container container framed framed-golden-2 golden-container"
           >
-            <p
-              class="reward-title"
-            >
-              Attribute
-            </p>
             <div
-              class="reward-button-container"
+              class="item-container"
             >
               <div
-                class="rpgui-icon potion reward-icon"
+                class="rpgui-icon potion item-icon"
               />
               <div
-                class="reward-button-content"
+                class="item-content"
               >
                 <p
-                  class="reward-subtitle"
+                  class="item-title"
+                >
+                  Attribute
+                </p>
+                <p
+                  class="item-subtitle"
                 >
                   <i />
                 </p>
                 <p
-                  class="reward-description"
+                  class="item-description"
                 >
                   Improve 2 attributes
                 </p>

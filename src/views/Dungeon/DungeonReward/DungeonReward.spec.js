@@ -2,10 +2,10 @@ import { configureStore } from '@reduxjs/toolkit'
 import { fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'
 import { Provider } from 'react-redux'
-import gameSlice from '../../../../store/game/gameSlice'
-import RewardModal from './RewardModal'
+import gameReducer from '../../../store/game/gameSlice'
+import DungeonReward from './DungeonReward'
 
-jest.mock('../../../../utils/item-generator', () => ({
+jest.mock('../../../utils/item-generator', () => ({
   generateItem: () => ({
     icon: 'test-icon',
     name: 'Test Item',
@@ -19,7 +19,7 @@ describe('RewardModal', () => {
   beforeEach(() => {
     store = configureStore({
       reducer: {
-        game: gameSlice,
+        game: gameReducer,
       },
     })
   })
@@ -27,7 +27,7 @@ describe('RewardModal', () => {
   it('renders correctly', () => {
     render(
       <Provider store={store}>
-        <RewardModal isOpen={true} setIsOpen={() => {}} />
+        <DungeonReward />
       </Provider>,
     )
     expect(document.body).toMatchSnapshot('RewardModal')
@@ -37,12 +37,15 @@ describe('RewardModal', () => {
     const dispatchSpy = jest.spyOn(store, 'dispatch')
     render(
       <Provider store={store}>
-        <RewardModal isOpen={true} setIsOpen={() => {}} />
+        <DungeonReward />
       </Provider>,
     )
     fireEvent.click(screen.getByText('Test Item'))
     expect(dispatchSpy).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'game/characterEquipItem' }),
+    )
+    expect(dispatchSpy).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'game/battleVictory' }),
     )
   })
 
@@ -50,12 +53,15 @@ describe('RewardModal', () => {
     const dispatchSpy = jest.spyOn(store, 'dispatch')
     render(
       <Provider store={store}>
-        <RewardModal isOpen={true} setIsOpen={() => {}} />
+        <DungeonReward />
       </Provider>,
     )
     fireEvent.click(screen.getByText('Food'))
     expect(dispatchSpy).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'game/characterRecoverHp' }),
+    )
+    expect(dispatchSpy).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'game/battleVictory' }),
     )
   })
 })

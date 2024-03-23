@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 import RpgButton from '../../../components/atoms/RpgButton/RpgButton'
 import {
@@ -6,12 +6,10 @@ import {
   gameWon,
   nextStage,
 } from '../../../store/game/gameSlice'
-import RewardModal from './Modal/RewardModal'
 import './DungeonAfterBattle.css'
 
 const DungeonAfterBattle = () => {
   const dispatch = useDispatch()
-  const [showReward, setShowReward] = useState(true)
 
   const localNextStage = () => {
     dispatch(nextStage())
@@ -20,7 +18,6 @@ const DungeonAfterBattle = () => {
 
   return (
     <>
-      <RewardModal isOpen={showReward} setIsOpen={setShowReward} />
       <div className="action-buttons-container">
         <RpgButton onClick={() => dispatch(gameWon())} text="Escape" />
         <RpgButton onClick={localNextStage} text="Next Stage" />

@@ -13,6 +13,7 @@ import {
 } from '../../../store/game/gameSlice'
 import { generateAttack } from '../../../utils/attack'
 import './DungeonLevelUp.css'
+import AttackReplaceModal from './Modal/AttackReplaceModal'
 
 const DungeonLevelUp = () => {
   const dispatch = useDispatch()
@@ -28,6 +29,7 @@ const DungeonLevelUp = () => {
     agility: 0,
     precision: 0,
   })
+  const [replaceAttackModal, setReplaceAttackModal] = useState(false)
   const availablePoints = useSelector(
     (state) => state.game.character.availableAttributePoints,
   )
@@ -38,6 +40,10 @@ const DungeonLevelUp = () => {
   const [statRewardChoice, setStatRewardChoice] = useState(false)
 
   const selectAttackReward = () => {
+    if (characterAttacks.length >= 3) {
+      setReplaceAttackModal(true)
+      return
+    }
     dispatch(characterLearnAttack(attackReward))
     rewardSelected()
   }
@@ -92,7 +98,6 @@ const DungeonLevelUp = () => {
             title={attackReward.name}
             subtitle={`Cooldown: ${attackReward.cooldown}`}
             description={attackReward.description}
-            disabled={characterAttacks.length >= 3}
             onClick={selectAttackReward}
           ></RewardButton>
           <RpgSeparator golden />
@@ -108,10 +113,19 @@ const DungeonLevelUp = () => {
   }
 
   return (
-    <div className="levelup-container">
-      <h2>Level {characterLevel} reached!</h2>
-      {getContent()}
-    </div>
+    <>
+      <div className="levelup-container">
+        <h2>Level {characterLevel} reached!</h2>
+        {getContent()}
+      </div>
+      {replaceAttackModal && (
+        <AttackReplaceModal
+          newAttack={attackReward}
+          onClose={() => setReplaceAttackModal(false)}
+          onRewardSelected={rewardSelected}
+        />
+      )}
+    </>
   )
 }
 
