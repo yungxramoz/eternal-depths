@@ -30,7 +30,6 @@ export const calculateDamage = (
 
     const evade = Math.random() < targetStats.agility / 50
     if (evade) {
-      console.log('Evade!')
       continue
     }
 
@@ -38,7 +37,6 @@ export const calculateDamage = (
       Math.random() < sourceStats.precision / 50 + attack.criticalChance
     if (criticalHit) {
       hitDamage *= 2
-      console.log('Critical hit!')
     }
     damage += hitDamage
   }
