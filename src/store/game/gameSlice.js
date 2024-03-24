@@ -50,6 +50,16 @@ const initialState = {
           id: 1,
           currentCooldown: 0,
         },
+        // {
+        //   ...ATTACK.BERSERK_STRIKE,
+        //   id: 2,
+        //   currentCooldown: 0,
+        // },
+        // {
+        //   ...ATTACK.DEATH_BLOW,
+        //   id: 3,
+        //   currentCooldown: 0,
+        // },
       ],
     },
     availableAttributePoints: 2,

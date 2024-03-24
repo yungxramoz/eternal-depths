@@ -13,10 +13,8 @@ exports[`AttackButton hides cooldown container when currentCooldown is 0: Attack
       <div
         class="rpgui-container container framed framed-golden-2 attack-container"
       >
-        <img
-          alt="Test Attack"
-          class="attack-icon"
-          src="test-file-stub"
+        <div
+          class="rpgui-icon test_attack.png attack-icon"
         />
       </div>
     </button>
@@ -38,10 +36,8 @@ exports[`AttackButton is disabled when disabled prop is true: AttackButton disab
       <div
         class="rpgui-container container framed framed-golden-2 attack-container"
       >
-        <img
-          alt="Test Attack"
-          class="attack-icon"
-          src="test-file-stub"
+        <div
+          class="rpgui-icon test_attack.png attack-icon"
         />
       </div>
     </button>
@@ -62,10 +58,8 @@ exports[`AttackButton renders correctly: AttackButton 1`] = `
       <div
         class="rpgui-container container framed framed-golden-2 attack-container"
       >
-        <img
-          alt="Test Attack"
-          class="attack-icon"
-          src="test-file-stub"
+        <div
+          class="rpgui-icon test_attack.png attack-icon"
         />
       </div>
     </button>
@@ -86,10 +80,8 @@ exports[`AttackButton shows cooldown container when currentCooldown is not 0: At
       <div
         class="rpgui-container container framed framed-golden-2 attack-container"
       >
-        <img
-          alt="Test Attack"
-          class="attack-icon"
-          src="test-file-stub"
+        <div
+          class="rpgui-icon test_attack.png attack-icon"
         />
       </div>
     </button>

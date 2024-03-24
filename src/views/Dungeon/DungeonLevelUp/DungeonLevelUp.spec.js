@@ -93,7 +93,11 @@ describe('DungeonLevelUp', () => {
         <DungeonLevelUp />
       </Provider>,
     )
-    fireEvent.click(screen.getByText('Test Attack'))
+    fireEvent.click(
+      screen.getByRole('button', {
+        name: 'Test Attack Cooldown: 1 Test Description',
+      }),
+    )
     expect(dispatchSpy).toHaveBeenCalledWith(
       expect.objectContaining({
         type: 'game/characterLearnAttack',
@@ -141,7 +145,11 @@ describe('DungeonLevelUp', () => {
         <DungeonLevelUp />
       </Provider>,
     )
-    fireEvent.click(screen.getByText('Test Attack'))
+    fireEvent.click(
+      screen.getByRole('button', {
+        name: 'Test Attack Cooldown: 1 Test Description',
+      }),
+    )
     expect(screen.getByText('AttackReplaceModal')).toBeTruthy()
   })
 })

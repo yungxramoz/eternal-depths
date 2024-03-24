@@ -32,48 +32,16 @@ exports[`AttackReplaceModal renders correctly: AttackReplaceModal 1`] = `
               class="attack-list"
             >
               <input
+                checked=""
                 class="rpgui-radio golden"
+                id="2"
                 name="radio-golden"
                 type="radio"
-                value=""
+                value="2"
               />
               <label
                 class="item-radio-label"
-              >
-                <div
-                  class="item-container"
-                >
-                  <div
-                    class="item-content"
-                  >
-                    <p
-                      class="item-title"
-                    >
-                      Test Attack 1
-                    </p>
-                    <p
-                      class="item-subtitle"
-                    >
-                      <i>
-                        Cooldown: 1
-                      </i>
-                    </p>
-                    <p
-                      class="item-description"
-                    >
-                      Test Description 1
-                    </p>
-                  </div>
-                </div>
-              </label>
-              <input
-                class="rpgui-radio golden"
-                name="radio-golden"
-                type="radio"
-                value=""
-              />
-              <label
-                class="item-radio-label"
+                for="2"
               >
                 <div
                   class="item-container"
@@ -103,12 +71,14 @@ exports[`AttackReplaceModal renders correctly: AttackReplaceModal 1`] = `
               </label>
               <input
                 class="rpgui-radio golden"
+                id="3"
                 name="radio-golden"
                 type="radio"
-                value=""
+                value="3"
               />
               <label
                 class="item-radio-label"
+                for="3"
               >
                 <div
                   class="item-container"

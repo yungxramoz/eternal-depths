@@ -5,7 +5,7 @@ import AttackButton from './AttackButton'
 describe('AttackButton', () => {
   const attack = {
     name: 'Test Attack',
-    fileName: 'test_attack.png',
+    icon: 'test_attack.png',
     currentCooldown: 0,
     cooldown: 10,
   }
@@ -18,7 +18,7 @@ describe('AttackButton', () => {
   it('calls onClick prop when clicked', () => {
     const onClick = jest.fn()
     render(<AttackButton attack={attack} onClick={onClick} />)
-    fireEvent.click(screen.getByAltText(attack.name))
+    fireEvent.click(screen.getByRole('button'))
     expect(onClick).toHaveBeenCalledTimes(1)
   })
 

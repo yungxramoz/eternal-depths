@@ -1,10 +1,9 @@
 import React from 'react'
 import RpgContainer from '../../templates/RpgContainer/RpgContainer'
 import './AttackButton.css'
+import RpgIcon from '../../atoms/RpgIcon/RpgIcon'
 
 const AttackButton = ({ onClick, attack, disabled }) => {
-  const attackImgSrc = require(`../../../assets/images/attacks/${attack.fileName}`)
-
   const cooldownPercentage =
     attack.currentCooldown === 0
       ? 61
@@ -18,7 +17,7 @@ const AttackButton = ({ onClick, attack, disabled }) => {
     <button className="attack-button" onClick={onClick} disabled={disabled}>
       <div className="cooldown-container" style={cooldownStyle}></div>
       <RpgContainer golden2 className="attack-container">
-        <img className="attack-icon" src={attackImgSrc} alt={attack.name} />
+        <RpgIcon className="attack-icon" icon={attack.icon} />
       </RpgContainer>
     </button>
   )
