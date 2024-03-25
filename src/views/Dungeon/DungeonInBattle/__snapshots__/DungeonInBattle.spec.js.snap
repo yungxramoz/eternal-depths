@@ -51,10 +51,8 @@ exports[`DungeonInBattle renders correctly: DungeonInBattle 1`] = `
         <div
           class="rpgui-container container framed framed-golden-2 attack-container"
         >
-          <img
-            alt="Attack 1"
-            class="attack-icon"
-            src="test-file-stub"
+          <div
+            class="rpgui-icon undefined attack-icon"
           />
         </div>
       </button>

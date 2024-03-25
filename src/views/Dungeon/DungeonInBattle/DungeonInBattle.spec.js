@@ -117,7 +117,7 @@ describe('DungeonInBattle', () => {
         <DungeonInBattle />
       </Provider>,
     )
-    fireEvent.click(screen.getByRole('button', { name: 'Attack 1' }))
+    fireEvent.click(screen.getByRole('button'))
     expect(store.dispatch).toHaveBeenCalledTimes(2)
     expect(store.dispatch).toHaveBeenCalledWith(
       expect.objectContaining({

@@ -3,6 +3,7 @@ import { ANIMATION_STATE } from '../../constants/animation-state'
 import { ATTACK, BASE_ATTACK } from '../../constants/attack-type'
 import GAME_CYCLE_STATE from '../../constants/game-cycle-state'
 import GAME_STATE from '../../constants/game-state'
+import { RPGUI_ICON } from '../../constants/rpgui-icon'
 import {
   encounterLevel,
   generateEncounter,
@@ -36,6 +37,7 @@ const initialState = {
         armor: null,
         weapon: {
           name: 'Rusty Sword',
+          icon: RPGUI_ICON.RUSTY_SWORD,
           stats: {
             minDamage: 1,
             maxDamage: 3,
@@ -50,6 +52,16 @@ const initialState = {
           id: 1,
           currentCooldown: 0,
         },
+        // {
+        //   ...ATTACK.BERSERK_STRIKE,
+        //   id: 2,
+        //   currentCooldown: 0,
+        // },
+        // {
+        //   ...ATTACK.DEATH_BLOW,
+        //   id: 3,
+        //   currentCooldown: 0,
+        // },
       ],
     },
     availableAttributePoints: 2,
@@ -131,6 +143,7 @@ const gameSlice = createSlice({
           armor: null,
           weapon: {
             name: 'Rusty Sword',
+            icon: RPGUI_ICON.RUSTY_SWORD,
             stats: {
               minDamage: 1,
               maxDamage: 3,

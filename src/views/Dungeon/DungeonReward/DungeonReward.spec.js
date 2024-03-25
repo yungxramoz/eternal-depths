@@ -12,9 +12,10 @@ jest.mock('../../../utils/item-generator', () => ({
     rarity: 'Common',
     stats: { strength: 10 },
   }),
+  getItemStats: () => 'Test stats',
 }))
 
-describe('RewardModal', () => {
+describe('DungeonReward', () => {
   let store
   beforeEach(() => {
     store = configureStore({

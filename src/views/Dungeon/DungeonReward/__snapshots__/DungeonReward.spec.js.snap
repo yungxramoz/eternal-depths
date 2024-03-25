@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RewardModal renders correctly: RewardModal 1`] = `
+exports[`DungeonReward renders correctly: RewardModal 1`] = `
 <body>
   <div>
     <div
@@ -48,7 +48,7 @@ exports[`RewardModal renders correctly: RewardModal 1`] = `
                 <p
                   class="item-description"
                 >
-                  STR:10
+                  Test stats
                 </p>
               </div>
             </div>

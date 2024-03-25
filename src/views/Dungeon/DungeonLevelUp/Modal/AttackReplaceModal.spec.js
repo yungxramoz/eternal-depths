@@ -16,16 +16,19 @@ describe('AttackReplaceModal', () => {
           current: {
             attacks: [
               {
+                id: 1,
                 name: 'Test Attack 1',
                 cooldown: 1,
                 description: 'Test Description 1',
               },
               {
+                id: 2,
                 name: 'Test Attack 2',
                 cooldown: 1,
                 description: 'Test Description 2',
               },
               {
+                id: 3,
                 name: 'Test Attack 3',
                 cooldown: 1,
                 description: 'Test Description 3',

@@ -359,6 +359,9 @@ ul.rpgui-dropdown-imp {
   /* background-image: url(img/icons/sword.png); */
   background-image: url(img/tiny-rpg/sword_001.png);
 }
+.rpgui-icon.rusty-sword {
+  background-image: url(img/tiny-rpg/sword_024.png);
+}
 .rpgui-icon.shield {
   /* background-image: url(img/icons/shield.png); */
   background-image: url(img/tiny-rpg/shield_008.png);
@@ -399,6 +402,27 @@ ul.rpgui-dropdown-imp {
 }
 .rpgui-icon.treasure {
   background-image: url(img/tiny-rpg/bagpack_002.png);
+}
+.rpgui-icon.attack-base {
+  background-image: url(img/game-icon/attack-base.png);
+}
+.rpgui-icon.attack-drain {
+  background-image: url(img/game-icon/attack-drain.png);
+}
+.rpgui-icon.attack-dance-of-the-dead {
+  background-image: url(img/game-icon/attack-dance-of-the-dead.png);
+}
+.rpgui-icon.attack-bloodlust {
+  background-image: url(img/game-icon/attack-bloodlust.png);
+}
+.rpgui-icon.attack-berserk-strike {
+  background-image: url(img/game-icon/attack-berserk-strike.png);
+}
+.rpgui-icon.attack-double-strike {
+  background-image: url(img/game-icon/attack-double-strike.png);
+}
+.rpgui-icon.attack-death-blow {
+  background-image: url(img/game-icon/attack-death-blow.png);
 }
 .rpgui-icon.potion-red {
   background-image: url(img/icons/potion-red.png);

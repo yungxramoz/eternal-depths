@@ -1,3 +1,10 @@
 .modal-header {
   width: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+.dismiss-button {
+  align-self: flex-end;
+  margin: 0.5em;
 }

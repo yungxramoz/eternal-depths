@@ -5,6 +5,7 @@ import ChevronRightIcon from '../../atoms/Icons/ChevronRightIcon'
 import MinusIcon from '../../atoms/Icons/MinusIcon'
 import PlusIcon from '../../atoms/Icons/PlusIcon'
 import './IconButton.css'
+import CloseIcon from '../../atoms/Icons/CloseIcon'
 
 const IconButton = ({ icon, size, disabled, onClick, className = '' }) => {
   const getSizeClass = (size) => {
@@ -32,6 +33,8 @@ const IconButton = ({ icon, size, disabled, onClick, className = '' }) => {
         return <MinusIcon />
       case 'plus':
         return <PlusIcon />
+      case 'close':
+        return <CloseIcon />
       default:
         return null
     }
