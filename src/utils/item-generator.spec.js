@@ -1,7 +1,7 @@
 import ARMOR_TYPE from '../constants/armor-type'
 import RARITY from '../constants/rarity'
 import WEAPON_TYPE from '../constants/weapon-type'
-import { generateItem } from './item-generator'
+import { generateItem, getItemStats } from './item-generator'
 
 describe('item-generator', () => {
   it('generateItem creates an item with the correct properties', () => {
@@ -122,5 +122,15 @@ describe('item-generator', () => {
     jest.spyOn(global.Math, 'random').mockReturnValue(0.96)
     const item = generateItem()
     expect(item.rarity).toBe(RARITY.LEGENDARY)
+  })
+  it('gets the display stats of an item', () => {
+    const item = {
+      stats: {
+        strength: 10,
+        agility: 5,
+      },
+    }
+    const stats = getItemStats(item)
+    expect(stats).toBe('STR:10, AGI:5')
   })
 })

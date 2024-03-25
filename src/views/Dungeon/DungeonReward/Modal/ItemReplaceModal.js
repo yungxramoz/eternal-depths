@@ -24,7 +24,7 @@ const ItemReplaceModal = ({ newItem, onClose, onRewardSelected }) => {
       title="Replace Item"
       onDismiss={onClose}
       content={
-        <div className="attack-replace-modal">
+        <div className="item-replace-modal">
           <p>Do you want to replace the current item:</p>
           <ItemDetails
             title={currentItem.name}
