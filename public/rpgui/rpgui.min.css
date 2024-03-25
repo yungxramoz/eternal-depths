@@ -359,6 +359,9 @@ ul.rpgui-dropdown-imp {
   /* background-image: url(img/icons/sword.png); */
   background-image: url(img/tiny-rpg/sword_001.png);
 }
+.rpgui-icon.rusty-sword {
+  background-image: url(img/tiny-rpg/sword_024.png);
+}
 .rpgui-icon.shield {
   /* background-image: url(img/icons/shield.png); */
   background-image: url(img/tiny-rpg/shield_008.png);

@@ -76,6 +76,13 @@ const generateStats = (type, stats, rarity, level) => {
   }
 }
 
+export const getItemStats = (item) => {
+  return Object.entries(item.stats)
+    .filter(([_, value]) => value > 0)
+    .map(([key, value]) => `${key.slice(0, 3).toUpperCase()}:${value}`)
+    .join(', ')
+}
+
 const randomStat = (stats) => {
   const statKeys = Object.keys(stats)
   return statKeys[Math.floor(Math.random() * statKeys.length)]

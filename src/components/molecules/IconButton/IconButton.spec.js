@@ -44,4 +44,9 @@ describe('IconButton', () => {
     render(<IconButton icon="plus" />)
     expect(document.body).toMatchSnapshot('IconButton Plus')
   })
+
+  it('renders close icon', () => {
+    render(<IconButton icon="close" />)
+    expect(document.body).toMatchSnapshot('IconButton Close')
+  })
 })

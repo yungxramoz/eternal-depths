@@ -2,6 +2,7 @@ import { ANIMATION_STATE } from '../../constants/animation-state'
 import { ATTACK, BASE_ATTACK } from '../../constants/attack-type'
 import GAME_CYCLE_STATE from '../../constants/game-cycle-state'
 import GAME_STATE from '../../constants/game-state'
+import { RPGUI_ICON } from '../../constants/rpgui-icon'
 import gameReducer, {
   battleDefeat,
   battleReward,
@@ -61,6 +62,7 @@ describe('gameSlice', () => {
             armor: null,
             weapon: {
               name: 'Rusty Sword',
+              icon: RPGUI_ICON.RUSTY_SWORD,
               stats: {
                 minDamage: 1,
                 maxDamage: 3,

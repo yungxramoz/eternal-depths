@@ -1,4 +1,5 @@
 const SWORD = 'sword'
+const RUSTY_SWORD = 'rusty-sword'
 const SHIELD = 'shield'
 const HELMET = 'helmet'
 const ARMOR = 'armor'
@@ -13,6 +14,7 @@ const TREASURE = 'treasure'
 
 export const RPGUI_ICON = {
   SWORD,
+  RUSTY_SWORD,
   SHIELD,
   HELMET,
   ARMOR,
