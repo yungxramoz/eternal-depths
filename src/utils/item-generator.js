@@ -43,32 +43,28 @@ export const generateItem = ({ name, item, rarity, level = 1 } = {}) => {
 }
 
 const generateStats = (type, stats, rarity, level) => {
-  let statIncrease
-  switch (rarity) {
-    case RARITY.COMMON:
-      statIncrease = 1
-      break
-    case RARITY.RARE:
-      statIncrease = 3
-      break
-    case RARITY.EPIC:
-      statIncrease = 5
-      break
-    case RARITY.LEGENDARY:
-      statIncrease = 8
-      break
-    default:
-      break
+  const rarityBasePoints = {
+    [RARITY.COMMON]: 1,
+    [RARITY.RARE]: 3,
+    [RARITY.EPIC]: 5,
+    [RARITY.LEGENDARY]: 8,
   }
-  statIncrease += level - 1
+
+  let statIncrease = rarityBasePoints[rarity] + (level - 1)
 
   if (type === 'weapon') {
-    statIncrease = Math.floor(Math.random() * (statIncrease * 2)) + statIncrease
-    stats.minDamage += Math.floor(Math.random() * statIncrease) + 1
-    stats.maxDamage += statIncrease - stats.minDamage
-    if (stats.maxDamage < stats.minDamage) {
-      stats.maxDamage = stats.minDamage
+    statIncrease = statIncrease * 2 + 5
+    const distributionFactor = Math.random()
+    let minDamage = Math.max(Math.floor(statIncrease * distributionFactor), 1)
+    let maxDamage = Math.floor(statIncrease - minDamage)
+
+    // Swap min and max damage if min damage is greater than max damage
+    if (maxDamage < minDamage) {
+      [minDamage, maxDamage] = [maxDamage, minDamage]
     }
+
+    stats.minDamage = minDamage
+    stats.maxDamage = maxDamage
   } else {
     for (let i = 0; i < statIncrease; i++) {
       stats[randomStat(stats)] += 1
