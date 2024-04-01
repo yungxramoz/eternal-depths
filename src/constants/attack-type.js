@@ -1,3 +1,5 @@
+import STAT from './stat'
+
 const NORMAL = 'normal'
 
 export const ATTACK_TYPE = {
@@ -12,10 +14,11 @@ export const EMPTY_ATTACK = Object.freeze({
   selfHealAmount: 0,
   selfInflictedAmount: 0,
   hitCount: 1,
-  damageIncrease: 0,
+  additionalDamage: 0,
   damageDecrease: 0,
   criticalChance: 0,
   cooldown: 0,
+  buffs: [],
 })
 
 export const BASE_ATTACK = Object.freeze({
@@ -26,10 +29,11 @@ export const BASE_ATTACK = Object.freeze({
   selfHealAmount: 0,
   selfInflictedAmount: 0,
   hitCount: 1,
-  damageIncrease: 0,
+  additionalDamage: 0,
   damageDecrease: 0,
   criticalChance: 0,
   cooldown: 0,
+  buffs: [],
 })
 
 const DRAIN = Object.freeze({
@@ -40,22 +44,30 @@ const DRAIN = Object.freeze({
   selfHealAmount: 'auto',
   selfInflictedAmount: 0,
   hitCount: 1,
-  damageIncrease: 0,
+  additionalDamage: 0,
   criticalChance: 0,
-  cooldown: 1,
+  cooldown: 2,
+  buffs: [],
 })
 
 const DANCE_OF_THE_DEAD = Object.freeze({
   name: 'Dance of the Dead',
-  description: 'Attack the enemy multiple times.',
+  description: 'Attack the enemy multiple times and increase agility.',
   icon: 'attack-dance-of-the-dead',
   type: 'normal',
   selfHealAmount: 0,
   selfInflictedAmount: 0,
   hitCount: 3,
-  damageIncrease: 0,
+  additionalDamage: 0,
   criticalChance: 0,
   cooldown: 2,
+  buffs: [
+    {
+      stat: STAT.AGILITY,
+      value: 5,
+      duration: 1,
+    },
+  ],
 })
 
 const BLOODLUST = Object.freeze({
@@ -66,9 +78,20 @@ const BLOODLUST = Object.freeze({
   selfHealAmount: 0,
   selfInflictedAmount: 0,
   hitCount: 1,
-  damageIncrease: 2,
-  criticalChance: 0.2,
   cooldown: 2,
+  additionalDamage: 0,
+  buffs: [
+    {
+      stat: STAT.STRENGTH,
+      value: 5,
+      duration: 1,
+    },
+    {
+      stat: STAT.PRECISION,
+      value: 5,
+      duration: 1,
+    },
+  ],
 })
 
 const BERSERK_STRIKE = Object.freeze({
@@ -79,9 +102,10 @@ const BERSERK_STRIKE = Object.freeze({
   selfHealAmount: 0,
   selfInflictedAmount: 6,
   hitCount: 1,
-  damageIncrease: 20,
+  additionalDamage: 20,
   criticalChance: 0,
   cooldown: 3,
+  buffs: [],
 })
 
 const DOUBLE_STRIKE = Object.freeze({
@@ -92,9 +116,10 @@ const DOUBLE_STRIKE = Object.freeze({
   selfHealAmount: 0,
   selfInflictedAmount: 0,
   hitCount: 2,
-  damageIncrease: 0,
+  additionalDamage: 0,
   criticalChance: 0,
   cooldown: 1,
+  buffs: [],
 })
 
 const DEATH_BLOW = Object.freeze({
@@ -105,9 +130,10 @@ const DEATH_BLOW = Object.freeze({
   selfHealAmount: 0,
   selfInflictedAmount: 0,
   hitCount: 1,
-  damageIncrease: 50,
+  additionalDamage: 50,
   criticalChance: 0,
   cooldown: 5,
+  buffs: [],
 })
 
 export const ATTACK = {

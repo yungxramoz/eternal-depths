@@ -9,16 +9,19 @@ import {
   generateEncounter,
 } from '../../utils/encounter-generator'
 import { generateStage } from '../../utils/stage-generator'
+import { healthPoints } from '../../utils/stats'
 
 const initialState = {
   gameState: GAME_STATE.IDLE,
   gameCycleState: null,
   isEncounterTurn: false,
   stage: 0,
+  turnCounter: 0,
   encounter: {
     current: null,
     animation: '',
     stageFileName: null,
+    initiative: 0,
   },
   character: {
     current: {
@@ -39,8 +42,8 @@ const initialState = {
           name: 'Rusty Sword',
           icon: RPGUI_ICON.RUSTY_SWORD,
           stats: {
-            minDamage: 1,
-            maxDamage: 3,
+            minDamage: 3,
+            maxDamage: 9,
           },
         },
         shield: null,
@@ -55,6 +58,8 @@ const initialState = {
       ],
     },
     availableAttributePoints: 2,
+    initiative: 0,
+    buffs: [],
   },
 }
 
@@ -67,8 +72,9 @@ const gameSlice = createSlice({
       (stage) => Math.min(Math.floor(stage / 5) * 10 + 5, 50),
     ),
     calculatedCharacterStats: createSelector(
-      (state) => state.character.current,
-      (current) => {
+      (state) => state.character,
+      (character) => {
+        const current = character.current
         const stats = {
           health: current.stats.health,
           strength: current.stats.strength,
@@ -88,12 +94,18 @@ const gameSlice = createSlice({
             }
           }
         }
-        return stats
+        for (const buff of character.buffs) {
+          stats[buff.stat] += buff.value
+        }
+        const { minDamage, maxDamage } = current.items.weapon.stats
+        return { ...stats, minDamage, maxDamage }
       },
     ),
     characterMaxXp: (state) => Math.pow(state.character.current.level, 2) * 10,
     characterMaxHp: (state) =>
-      gameSlice.getSelectors().calculatedCharacterStats(state).health * 10 + 90,
+      healthPoints(
+        gameSlice.getSelectors().calculatedCharacterStats(state).health,
+      ),
   },
   reducers: {
     gameStart(state) {
@@ -114,6 +126,7 @@ const gameSlice = createSlice({
       state.gameState = GAME_STATE.IDLE
       state.gameCycleState = null
       state.stage = 0
+      state.turnCounter = 0
       state.encounter.current = null
       state.encounter.animation = ''
       state.encounter.stageFileName = null
@@ -135,8 +148,8 @@ const gameSlice = createSlice({
             name: 'Rusty Sword',
             icon: RPGUI_ICON.RUSTY_SWORD,
             stats: {
-              minDamage: 1,
-              maxDamage: 3,
+              minDamage: 3,
+              maxDamage: 9,
             },
           },
           shield: null,
@@ -152,10 +165,19 @@ const gameSlice = createSlice({
       }
       state.character.availableAttributePoints = 2
     },
-    battleStart(state, { payload }) {
-      if (payload < state.encounter.current.stats.agility) {
+    battleStart(state) {
+      state.turnCounter = 0
+      state.character.initiative = gameSlice
+        .getSelectors()
+        .calculatedCharacterStats(state).agility
+      state.encounter.initiative = state.encounter.current.stats.agility
+
+      if (state.character.initiative >= state.encounter.initiative) {
+        state.isEncounterTurn = false
+      } else {
         state.isEncounterTurn = true
       }
+
       state.gameCycleState = GAME_CYCLE_STATE.BATTLE
     },
     battleVictory(state) {
@@ -177,7 +199,7 @@ const gameSlice = createSlice({
       state.encounter.stageFileName = generateStage(state.encounter.current)
       state.gameCycleState = GAME_CYCLE_STATE.ENCOUNTER
     },
-    checkGameCycleState(state) {
+    updateGameCycleState(state) {
       if (state.character.current.hp <= 0) {
         gameSlice.caseReducers.battleDefeat(state)
       }
@@ -196,13 +218,15 @@ const gameSlice = createSlice({
     encounterDamage(state, { payload }) {
       state.encounter.current.hp -= payload
       gameSlice.caseReducers.encounterAnimateDamage(state)
-      gameSlice.caseReducers.checkGameCycleState(state)
-      state.isEncounterTurn = true
     },
     encounterAttack(state) {
       gameSlice.caseReducers.encounterAnimateAttack(state)
-      gameSlice.caseReducers.checkGameCycleState(state)
-      state.isEncounterTurn = false
+      state.encounter.initiative -= 5
+      if (state.encounter.initiative <= 0) {
+        state.encounter.initiative += state.encounter.current.stats.agility
+        state.isEncounterTurn = false
+      }
+      state.turnCounter += 1
     },
     encounterAnimateAttack(state) {
       state.encounter.animation = ANIMATION_STATE.ATTACKING
@@ -259,7 +283,7 @@ const gameSlice = createSlice({
       state.character.current.items[payload.type] = payload
     },
     characterAttackEffects: (state, { payload: { attack, dealtDamage } }) => {
-      if (attack.selfHealAmount != null) {
+      if (attack.selfHealAmount) {
         let heal = 0
         if (attack.selfHealAmount === 'auto') {
           heal = dealtDamage
@@ -268,11 +292,25 @@ const gameSlice = createSlice({
         }
         gameSlice.caseReducers.characterRecoverHp(state, { payload: heal })
       }
+
       if (attack.selfInflictedAmount > 0) {
         state.character.current.hp -= attack.selfInflictedAmount
         if (state.character.current.hp <= 0) {
           state.character.current.hp = 0
         }
+      }
+
+      state.character.buffs.forEach((b) => {
+        b.duration -= 1
+      })
+      state.character.buffs = state.character.buffs.filter(
+        (b) => b.duration > 0,
+      )
+
+      if (attack.buffs) {
+        attack.buffs.forEach((b) => {
+          state.character.buffs.push(b)
+        })
       }
 
       state.character.current.attacks.forEach((a) => {
@@ -284,14 +322,21 @@ const gameSlice = createSlice({
       state.character.current.attacks.find(
         (a) => a.id === attack.id,
       ).currentCooldown = attack.cooldown
-      gameSlice.caseReducers.checkGameCycleState(state)
+
+      state.character.initiative -= 5
+      if (state.character.initiative <= 0) {
+        state.character.initiative += gameSlice
+          .getSelectors()
+          .calculatedCharacterStats(state).agility
+        state.isEncounterTurn = true
+      }
+      state.turnCounter += 1
     },
     characterDamage: (state, { payload }) => {
       state.character.current.hp -= payload
       if (state.character.current.hp <= 0) {
         state.character.current.hp = 0
       }
-      gameSlice.caseReducers.checkGameCycleState(state)
     },
     characterLevelUp: (state) => {
       state.character.current.xp -= gameSlice
@@ -339,6 +384,7 @@ export const {
   battleDefeat,
   battleReward,
   nextStage,
+  updateGameCycleState,
   encounterDamage,
   encounterAttack,
   encounterAnimateAttack,

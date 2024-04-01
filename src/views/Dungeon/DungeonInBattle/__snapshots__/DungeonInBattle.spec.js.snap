@@ -4,6 +4,9 @@ exports[`DungeonInBattle renders correctly: DungeonInBattle 1`] = `
 <body>
   <div>
     <div>
+      DamageIndicator
+    </div>
+    <div>
       Encounter
     </div>
     <div
@@ -46,13 +49,13 @@ exports[`DungeonInBattle renders correctly: DungeonInBattle 1`] = `
       >
         <div
           class="cooldown-container"
-          style="width: 61px; visibility: hidden;"
+          style="visibility: visible;"
         />
         <div
           class="rpgui-container container framed framed-golden-2 attack-container"
         >
           <div
-            class="rpgui-icon undefined attack-icon"
+            class="rpgui-icon attack-base attack-icon"
           />
         </div>
       </button>

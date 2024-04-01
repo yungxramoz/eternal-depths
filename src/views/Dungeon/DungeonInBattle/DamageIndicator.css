@@ -1,0 +1,38 @@
+.message {
+  font-size: 1.5rem;
+  position: absolute;
+  z-index: 999;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  font-size: larger !important;
+  text-align: center;
+  opacity: 1;
+  animation: fadeOutSlideUp 0.7s forwards;
+}
+
+@keyframes fadeOutSlideUp {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(-15px);
+  }
+}
+
+.hit {
+  color: #fff !important;
+}
+
+.critical {
+  color: orange !important;
+  font-style: bold;
+}
+
+.evaded,
+.missed {
+  color: lightgrey !important;
+}

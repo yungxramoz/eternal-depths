@@ -6,12 +6,12 @@ import RewardButton from '../../../components/organisms/RewardButton/RewardButto
 import RpgSeparator from '../../../components/templates/RpgSeperator/RpgSeparator'
 import { RPGUI_ICON } from '../../../constants/rpgui-icon'
 import {
-  battleVictory,
+  battleReward,
   characterAssignAttributePoint,
   characterLearnAttack,
   characterSetAssignablePoints,
 } from '../../../store/game/gameSlice'
-import { generateAttack } from '../../../utils/attack'
+import { generateAttack } from '../../../utils/attack-generator'
 import './DungeonLevelUp.css'
 import AttackReplaceModal from './Modal/AttackReplaceModal'
 
@@ -66,7 +66,7 @@ const DungeonLevelUp = () => {
   }
 
   const rewardSelected = () => {
-    dispatch(battleVictory())
+    dispatch(battleReward())
   }
 
   const getContent = () => {

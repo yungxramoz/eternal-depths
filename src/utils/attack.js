@@ -1,45 +1,63 @@
-import { ATTACK } from '../constants/attack-type'
-
-const getRandomAttack = () => {
-  const attacks = Object.values(ATTACK)
-  return attacks[Math.floor(Math.random() * attacks.length)]
-}
-
-export const generateAttack = (attack) => {
-  if (!attack) {
-    attack = getRandomAttack()
-  }
-  return attack
-}
+import {
+  criticalChance,
+  damagePoints,
+  evasionChance,
+  toHitChance,
+} from './stats'
 
 export const calculateDamage = (
   attack,
   sourceStats,
-  minDamage,
-  maxDamage,
   targetStats,
+  isEncounter = false,
 ) => {
-  let damage = 0
-
-  for (let i = 0; i < attack.hitCount; i++) {
-    let hitDamage =
-      Math.floor(Math.random() * (maxDamage - minDamage + 1)) +
-      minDamage +
-      sourceStats.strength +
-      attack.damageIncrease
-
-    const evade = Math.random() < targetStats.agility / 50
-    if (evade) {
-      continue
+  let damage = determineDamage(sourceStats, isEncounter)
+  damage += attack.additionalDamage
+  const isHit = determineHit(sourceStats, targetStats, isEncounter)
+  if (!isHit) {
+    return {
+      result: 'missed',
+      damage: 0,
     }
-
-    const criticalHit =
-      Math.random() < sourceStats.precision / 50 + attack.criticalChance
-    if (criticalHit) {
-      hitDamage *= 2
-    }
-    damage += hitDamage
   }
 
+  const isEvaded = determineEvade(targetStats, isEncounter)
+  if (isEvaded) {
+    return {
+      result: 'evaded',
+      damage: 0,
+    }
+  }
+
+  const isCritical = determineCritical(sourceStats, isEncounter)
+  if (isCritical) {
+    return {
+      result: 'critical',
+      damage: damage * 2,
+    }
+  }
+
+  return {
+    result: 'hit',
+    damage,
+  }
+}
+
+const determineDamage = (sourceStats, isEncounter) => {
+  const damageModifier = damagePoints(1, sourceStats.strength, isEncounter)
+  const minDamage = sourceStats.minDamage + damageModifier
+  const maxDamage = sourceStats.maxDamage + damageModifier
+
+  const damage = Math.floor(Math.random() * (maxDamage - minDamage) + minDamage)
   return damage
 }
+
+const determineHit = (sourceStats, targetStats, isEncounter) =>
+  Math.random() <
+  toHitChance(sourceStats.precision, targetStats.agility, isEncounter)
+
+const determineEvade = (targetStats, isEncounter) =>
+  Math.random() < evasionChance(targetStats.agility, isEncounter)
+
+const determineCritical = (sourceStats, isEncounter) =>
+  Math.random() < criticalChance(sourceStats.precision, isEncounter)
