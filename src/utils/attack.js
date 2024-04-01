@@ -1,3 +1,4 @@
+import ATTACK_RESULT from '../constants/attack-result'
 import {
   criticalChance,
   damagePoints,
@@ -13,32 +14,32 @@ export const calculateDamage = (
 ) => {
   let damage = determineDamage(sourceStats, isEncounter)
   damage += attack.additionalDamage
-  const isHit = determineHit(sourceStats, targetStats, isEncounter)
+  const isHit = determineHit(sourceStats, targetStats)
   if (!isHit) {
     return {
-      result: 'missed',
+      result: ATTACK_RESULT.MISSED,
       damage: 0,
     }
   }
 
-  const isEvaded = determineEvade(targetStats, isEncounter)
+  const isEvaded = determineEvade(targetStats)
   if (isEvaded) {
     return {
-      result: 'evaded',
+      result: ATTACK_RESULT.EVADED,
       damage: 0,
     }
   }
 
-  const isCritical = determineCritical(sourceStats, isEncounter)
+  const isCritical = determineCritical(sourceStats)
   if (isCritical) {
     return {
-      result: 'critical',
+      result: ATTACK_RESULT.CRITICAL,
       damage: damage * 2,
     }
   }
 
   return {
-    result: 'hit',
+    result: ATTACK_RESULT.HIT,
     damage,
   }
 }
@@ -48,16 +49,16 @@ const determineDamage = (sourceStats, isEncounter) => {
   const minDamage = sourceStats.minDamage + damageModifier
   const maxDamage = sourceStats.maxDamage + damageModifier
 
-  const damage = Math.floor(Math.random() * (maxDamage - minDamage) + minDamage)
+  const damage = Math.floor(Math.random() * (maxDamage - minDamage)) + minDamage
+
   return damage
 }
 
-const determineHit = (sourceStats, targetStats, isEncounter) =>
-  Math.random() <
-  toHitChance(sourceStats.precision, targetStats.agility, isEncounter)
+const determineHit = (sourceStats, targetStats) =>
+  Math.random() < toHitChance(sourceStats.precision, targetStats.agility)
 
-const determineEvade = (targetStats, isEncounter) =>
-  Math.random() < evasionChance(targetStats.agility, isEncounter)
+const determineEvade = (targetStats) =>
+  Math.random() < evasionChance(targetStats.agility)
 
-const determineCritical = (sourceStats, isEncounter) =>
-  Math.random() < criticalChance(sourceStats.precision, isEncounter)
+const determineCritical = (sourceStats) =>
+  Math.random() < criticalChance(sourceStats.precision)

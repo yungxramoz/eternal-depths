@@ -20,16 +20,17 @@ export const healthPoints = (heaPoints, isEncounter = false) =>
 export const strengthPoints = (strPoints, isEncounter) =>
   strPoints * DAMAGE_MODIFIER_PER_STRENGTH_POINT * modifier(isEncounter)
 
+//TODO this is probably not needed anymore
 export const damagePoints = (dmg, strPoints, isEncounter = false) =>
-  Math.floor(dmg * (1 + strengthPoints(strPoints, isEncounter)))
+  strengthPoints(strPoints, isEncounter)
 
-export const evasionChance = (agiPoints, isEncounter = false) =>
+export const evasionChance = (agiPoints) =>
   Math.min(MAX_EVADE_CHANCE, agiPoints * EVADE_CHANCE_PER_AGILITY_POINT)
 
-export const criticalChance = (prePoints, isEncounter = false) =>
+export const criticalChance = (prePoints) =>
   Math.min(MAX_CRIT_CHANCE, prePoints * CRIT_CHANCE_PER_PRECISION_POINT)
 
-export const toHitChance = (prePoints, targetAgiPoints, isEncounter = false) =>
+export const toHitChance = (prePoints, targetAgiPoints) =>
   Math.min(
     MAX_HIT_CHANCE,
     Math.max(

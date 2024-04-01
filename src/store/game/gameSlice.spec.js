@@ -30,6 +30,7 @@ import gameReducer, {
   gameStart,
   gameWon,
   nextStage,
+  updateGameCycleState,
 } from './gameSlice'
 
 let initialState
@@ -790,6 +791,83 @@ describe('gameSlice', () => {
         }),
       )
     })
+    it('decreases buff duration', () => {
+      const state = {
+        ...initialState,
+        character: {
+          ...initialState.character,
+          buffs: [
+            {
+              stat: STAT.STRENGTH,
+              value: 5,
+              duration: 2,
+            },
+            {
+              stat: STAT.PRECISION,
+              value: 5,
+              duration: 1,
+            },
+          ],
+        },
+      }
+      const attack = {
+        id: 1,
+        selfHealAmount: 0,
+        selfInflictedAmount: 0,
+        cooldown: 2,
+        buffs: [],
+      }
+      const dealtDamage = 10
+      expect(
+        gameReducer(state, characterAttackEffects({ attack, dealtDamage })),
+      ).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            buffs: [
+              {
+                stat: STAT.STRENGTH,
+                value: 5,
+                duration: 1,
+              },
+            ],
+          }),
+        }),
+      )
+    })
+    it('adds new buffs', () => {
+      const attack = {
+        id: 1,
+        selfHealAmount: 0,
+        selfInflictedAmount: 0,
+        cooldown: 2,
+        buffs: [
+          {
+            stat: STAT.AGILITY,
+            value: 5,
+            duration: 1,
+          },
+        ],
+      }
+      const dealtDamage = 10
+      expect(
+        gameReducer(
+          initialState,
+          characterAttackEffects({ attack, dealtDamage }),
+        ),
+      ).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            buffs: [
+              {
+                stat: STAT.AGILITY,
+                value: 5,
+                duration: 1,
+              },
+            ],
+          }),
+        }),
+      )
+    })
   })
 
   describe('characterLearnAttack', () => {
@@ -814,6 +892,35 @@ describe('gameSlice', () => {
               ],
             }),
           }),
+        }),
+      )
+    })
+  })
+
+  describe('updateGameCycleState', () => {
+    it('sets gameCycleState to BATTLE_DEFEAT if character HP is 0 or less', () => {
+      initialState.character.current.hp = 0
+      initialState.encounter.current = { hp: 1 }
+      expect(gameReducer(initialState, updateGameCycleState())).toEqual(
+        expect.objectContaining({
+          gameCycleState: GAME_CYCLE_STATE.BATTLE_DEFEAT,
+        }),
+      )
+    })
+    it('sets gameCycleState to BATTLE_REWARD if encounter HP is 0 or less and character XP is less than max XP', () => {
+      initialState.encounter.current = { hp: 0 }
+      expect(gameReducer(initialState, updateGameCycleState())).toEqual(
+        expect.objectContaining({
+          gameCycleState: GAME_CYCLE_STATE.REWARD,
+        }),
+      )
+    })
+    it('should set gameCycleState to LEVEL_UP if encounter HP is 0 or less and character XP is equal to or more than max XP', () => {
+      initialState.encounter.current = { level: 1, hp: 0 }
+      initialState.character.current.xp = 100
+      expect(gameReducer(initialState, updateGameCycleState())).toEqual(
+        expect.objectContaining({
+          gameCycleState: GAME_CYCLE_STATE.LEVEL_UP,
         }),
       )
     })

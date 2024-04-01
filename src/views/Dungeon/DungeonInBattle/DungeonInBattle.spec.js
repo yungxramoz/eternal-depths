@@ -11,7 +11,10 @@ import DungeonInBattle from './DungeonInBattle'
 jest.mock('../../../components/molecules/Encounter/Encounter', () => () => (
   <div>Encounter</div>
 ))
-jest.mock('./DamageIndicator', () => () => <div>DamageIndicator</div>)
+jest.mock(
+  '../../../components/atoms/DamageIndicator/DamageIndicator',
+  () => () => <div>DamageIndicator</div>,
+)
 
 describe('DungeonInBattle', () => {
   let store

@@ -16,7 +16,7 @@ import {
 } from '../../../store/game/gameSlice'
 import { calculateDamage } from '../../../utils/attack'
 import './DungeonInBattle.css'
-import DamageIndicator from './DamageIndicator'
+import DamageIndicator from '../../../components/atoms/DamageIndicator/DamageIndicator'
 
 const DungeonInBattle = () => {
   const dispatch = useDispatch()
