@@ -18,7 +18,9 @@ export const healthPoints = (heaPoints, isEncounter = false) =>
   (HEALTH_BASE_POINTS + heaPoints * HP_PER_HEALTH_POINT) * modifier(isEncounter)
 
 export const strengthPoints = (strPoints, isEncounter) =>
-  strPoints * DAMAGE_MODIFIER_PER_STRENGTH_POINT * modifier(isEncounter)
+  Math.floor(
+    strPoints * DAMAGE_MODIFIER_PER_STRENGTH_POINT * modifier(isEncounter),
+  )
 
 //TODO this is probably not needed anymore
 export const damagePoints = (dmg, strPoints, isEncounter = false) =>
