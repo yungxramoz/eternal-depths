@@ -19,20 +19,22 @@ const AttackReplaceModal = ({ newAttack, onClose, onRewardSelected }) => {
   return (
     <Modal
       title="Replace Attack"
+      onDismiss={onClose}
       content={
         <div className="attack-replace-modal">
           <p>Select an attack to replace:</p>
           <form className="attack-list">
             {filteredAttacks.map((attack) => (
-              <ItemRadioButton
-                key={attack.id}
-                id={attack.id}
-                checked={selectedAttackId === attack.id}
-                title={attack.name}
-                subtitle={`Cooldown: ${attack.cooldown}`}
-                description={attack.description}
-                onChange={() => setSelectedAttackId(attack.id)}
-              />
+              <React.Fragment key={attack.id}>
+                <ItemRadioButton
+                  id={attack.id}
+                  checked={selectedAttackId === attack.id}
+                  title={attack.name}
+                  subtitle={`Cooldown: ${attack.cooldown}`}
+                  description={attack.description}
+                  onChange={() => setSelectedAttackId(attack.id)}
+                />
+              </React.Fragment>
             ))}
           </form>
         </div>

@@ -3,6 +3,7 @@ import { ATTACK, BASE_ATTACK } from '../../constants/attack-type'
 import GAME_CYCLE_STATE from '../../constants/game-cycle-state'
 import GAME_STATE from '../../constants/game-state'
 import { RPGUI_ICON } from '../../constants/rpgui-icon'
+import STAT from '../../constants/stat'
 import gameReducer, {
   battleDefeat,
   battleReward,
@@ -10,6 +11,7 @@ import gameReducer, {
   battleVictory,
   calculatedCharacterStats,
   calculatedHpReward,
+  characterAnimateIdle,
   characterAssignAttributePoint,
   characterAttackEffects,
   characterDamage,
@@ -29,6 +31,7 @@ import gameReducer, {
   gameStart,
   gameWon,
   nextStage,
+  updateGameCycleState,
 } from './gameSlice'
 
 let initialState
@@ -40,10 +43,12 @@ describe('gameSlice', () => {
       gameCycleState: null,
       stage: 0,
       isEncounterTurn: false,
+      turnCounter: 0,
       encounter: {
         current: null,
         animation: '',
         stageFileName: null,
+        initiative: 0,
       },
       character: {
         current: {
@@ -64,8 +69,8 @@ describe('gameSlice', () => {
               name: 'Rusty Sword',
               icon: RPGUI_ICON.RUSTY_SWORD,
               stats: {
-                minDamage: 1,
-                maxDamage: 3,
+                minDamage: 3,
+                maxDamage: 9,
               },
             },
             shield: null,
@@ -79,6 +84,9 @@ describe('gameSlice', () => {
             },
           ],
         },
+        animation: '',
+        initiative: 0,
+        buffs: [],
         availableAttributePoints: 2,
       },
     }
@@ -90,61 +98,60 @@ describe('gameSlice', () => {
 
   describe('startGame', () => {
     it('starts the game', () => {
-      expect(gameReducer(initialState, gameStart())).toEqual({
-        ...initialState,
-        gameState: GAME_STATE.PLAYING,
-        stage: 1,
-        gameCycleState: GAME_CYCLE_STATE.ENCOUNTER,
-        isEncounterTurn: expect.any(Boolean),
-        encounter: {
-          current: expect.any(Object),
-          animation: expect.any(String),
-          stageFileName: expect.any(String),
-        },
-      })
+      expect(gameReducer(initialState, gameStart())).toEqual(
+        expect.objectContaining({
+          gameState: GAME_STATE.PLAYING,
+          stage: 1,
+          gameCycleState: GAME_CYCLE_STATE.ENCOUNTER,
+          encounter: expect.objectContaining({
+            current: expect.any(Object),
+            animation: expect.any(String),
+            stageFileName: expect.any(String),
+          }),
+        }),
+      )
     })
   })
 
   describe('gameOver', () => {
     it('ends the game with a loss', () => {
-      expect(gameReducer(initialState, gameOver())).toEqual({
-        ...initialState,
-        gameState: GAME_STATE.OVER,
-      })
+      expect(gameReducer(initialState, gameOver())).toEqual(
+        expect.objectContaining({
+          gameState: GAME_STATE.OVER,
+        }),
+      )
     })
   })
 
   describe('gameWon', () => {
     it('ends the game with a win', () => {
-      expect(gameReducer(initialState, gameWon())).toEqual({
-        ...initialState,
-        gameState: GAME_STATE.WON,
-      })
+      expect(gameReducer(initialState, gameWon())).toEqual(
+        expect.objectContaining({
+          gameState: GAME_STATE.WON,
+        }),
+      )
     })
   })
 
   describe('resetGame', () => {
     it('resets the game to initial state', () => {
-      expect(gameReducer(initialState, gameReset())).toEqual({
-        ...initialState,
-        gameState: GAME_STATE.IDLE,
-        gameCycleState: null,
-      })
+      expect(gameReducer(initialState, gameReset())).toEqual(initialState)
     })
   })
 
   describe('nextStage', () => {
     it('advances to the next stage', () => {
-      expect(gameReducer(initialState, nextStage())).toEqual({
-        ...initialState,
-        gameCycleState: GAME_CYCLE_STATE.ENCOUNTER,
-        stage: 1,
-        encounter: {
-          current: expect.any(Object),
-          animation: expect.any(String),
-          stageFileName: expect.any(String),
-        },
-      })
+      expect(gameReducer(initialState, nextStage())).toEqual(
+        expect.objectContaining({
+          gameCycleState: GAME_CYCLE_STATE.ENCOUNTER,
+          stage: 1,
+          encounter: expect.objectContaining({
+            current: expect.any(Object),
+            animation: expect.any(String),
+            stageFileName: expect.any(String),
+          }),
+        }),
+      )
     })
   })
 
@@ -157,59 +164,14 @@ describe('gameSlice', () => {
           current: { hp: 10 },
         },
       }
-      expect(gameReducer(stateWithEncounter, encounterDamage(5))).toEqual({
-        ...stateWithEncounter,
-        encounter: {
-          ...stateWithEncounter.encounter,
-          current: { hp: 5 },
-          animation: ANIMATION_STATE.DAMAGING,
-        },
-        isEncounterTurn: true,
-      })
-    })
-    it('defeats the encounter', () => {
-      const stateWithEncounter = {
-        ...initialState,
-        encounter: {
-          ...initialState.encounter,
-          current: { hp: 5, level: 1 },
-        },
-      }
-      expect(gameReducer(stateWithEncounter, encounterDamage(5))).toEqual({
-        ...stateWithEncounter,
-        gameCycleState: GAME_CYCLE_STATE.REWARD,
-        isEncounterTurn: expect.any(Boolean),
-        encounter: expect.any(Object),
-        character: expect.any(Object),
-      })
-    })
-    it('defeats the encounter and levels up', () => {
-      const stateWithEncounter = {
-        ...initialState,
-        encounter: {
-          ...initialState.encounter,
-          current: { hp: 5, level: 2 },
-        },
-        character: {
-          ...initialState.character,
-          current: {
-            ...initialState.character.current,
-            xp: 6,
-          },
-        },
-      }
-      expect(gameReducer(stateWithEncounter, encounterDamage(5))).toEqual({
-        ...stateWithEncounter,
-        gameCycleState: GAME_CYCLE_STATE.LEVEL_UP,
-        isEncounterTurn: expect.any(Boolean),
-        encounter: expect.any(Object),
-        character: expect.objectContaining({
-          current: expect.objectContaining({
-            level: 2,
-            xp: 1,
+      expect(gameReducer(stateWithEncounter, encounterDamage(5))).toEqual(
+        expect.objectContaining({
+          encounter: expect.objectContaining({
+            current: { hp: 5 },
+            animation: ANIMATION_STATE.DAMAGING,
           }),
         }),
-      })
+      )
     })
   })
 
@@ -222,97 +184,137 @@ describe('gameSlice', () => {
           current: { stats: { agility: 5 } },
         },
       }
-      expect(gameReducer(stateWithEncounter, battleStart(10))).toEqual({
-        ...stateWithEncounter,
-        gameCycleState: GAME_CYCLE_STATE.BATTLE,
-        isEncounterTurn: false,
-      })
+      expect(gameReducer(stateWithEncounter, battleStart())).toEqual(
+        expect.objectContaining({
+          gameCycleState: GAME_CYCLE_STATE.BATTLE,
+          isEncounterTurn: true,
+        }),
+      )
     })
     it('starts the battle with player turn', () => {
       const stateWithEncounter = {
         ...initialState,
+        character: {
+          ...initialState.character,
+          current: {
+            ...initialState.character.current,
+            stats: { agility: 5 },
+          },
+        },
         encounter: {
           ...initialState.encounter,
-          current: { stats: { agility: 10 } },
+          current: { stats: { agility: 1 } },
         },
       }
-      expect(gameReducer(stateWithEncounter, battleStart(5))).toEqual({
-        ...stateWithEncounter,
-        gameCycleState: GAME_CYCLE_STATE.BATTLE,
-        isEncounterTurn: true,
-      })
+      expect(gameReducer(stateWithEncounter, battleStart())).toEqual(
+        expect.objectContaining({
+          gameCycleState: GAME_CYCLE_STATE.BATTLE,
+          isEncounterTurn: false,
+        }),
+      )
     })
   })
 
   describe('battleVictory', () => {
     it('wins the battle', () => {
-      expect(gameReducer(initialState, battleVictory())).toEqual({
-        ...initialState,
-        gameCycleState: GAME_CYCLE_STATE.BATTLE_VICTORY,
-      })
+      expect(gameReducer(initialState, battleVictory())).toEqual(
+        expect.objectContaining({
+          gameCycleState: GAME_CYCLE_STATE.BATTLE_VICTORY,
+        }),
+      )
     })
   })
 
   describe('battleReward', () => {
     it('sets the reward cycle state', () => {
-      expect(gameReducer(initialState, battleReward())).toEqual({
-        ...initialState,
-        gameCycleState: GAME_CYCLE_STATE.REWARD,
-      })
+      expect(gameReducer(initialState, battleReward())).toEqual(
+        expect.objectContaining({
+          gameCycleState: GAME_CYCLE_STATE.REWARD,
+        }),
+      )
     })
   })
 
   describe('battleDefeat', () => {
     it('loses the battle', () => {
-      expect(gameReducer(initialState, battleDefeat())).toEqual({
-        ...initialState,
-        gameCycleState: GAME_CYCLE_STATE.BATTLE_DEFEAT,
-      })
+      expect(gameReducer(initialState, battleDefeat())).toEqual(
+        expect.objectContaining({
+          gameCycleState: GAME_CYCLE_STATE.BATTLE_DEFEAT,
+        }),
+      )
     })
   })
 
   describe('encounterAttack', () => {
-    it('attacks the encounter', () => {
+    it('applies attack effects passes turn', () => {
       const stateWithEncounter = {
         ...initialState,
         encounter: {
           ...initialState.encounter,
-          current: { hp: 50 },
+          current: {
+            stats: { hp: 50, agility: 1 },
+          },
+          initiative: 1,
         },
       }
-      expect(gameReducer(stateWithEncounter, encounterAttack())).toEqual({
+      expect(gameReducer(stateWithEncounter, encounterAttack())).toEqual(
+        expect.objectContaining({
+          isEncounterTurn: false,
+          turnCounter: 1,
+          encounter: expect.objectContaining({
+            animation: ANIMATION_STATE.ATTACKING,
+            initiative: -3,
+          }),
+        }),
+      )
+    })
+
+    it('applies attack effects does not pass turn', () => {
+      const stateWithEncounter = {
         ...initialState,
-        isEncounterTurn: false,
+        isEncounterTurn: true,
         encounter: {
           ...initialState.encounter,
-          animation: ANIMATION_STATE.ATTACKING,
-          current: expect.any(Object),
+          current: {
+            stats: { hp: 50, agility: 6 },
+          },
+          initiative: 6,
         },
-      })
+      }
+      expect(gameReducer(stateWithEncounter, encounterAttack())).toEqual(
+        expect.objectContaining({
+          isEncounterTurn: true,
+          turnCounter: 1,
+          encounter: expect.objectContaining({
+            animation: ANIMATION_STATE.ATTACKING,
+            initiative: 1,
+          }),
+        }),
+      )
     })
   })
 
   describe('encounterAnimateAttack', () => {
     it('animates the attack', () => {
-      expect(gameReducer(initialState, encounterAnimateAttack())).toEqual({
-        ...initialState,
-        encounter: {
-          ...initialState.encounter,
-          animation: ANIMATION_STATE.ATTACKING,
-        },
-      })
+      expect(gameReducer(initialState, encounterAnimateAttack())).toEqual(
+        expect.objectContaining({
+          encounter: expect.objectContaining({
+            animation: ANIMATION_STATE.ATTACKING,
+          }),
+        }),
+      )
     })
   })
 
   describe('encounterAnimateDamage', () => {
     it('animates the damage', () => {
-      expect(gameReducer(initialState, encounterAnimateDamage())).toEqual({
-        ...initialState,
-        encounter: {
-          ...initialState.encounter,
-          animation: ANIMATION_STATE.DAMAGING,
-        },
-      })
+      expect(gameReducer(initialState, encounterAnimateDamage())).toEqual(
+        expect.objectContaining({
+          encounter: expect.objectContaining({
+            animation: ANIMATION_STATE.DAMAGING,
+          }),
+        }),
+      )
     })
   })
 
@@ -325,13 +327,13 @@ describe('gameSlice', () => {
           current: { idleAnimation: ANIMATION_STATE.IDLE_STANDING },
         },
       }
-      expect(gameReducer(stateWithEncounter, encounterAnimateIdle())).toEqual({
-        ...stateWithEncounter,
-        encounter: {
-          ...stateWithEncounter.encounter,
-          animation: ANIMATION_STATE.IDLE_STANDING,
-        },
-      })
+      expect(gameReducer(stateWithEncounter, encounterAnimateIdle())).toEqual(
+        expect.objectContaining({
+          encounter: expect.objectContaining({
+            animation: ANIMATION_STATE.IDLE_STANDING,
+          }),
+        }),
+      )
     })
   })
 
@@ -339,31 +341,29 @@ describe('gameSlice', () => {
     it('sets the name of the character', () => {
       expect(
         gameReducer(initialState, characterSetName('Test Character')),
-      ).toEqual({
-        ...initialState,
-        character: {
-          ...initialState.character,
-          current: {
-            ...initialState.character.current,
-            name: 'Test Character',
-          },
-        },
-      })
+      ).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            current: expect.objectContaining({
+              name: 'Test Character',
+            }),
+          }),
+        }),
+      )
     })
   })
 
   describe('characterSetLook', () => {
     it('sets the look of the character', () => {
-      expect(gameReducer(initialState, characterSetLook(2))).toEqual({
-        ...initialState,
-        character: {
-          ...initialState.character,
-          current: {
-            ...initialState.character.current,
-            look: 2,
-          },
-        },
-      })
+      expect(gameReducer(initialState, characterSetLook(2))).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            current: expect.objectContaining({
+              look: 2,
+            }),
+          }),
+        }),
+      )
     })
   })
 
@@ -374,23 +374,22 @@ describe('gameSlice', () => {
           initialState,
           characterAssignAttributePoint({ strength: 1, agility: 1 }),
         ),
-      ).toEqual({
-        ...initialState,
-        character: {
-          ...initialState.character,
-          current: {
-            ...initialState.character.current,
-            hp: 100,
-            stats: {
-              health: 1,
-              strength: 2,
-              agility: 2,
-              precision: 1,
-            },
-          },
-          availableAttributePoints: 0,
-        },
-      })
+      ).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            current: expect.objectContaining({
+              hp: 100,
+              stats: {
+                health: 1,
+                strength: 2,
+                agility: 2,
+                precision: 1,
+              },
+            }),
+            availableAttributePoints: 0,
+          }),
+        }),
+      )
     })
   })
 
@@ -402,19 +401,17 @@ describe('gameSlice', () => {
           health: 1,
         },
       }
-      expect(gameReducer(initialState, characterEquipItem(item))).toEqual({
-        ...initialState,
-        character: {
-          ...initialState.character,
-          current: {
-            ...initialState.character.current,
-            items: {
-              ...initialState.character.current.items,
-              helmet: item,
-            },
-          },
-        },
-      })
+      expect(gameReducer(initialState, characterEquipItem(item))).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            current: expect.objectContaining({
+              items: expect.objectContaining({
+                helmet: item,
+              }),
+            }),
+          }),
+        }),
+      )
     })
   })
 
@@ -433,16 +430,15 @@ describe('gameSlice', () => {
           },
         },
       }
-      expect(gameReducer(state, characterSetHpToMax())).toEqual({
-        ...state,
-        character: {
-          ...state.character,
-          current: {
-            ...state.character.current,
-            hp: 200,
-          },
-        },
-      })
+      expect(gameReducer(state, characterSetHpToMax())).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            current: expect.objectContaining({
+              hp: 200,
+            }),
+          }),
+        }),
+      )
     })
   })
 
@@ -458,16 +454,15 @@ describe('gameSlice', () => {
           },
         },
       }
-      expect(gameReducer(state, characterRecoverHp(25))).toEqual({
-        ...state,
-        character: {
-          ...state.character,
-          current: {
-            ...state.character.current,
-            hp: 75,
-          },
-        },
-      })
+      expect(gameReducer(state, characterRecoverHp(25))).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            current: expect.objectContaining({
+              hp: 75,
+            }),
+          }),
+        }),
+      )
     })
   })
 
@@ -487,16 +482,39 @@ describe('gameSlice', () => {
           },
         },
       }
-      expect(gameReducer(state, characterDamage(25))).toEqual({
-        ...state,
+      expect(gameReducer(state, characterDamage(25))).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            animation: ANIMATION_STATE.DAMAGING,
+            current: expect.objectContaining({
+              hp: 25,
+            }),
+          }),
+        }),
+      )
+    })
+    it('sets no animation if damage is 0', () => {
+      const state = {
+        ...initialState,
+        encounter: {
+          ...initialState.encounter,
+          current: { hp: 50 },
+        },
         character: {
-          ...state.character,
+          ...initialState.character,
           current: {
-            ...state.character.current,
-            hp: 25,
+            ...initialState.character.current,
+            hp: 50,
           },
         },
-      })
+      }
+      expect(gameReducer(state, characterDamage(0))).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            animation: '',
+          }),
+        }),
+      )
     })
     it('does not go below 0', () => {
       const state = {
@@ -513,17 +531,15 @@ describe('gameSlice', () => {
           },
         },
       }
-      expect(gameReducer(state, characterDamage(10))).toEqual({
-        ...state,
-        gameCycleState: GAME_CYCLE_STATE.BATTLE_DEFEAT,
-        character: {
-          ...state.character,
-          current: {
-            ...state.character.current,
-            hp: 0,
-          },
-        },
-      })
+      expect(gameReducer(state, characterDamage(10))).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            current: expect.objectContaining({
+              hp: 0,
+            }),
+          }),
+        }),
+      )
     })
   })
 
@@ -562,26 +578,15 @@ describe('gameSlice', () => {
       const dealtDamage = 10
       expect(
         gameReducer(state, characterAttackEffects({ attack, dealtDamage })),
-      ).toEqual({
-        ...state,
-        character: {
-          ...state.character,
-          current: {
-            ...state.character.current,
-            hp: 60,
-            attacks: [
-              {
-                id: 1,
-                currentCooldown: 2,
-              },
-              {
-                id: 2,
-                currentCooldown: 0,
-              },
-            ],
-          },
-        },
-      })
+      ).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            current: expect.objectContaining({
+              hp: 60,
+            }),
+          }),
+        }),
+      )
     })
     it('applies self heal fixed', () => {
       const state = {
@@ -617,26 +622,15 @@ describe('gameSlice', () => {
       const dealtDamage = 10
       expect(
         gameReducer(state, characterAttackEffects({ attack, dealtDamage })),
-      ).toEqual({
-        ...state,
-        character: {
-          ...state.character,
-          current: {
-            ...state.character.current,
-            hp: 55,
-            attacks: [
-              {
-                id: 1,
-                currentCooldown: 2,
-              },
-              {
-                id: 2,
-                currentCooldown: 0,
-              },
-            ],
-          },
-        },
-      })
+      ).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            current: expect.objectContaining({
+              hp: 55,
+            }),
+          }),
+        }),
+      )
     })
     it('applies self inflicted damage', () => {
       const state = {
@@ -672,26 +666,15 @@ describe('gameSlice', () => {
       const dealtDamage = 10
       expect(
         gameReducer(state, characterAttackEffects({ attack, dealtDamage })),
-      ).toEqual({
-        ...state,
-        character: {
-          ...state.character,
-          current: {
-            ...state.character.current,
-            hp: 45,
-            attacks: [
-              {
-                id: 1,
-                currentCooldown: 2,
-              },
-              {
-                id: 2,
-                currentCooldown: 0,
-              },
-            ],
-          },
-        },
-      })
+      ).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            current: expect.objectContaining({
+              hp: 45,
+            }),
+          }),
+        }),
+      )
     })
     it('applies self inflicted damage does not go below 0', () => {
       const state = {
@@ -727,27 +710,15 @@ describe('gameSlice', () => {
       const dealtDamage = 10
       expect(
         gameReducer(state, characterAttackEffects({ attack, dealtDamage })),
-      ).toEqual({
-        ...state,
-        gameCycleState: GAME_CYCLE_STATE.BATTLE_DEFEAT,
-        character: {
-          ...state.character,
-          current: {
-            ...state.character.current,
-            hp: 0,
-            attacks: [
-              {
-                id: 1,
-                currentCooldown: 2,
-              },
-              {
-                id: 2,
-                currentCooldown: 0,
-              },
-            ],
-          },
-        },
-      })
+      ).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            current: expect.objectContaining({
+              hp: 0,
+            }),
+          }),
+        }),
+      )
     })
     it('does not overheal', () => {
       const state = {
@@ -783,26 +754,15 @@ describe('gameSlice', () => {
       const dealtDamage = 10
       expect(
         gameReducer(state, characterAttackEffects({ attack, dealtDamage })),
-      ).toEqual({
-        ...state,
-        character: {
-          ...state.character,
-          current: {
-            ...state.character.current,
-            hp: 100,
-            attacks: [
-              {
-                id: 1,
-                currentCooldown: 2,
-              },
-              {
-                id: 2,
-                currentCooldown: 0,
-              },
-            ],
-          },
-        },
-      })
+      ).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            current: expect.objectContaining({
+              hp: 100,
+            }),
+          }),
+        }),
+      )
     })
     it('applies correct cooldown', () => {
       const state = {
@@ -838,26 +798,101 @@ describe('gameSlice', () => {
       const dealtDamage = 10
       expect(
         gameReducer(state, characterAttackEffects({ attack, dealtDamage })),
-      ).toEqual({
-        ...state,
+      ).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            current: expect.objectContaining({
+              attacks: [
+                {
+                  id: 1,
+                  currentCooldown: 2,
+                },
+                {
+                  id: 2,
+                  currentCooldown: 0,
+                },
+              ],
+            }),
+          }),
+        }),
+      )
+    })
+    it('decreases buff duration', () => {
+      const state = {
+        ...initialState,
         character: {
-          ...state.character,
-          current: {
-            ...state.character.current,
-            hp: 50,
-            attacks: [
+          ...initialState.character,
+          buffs: [
+            {
+              stat: STAT.STRENGTH,
+              value: 5,
+              duration: 2,
+            },
+            {
+              stat: STAT.PRECISION,
+              value: 5,
+              duration: 1,
+            },
+          ],
+        },
+      }
+      const attack = {
+        id: 1,
+        selfHealAmount: 0,
+        selfInflictedAmount: 0,
+        cooldown: 2,
+        buffs: [],
+      }
+      const dealtDamage = 10
+      expect(
+        gameReducer(state, characterAttackEffects({ attack, dealtDamage })),
+      ).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            buffs: [
               {
-                id: 1,
-                currentCooldown: 2,
-              },
-              {
-                id: 2,
-                currentCooldown: 0,
+                stat: STAT.STRENGTH,
+                value: 5,
+                duration: 1,
               },
             ],
+          }),
+        }),
+      )
+    })
+    it('adds new buffs', () => {
+      const attack = {
+        id: 1,
+        selfHealAmount: 0,
+        selfInflictedAmount: 0,
+        cooldown: 2,
+        buffs: [
+          {
+            stat: STAT.AGILITY,
+            value: 5,
+            duration: 1,
           },
-        },
-      })
+        ],
+      }
+      const dealtDamage = 10
+      expect(
+        gameReducer(
+          initialState,
+          characterAttackEffects({ attack, dealtDamage }),
+        ),
+      ).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            buffs: [
+              {
+                stat: STAT.AGILITY,
+                value: 5,
+                duration: 1,
+              },
+            ],
+          }),
+        }),
+      )
     })
   })
 
@@ -865,27 +900,68 @@ describe('gameSlice', () => {
     it('learns a new attack', () => {
       expect(
         gameReducer(initialState, characterLearnAttack(ATTACK.BERSERK_STRIKE)),
-      ).toEqual({
-        ...initialState,
-        character: {
-          ...initialState.character,
-          current: {
-            ...initialState.character.current,
-            attacks: [
-              {
-                ...BASE_ATTACK,
-                id: 1,
-                currentCooldown: 0,
-              },
-              {
-                ...ATTACK.BERSERK_STRIKE,
-                id: 2,
-                currentCooldown: ATTACK.BERSERK_STRIKE.cooldown,
-              },
-            ],
-          },
-        },
-      })
+      ).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            current: expect.objectContaining({
+              attacks: [
+                {
+                  ...BASE_ATTACK,
+                  id: 1,
+                  currentCooldown: 0,
+                },
+                {
+                  ...ATTACK.BERSERK_STRIKE,
+                  id: 2,
+                  currentCooldown: ATTACK.BERSERK_STRIKE.cooldown,
+                },
+              ],
+            }),
+          }),
+        }),
+      )
+    })
+  })
+
+  describe('updateGameCycleState', () => {
+    it('sets gameCycleState to BATTLE_DEFEAT if character HP is 0 or less', () => {
+      initialState.character.current.hp = 0
+      initialState.encounter.current = { hp: 1 }
+      expect(gameReducer(initialState, updateGameCycleState())).toEqual(
+        expect.objectContaining({
+          gameCycleState: GAME_CYCLE_STATE.BATTLE_DEFEAT,
+        }),
+      )
+    })
+    it('sets gameCycleState to BATTLE_REWARD if encounter HP is 0 or less and character XP is less than max XP', () => {
+      initialState.encounter.current = { hp: 0 }
+      expect(gameReducer(initialState, updateGameCycleState())).toEqual(
+        expect.objectContaining({
+          gameCycleState: GAME_CYCLE_STATE.REWARD,
+        }),
+      )
+    })
+    it('should set gameCycleState to LEVEL_UP if encounter HP is 0 or less and character XP is equal to or more than max XP', () => {
+      initialState.encounter.current = { level: 1, hp: 0 }
+      initialState.character.current.xp = 100
+      expect(gameReducer(initialState, updateGameCycleState())).toEqual(
+        expect.objectContaining({
+          gameCycleState: GAME_CYCLE_STATE.LEVEL_UP,
+        }),
+      )
+    })
+  })
+
+  describe('characterAnimateIdle', () => {
+    it('animates the character', () => {
+      initialState.character.animation = ANIMATION_STATE.DAMAGING
+      expect(gameReducer(initialState, characterAnimateIdle())).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            animation: '',
+          }),
+        }),
+      )
     })
   })
 
@@ -919,16 +995,47 @@ describe('gameSlice', () => {
                     precision: 4,
                   },
                 },
+                weapon: {
+                  stats: {
+                    minDamage: 2,
+                    maxDamage: 4,
+                  },
+                },
               },
             },
+
+            buffs: [
+              {
+                stat: STAT.HEALTH,
+                value: 1,
+                duration: 1,
+              },
+              {
+                stat: STAT.STRENGTH,
+                value: 2,
+                duration: 1,
+              },
+              {
+                stat: STAT.AGILITY,
+                value: 3,
+                duration: 1,
+              },
+              {
+                stat: STAT.PRECISION,
+                value: 4,
+                duration: 1,
+              },
+            ],
           },
         },
       }
       expect(calculatedCharacterStats(state)).toEqual({
-        health: 2,
-        strength: 3,
-        agility: 4,
-        precision: 5,
+        health: 3,
+        strength: 5,
+        agility: 7,
+        precision: 9,
+        minDamage: 2,
+        maxDamage: 4,
       })
     })
   })

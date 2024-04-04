@@ -4,7 +4,7 @@ exports[`Dungeon renders DungeonAfterBattle component on battle victory state: D
 <body>
   <div>
     <div
-      class="rpgui-container container framed full-page scrollable dungeon-container"
+      class="rpgui-container container framed full-page scrollable dungeon-container "
       style="background-image: url(test-file-stub); background-repeat: no-repeat; background-size: cover; background-position: bottom;"
     >
       <h2>
@@ -26,7 +26,7 @@ exports[`Dungeon renders DungeonBeforeBattle component on encounter state: Dunge
 <body>
   <div>
     <div
-      class="rpgui-container container framed full-page scrollable dungeon-container"
+      class="rpgui-container container framed full-page scrollable dungeon-container "
       style="background-image: url(test-file-stub); background-repeat: no-repeat; background-size: cover; background-position: bottom;"
     >
       <h2>
@@ -48,7 +48,7 @@ exports[`Dungeon renders DungeonInBattle component on battle state: DungeonInBat
 <body>
   <div>
     <div
-      class="rpgui-container container framed full-page scrollable dungeon-container"
+      class="rpgui-container container framed full-page scrollable dungeon-container "
       style="background-image: url(test-file-stub); background-repeat: no-repeat; background-size: cover; background-position: bottom;"
     >
       <div>
@@ -63,7 +63,7 @@ exports[`Dungeon renders DungeonLevelUp component on level up state: DungeonLeve
 <body>
   <div>
     <div
-      class="rpgui-container container framed full-page scrollable dungeon-container"
+      class="rpgui-container container framed full-page scrollable dungeon-container "
     >
       <div>
         CharacterHeader
@@ -80,7 +80,7 @@ exports[`Dungeon renders DungeonReward component on reward state: DungeonReward 
 <body>
   <div>
     <div
-      class="rpgui-container container framed full-page scrollable dungeon-container"
+      class="rpgui-container container framed full-page scrollable dungeon-container "
     >
       <h2>
         Stage 
@@ -101,7 +101,7 @@ exports[`Dungeon renders without crashing: Dungeon 1`] = `
 <body>
   <div>
     <div
-      class="rpgui-container container framed full-page scrollable dungeon-container"
+      class="rpgui-container container framed full-page scrollable dungeon-container "
       style="background-image: url(test-file-stub); background-repeat: no-repeat; background-size: cover; background-position: bottom;"
     >
       <h2>

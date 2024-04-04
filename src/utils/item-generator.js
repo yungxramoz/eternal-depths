@@ -11,6 +11,18 @@ const items = [
   WEAPON_TYPE.SHIELD,
 ]
 
+const COMMON_STAT_POINTS = 1
+const RARE_STAT_POINTS = 3
+const EPIC_STAT_POINTS = 5
+const LEGENDARY_STAT_POINTS = 8
+
+const WEAPON_STAT_BASE_MODIFIER = 2
+const WEAPON_STAT_BASE_ADDITION = 12
+
+const COMMON_RARITY = 0.65
+const RARE_RARITY = 0.85
+const EPIC_RARITY = 0.95
+
 export const generateItem = ({ name, item, rarity, level = 1 } = {}) => {
   item = item ? { ...item } : null
   if (!item) {
@@ -21,11 +33,11 @@ export const generateItem = ({ name, item, rarity, level = 1 } = {}) => {
   }
   if (!rarity) {
     const randomRarity = Math.random()
-    if (randomRarity <= 0.65) {
+    if (randomRarity <= COMMON_RARITY) {
       rarity = RARITY.COMMON
-    } else if (randomRarity <= 0.85) {
+    } else if (randomRarity <= RARE_RARITY) {
       rarity = RARITY.RARE
-    } else if (randomRarity <= 0.95) {
+    } else if (randomRarity <= EPIC_RARITY) {
       rarity = RARITY.EPIC
     } else {
       rarity = RARITY.LEGENDARY
@@ -34,46 +46,44 @@ export const generateItem = ({ name, item, rarity, level = 1 } = {}) => {
 
   //TODO currently only swords are weapons
   item.type = item.type === 'sword' ? 'weapon' : item.type
-
-  const stats = { ...item.stats }
-  generateStats(item.type, stats, rarity, level)
-  item.stats = stats
+  item.stats = generateStats(item.type, item.stats, rarity, level)
 
   return { ...item, rarity, name }
 }
 
 const generateStats = (type, stats, rarity, level) => {
-  let statIncrease
-  switch (rarity) {
-    case RARITY.COMMON:
-      statIncrease = 1
-      break
-    case RARITY.RARE:
-      statIncrease = 3
-      break
-    case RARITY.EPIC:
-      statIncrease = 5
-      break
-    case RARITY.LEGENDARY:
-      statIncrease = 8
-      break
-    default:
-      break
+  const newStats = { ...stats }
+  const rarityBasePoints = {
+    [RARITY.COMMON]: COMMON_STAT_POINTS,
+    [RARITY.RARE]: RARE_STAT_POINTS,
+    [RARITY.EPIC]: EPIC_STAT_POINTS,
+    [RARITY.LEGENDARY]: LEGENDARY_STAT_POINTS,
   }
-  statIncrease += level - 1
+
+  let statIncrease = rarityBasePoints[rarity] + (level - 1)
 
   if (type === 'weapon') {
-    statIncrease = Math.floor(Math.random() * (statIncrease * 2)) + statIncrease
-    stats.minDamage += Math.floor(Math.random() * statIncrease) + 1
-    stats.maxDamage += statIncrease - stats.minDamage
-    if (stats.maxDamage < stats.minDamage) {
-      stats.maxDamage = stats.minDamage
+    statIncrease =
+      statIncrease * WEAPON_STAT_BASE_MODIFIER + WEAPON_STAT_BASE_ADDITION
+    const distributionFactor = Math.random()
+    let minDamage = Math.max(Math.floor(statIncrease * distributionFactor), 1)
+    let maxDamage = Math.floor(statIncrease - minDamage)
+
+    // Swap min and max damage if min damage is greater than max damage
+    if (maxDamage < minDamage) {
+      const temp = maxDamage
+      maxDamage = minDamage
+      minDamage = temp
     }
+
+    newStats.minDamage = minDamage
+    newStats.maxDamage = maxDamage
   } else {
     for (let i = 0; i < statIncrease; i++) {
-      stats[randomStat(stats)] += 1
+      newStats[randomStat(stats)] += 1
     }
   }
+  return newStats
 }
 
 export const getItemStats = (item) => {

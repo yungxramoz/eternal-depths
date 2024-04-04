@@ -1,76 +1,77 @@
-import { ATTACK } from '../constants/attack-type'
-import { calculateDamage, generateAttack } from './attack'
+import ATTACK_RESULT from '../constants/attack-result'
+import { calculateDamage } from './attack'
+import {
+  criticalChance,
+  damagePoints,
+  evasionChance,
+  toHitChance,
+} from './stats'
+
+jest.mock('./stats', () => ({
+  criticalChance: jest.fn(),
+  damagePoints: jest.fn(),
+  evasionChance: jest.fn(),
+  toHitChance: jest.fn(),
+}))
 
 describe('attack', () => {
-  describe('generateAttack', () => {
-    it('returns a random attack if no attack is provided', () => {
-      const attack = generateAttack()
-      expect(Object.values(ATTACK)).toContainEqual(attack)
-    })
+  let attack
+  const sourceStats = {
+    minDamage: 1,
+    maxDamage: 3,
+    health: 1,
+    strength: 1,
+    precision: 1,
+    agility: 1,
+  }
+  const targetStats = { agility: 1 }
 
-    it('returns the provided attack', () => {
-      const attack = ATTACK.DEATH_BLOW
-      expect(generateAttack(attack)).toBe(attack)
-    })
+  const defineMocks = (critChance, damage, evadeChance, hitChance, random) => {
+    criticalChance.mockReturnValue(critChance)
+    damagePoints.mockReturnValue(damage)
+    evasionChance.mockReturnValue(evadeChance)
+    toHitChance.mockReturnValue(hitChance)
+    jest.spyOn(global.Math, 'random').mockImplementation(() => random)
+  }
+
+  beforeEach(() => {
+    attack = {
+      additionalDamage: 5,
+      safeHit: false,
+    }
+    defineMocks(0.5, 2, 0.5, 0.5, 0.4)
+  })
+
+  afterEach(() => {
+    global.Math.random.mockRestore()
   })
 
   describe('calculateDamage', () => {
-    const attack = ATTACK.DEATH_BLOW
-    const sourceStats = { strength: 1, precision: 0 }
-    const minDamage = 1
-    const maxDamage = 10
-    const targetStats = { agility: 0 }
-
-    it('returns the correct damage', () => {
-      const damage = calculateDamage(
-        attack,
-        sourceStats,
-        minDamage,
-        maxDamage,
-        targetStats,
-      )
-      expect(damage).toBeGreaterThanOrEqual(minDamage)
-      expect(damage).toBeLessThanOrEqual(
-        maxDamage + sourceStats.strength + attack.damageIncrease,
-      )
+    it('returns normal hit result', () => {
+      defineMocks(0, 2, 0, 1.1, 1)
+      const result = calculateDamage(attack, sourceStats, targetStats, false)
+      expect(result).toEqual({ result: ATTACK_RESULT.HIT, damage: 10 })
     })
-
-    it('returns 0 if the target evades the attack', () => {
-      jest
-        .spyOn(global.Math, 'random')
-        .mockReturnValueOnce(0) // Attack hit
-        .mockReturnValueOnce(0) // Evade
-      const damage = calculateDamage(
-        attack,
-        sourceStats,
-        minDamage,
-        maxDamage,
-        { ...targetStats, agility: 1 },
-      )
-      expect(damage).toBe(0)
-      jest.spyOn(global.Math, 'random').mockRestore()
+    it('returns critical hit result', () => {
+      defineMocks(1.1, 2, 0, 1.1, 1)
+      const result = calculateDamage(attack, sourceStats, targetStats, false)
+      expect(result).toEqual({ result: ATTACK_RESULT.CRITICAL, damage: 15 })
     })
-
-    it('returns double damage if it is a critical hit', () => {
-      jest
-        .spyOn(global.Math, 'random')
-        .mockReturnValueOnce(0) // attack hit
-        .mockReturnValueOnce(1) // Not evade
-        .mockReturnValueOnce(0) // Critical hit
-      const damage = calculateDamage(
-        attack,
-        { ...sourceStats, precision: 1 },
-        minDamage,
-        maxDamage,
-        targetStats,
-      )
-      expect(damage).toBeGreaterThanOrEqual(
-        2 * (minDamage + sourceStats.strength + attack.damageIncrease),
-      )
-      expect(damage).toBeLessThanOrEqual(
-        2 * (maxDamage + sourceStats.strength + attack.damageIncrease),
-      )
-      jest.spyOn(global.Math, 'random').mockRestore()
+    it('returns missed result', () => {
+      defineMocks(0, 2, 0, 0, 1)
+      const result = calculateDamage(attack, sourceStats, targetStats, false)
+      expect(result).toEqual({ result: ATTACK_RESULT.MISSED, damage: 0 })
+    })
+    it('returns evaded result', () => {
+      defineMocks(0, 2, 1.1, 1.1, 1)
+      const result = calculateDamage(attack, sourceStats, targetStats, false)
+      expect(result).toEqual({ result: ATTACK_RESULT.EVADED, damage: 0 })
+    })
+    it('normal hits on safe hit attack', () => {
+      attack.safeHit = true
+      defineMocks(1.1, 2, 1.1, 1.1, 1)
+      const result = calculateDamage(attack, sourceStats, targetStats, false)
+      expect(result).toEqual({ result: ATTACK_RESULT.HIT, damage: 10 })
     })
   })
 })

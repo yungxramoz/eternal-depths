@@ -1,5 +1,6 @@
 import { ENCOUNTERS } from '../constants/encounter'
 import { ENCOUNTER_BOSS } from '../constants/encounter-boss'
+import { damagePoints, healthPoints } from './stats'
 
 export const generateEncounter = (
   level,
@@ -20,15 +21,13 @@ export const generateEncounter = (
   const stages = encounter.stages
   const style = encounter.style
 
-  const points = level * 2
-  const stats = { ...encounter.baseStats }
-  generateStats(points, stats, level)
-
-  const maxHp = stats.health * 4 + 10
+  const stats = generateStats(encounter.baseStats, level)
+  const maxHp = healthPoints(stats.health, true)
   const hp = maxHp
-  const minDamage = stats.strength * 2
+  const minDamage = damagePoints(level, stats.strength, true)
   const maxDamageRange = isBoss ? 5 : 3
-  const maxDamage = minDamage + maxDamageRange
+  const maxDamage =
+    minDamage + damagePoints(maxDamageRange, stats.strength, true)
 
   return {
     level,
@@ -50,7 +49,9 @@ export const encounterLevel = (stage) => {
   return Math.floor((stage - 1) / 5) + 1
 }
 
-const generateStats = (points, stats, level) => {
+const generateStats = (baseStats, level) => {
+  const stats = { ...baseStats }
+  const points = level * 2
   const levelModification = level - 1
   stats.health += levelModification
   stats.strength += levelModification
@@ -75,4 +76,6 @@ const generateStats = (points, stats, level) => {
         break
     }
   }
+
+  return stats
 }

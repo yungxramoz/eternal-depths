@@ -1,0 +1,22 @@
+.dungeon-container.animate-damaging {
+  animation: shake-damage 0.4s;
+}
+
+@keyframes shake-damage {
+  0% {
+    transform: translateX(0);
+    filter: brightness(1);
+  }
+  25% {
+    transform: translateX(-3px);
+    filter: brightness(0.8);
+  }
+  50% {
+    transform: translateX(3px);
+    filter: brightness(0.9);
+  }
+  75% {
+    transform: translateX(-3px);
+    filter: brightness(0.8);
+  }
+}

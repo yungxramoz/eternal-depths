@@ -3,10 +3,10 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'
 import { Provider } from 'react-redux'
 import gameReducer from '../../../store/game/gameSlice'
-import { generateAttack } from '../../../utils/attack'
+import { generateAttack } from '../../../utils/attack-generator'
 import DungeonLevelUp from './DungeonLevelUp'
 
-jest.mock('../../../utils/attack', () => ({
+jest.mock('../../../utils/attack-generator', () => ({
   generateAttack: jest.fn(),
 }))
 
