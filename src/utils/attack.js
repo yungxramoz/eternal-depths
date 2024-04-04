@@ -13,28 +13,30 @@ export const calculateDamage = (
   isEncounter = false,
 ) => {
   let damage = determineDamage(sourceStats, isEncounter)
-  damage += attack.additionalDamage
-  const isHit = determineHit(sourceStats, targetStats)
-  if (!isHit) {
-    return {
-      result: ATTACK_RESULT.MISSED,
-      damage: 0,
+  damage = Math.max(damage + attack.additionalDamage, 1) // additional damage can be negative
+  if (!attack.safeHit) {
+    const isHit = determineHit(sourceStats, targetStats)
+    if (!isHit) {
+      return {
+        result: ATTACK_RESULT.MISSED,
+        damage: 0,
+      }
     }
-  }
 
-  const isEvaded = determineEvade(targetStats)
-  if (isEvaded) {
-    return {
-      result: ATTACK_RESULT.EVADED,
-      damage: 0,
+    const isEvaded = determineEvade(targetStats)
+    if (isEvaded) {
+      return {
+        result: ATTACK_RESULT.EVADED,
+        damage: 0,
+      }
     }
-  }
 
-  const isCritical = determineCritical(sourceStats)
-  if (isCritical) {
-    return {
-      result: ATTACK_RESULT.CRITICAL,
-      damage: Math.floor(damage * 1.5),
+    const isCritical = determineCritical(sourceStats)
+    if (isCritical) {
+      return {
+        result: ATTACK_RESULT.CRITICAL,
+        damage: Math.floor(damage * 1.5),
+      }
     }
   }
 

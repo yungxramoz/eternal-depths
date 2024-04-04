@@ -1,11 +1,5 @@
 import ATTACK_RESULT from '../constants/attack-result'
-import {
-  calculateDamage,
-  determineCritical,
-  determineDamage,
-  determineEvade,
-  determineHit,
-} from './attack'
+import { calculateDamage } from './attack'
 import {
   criticalChance,
   damagePoints,
@@ -21,7 +15,7 @@ jest.mock('./stats', () => ({
 }))
 
 describe('attack', () => {
-  const attack = { additionalDamage: 5 }
+  let attack
   const sourceStats = {
     minDamage: 1,
     maxDamage: 3,
@@ -41,6 +35,10 @@ describe('attack', () => {
   }
 
   beforeEach(() => {
+    attack = {
+      additionalDamage: 5,
+      safeHit: false,
+    }
     defineMocks(0.5, 2, 0.5, 0.5, 0.4)
   })
 
@@ -68,6 +66,12 @@ describe('attack', () => {
       defineMocks(0, 2, 1.1, 1.1, 1)
       const result = calculateDamage(attack, sourceStats, targetStats, false)
       expect(result).toEqual({ result: ATTACK_RESULT.EVADED, damage: 0 })
+    })
+    it('normal hits on safe hit attack', () => {
+      attack.safeHit = true
+      defineMocks(1.1, 2, 1.1, 1.1, 1)
+      const result = calculateDamage(attack, sourceStats, targetStats, false)
+      expect(result).toEqual({ result: ATTACK_RESULT.HIT, damage: 10 })
     })
   })
 })
