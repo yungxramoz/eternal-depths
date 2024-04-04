@@ -57,7 +57,7 @@ describe('attack', () => {
     it('returns critical hit result', () => {
       defineMocks(1.1, 2, 0, 1.1, 1)
       const result = calculateDamage(attack, sourceStats, targetStats, false)
-      expect(result).toEqual({ result: ATTACK_RESULT.CRITICAL, damage: 20 })
+      expect(result).toEqual({ result: ATTACK_RESULT.CRITICAL, damage: 15 })
     })
     it('returns missed result', () => {
       defineMocks(0, 2, 0, 0, 1)

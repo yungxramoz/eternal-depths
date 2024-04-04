@@ -34,7 +34,7 @@ export const calculateDamage = (
   if (isCritical) {
     return {
       result: ATTACK_RESULT.CRITICAL,
-      damage: damage * 2,
+      damage: Math.floor(damage * 1.5),
     }
   }
 

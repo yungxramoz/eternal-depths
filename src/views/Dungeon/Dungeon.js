@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import CharacterHeader from '../../components/organisms/CharacterHeader/CharacterHeader'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
@@ -19,6 +19,9 @@ const Dungeon = () => {
   const gameCycleState = useSelector((state) => state.game.gameCycleState)
   const stage = useSelector((state) => state.game.stage)
   const character = useSelector((state) => state.game.character.current)
+  const characterAnimation = useSelector(
+    (state) => state.game.character.animation,
+  )
   const charMaxHp = useSelector(characterMaxHp)
   const charMaxXp = useSelector(characterMaxXp)
 
@@ -83,7 +86,7 @@ const Dungeon = () => {
 
   return (
     <RpgContainer
-      className="dungeon-container"
+      className={`dungeon-container ${characterAnimation}`}
       bgImg={getImgSrc()}
       fullPage
       scrollable

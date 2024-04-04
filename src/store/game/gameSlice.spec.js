@@ -11,6 +11,7 @@ import gameReducer, {
   battleVictory,
   calculatedCharacterStats,
   calculatedHpReward,
+  characterAnimateIdle,
   characterAssignAttributePoint,
   characterAttackEffects,
   characterDamage,
@@ -83,6 +84,7 @@ describe('gameSlice', () => {
             },
           ],
         },
+        animation: '',
         initiative: 0,
         buffs: [],
         availableAttributePoints: 2,
@@ -483,9 +485,33 @@ describe('gameSlice', () => {
       expect(gameReducer(state, characterDamage(25))).toEqual(
         expect.objectContaining({
           character: expect.objectContaining({
+            animation: ANIMATION_STATE.DAMAGING,
             current: expect.objectContaining({
               hp: 25,
             }),
+          }),
+        }),
+      )
+    })
+    it('sets no animation if damage is 0', () => {
+      const state = {
+        ...initialState,
+        encounter: {
+          ...initialState.encounter,
+          current: { hp: 50 },
+        },
+        character: {
+          ...initialState.character,
+          current: {
+            ...initialState.character.current,
+            hp: 50,
+          },
+        },
+      }
+      expect(gameReducer(state, characterDamage(0))).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            animation: '',
           }),
         }),
       )
@@ -921,6 +947,19 @@ describe('gameSlice', () => {
       expect(gameReducer(initialState, updateGameCycleState())).toEqual(
         expect.objectContaining({
           gameCycleState: GAME_CYCLE_STATE.LEVEL_UP,
+        }),
+      )
+    })
+  })
+
+  describe('characterAnimateIdle', () => {
+    it('animates the character', () => {
+      initialState.character.animation = ANIMATION_STATE.DAMAGING
+      expect(gameReducer(initialState, characterAnimateIdle())).toEqual(
+        expect.objectContaining({
+          character: expect.objectContaining({
+            animation: '',
+          }),
         }),
       )
     })

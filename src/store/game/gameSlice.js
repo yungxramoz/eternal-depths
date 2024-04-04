@@ -57,6 +57,7 @@ const initialState = {
         },
       ],
     },
+    animation: '',
     availableAttributePoints: 2,
     initiative: 0,
     buffs: [],
@@ -217,7 +218,9 @@ const gameSlice = createSlice({
     },
     encounterDamage(state, { payload }) {
       state.encounter.current.hp -= payload
-      gameSlice.caseReducers.encounterAnimateDamage(state)
+      if (payload > 0) {
+        gameSlice.caseReducers.encounterAnimateDamage(state)
+      }
     },
     encounterAttack(state) {
       gameSlice.caseReducers.encounterAnimateAttack(state)
@@ -334,6 +337,9 @@ const gameSlice = createSlice({
     },
     characterDamage: (state, { payload }) => {
       state.character.current.hp -= payload
+      if (payload > 0) {
+        state.character.animation = ANIMATION_STATE.DAMAGING
+      }
       if (state.character.current.hp <= 0) {
         state.character.current.hp = 0
       }
@@ -363,6 +369,9 @@ const gameSlice = createSlice({
         id: attackId,
         currentCooldown: newAttack.cooldown,
       }
+    },
+    characterAnimateIdle: (state) => {
+      state.character.animation = ''
     },
   },
 })
@@ -402,6 +411,7 @@ export const {
   characterLevelUp,
   characterLearnAttack,
   characterReplaceAttack,
+  characterAnimateIdle,
 } = gameSlice.actions
 
 export default gameSlice.reducer

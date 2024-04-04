@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import DamageIndicator from '../../../components/atoms/DamageIndicator/DamageIndicator'
 import AttackButton from '../../../components/molecules/AtackButton/AttackButton'
 import Encounter from '../../../components/molecules/Encounter/Encounter'
 import HpProgressBar from '../../../components/molecules/ProgressBar/HpProgressBar'
 import { EMPTY_ATTACK } from '../../../constants/attack-type'
 import {
   calculatedCharacterStats,
+  characterAnimateIdle,
   characterAttackEffects,
   characterDamage,
   characterMaxHp,
@@ -16,7 +18,6 @@ import {
 } from '../../../store/game/gameSlice'
 import { calculateDamage } from '../../../utils/attack'
 import './DungeonInBattle.css'
-import DamageIndicator from '../../../components/atoms/DamageIndicator/DamageIndicator'
 
 const DungeonInBattle = () => {
   const dispatch = useDispatch()
@@ -84,6 +85,7 @@ const DungeonInBattle = () => {
     dispatch(characterDamage(damage))
     await new Promise((resolve) => setTimeout(resolve, 250))
     dispatch(encounterAnimateIdle())
+    dispatch(characterAnimateIdle())
     await new Promise((resolve) => setTimeout(resolve, 50))
     setIsDisabled(false)
   }

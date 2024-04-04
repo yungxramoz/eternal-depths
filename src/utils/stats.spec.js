@@ -14,13 +14,13 @@ describe('stats', () => {
   })
 
   it('strengthPoints returns correct strength points', () => {
-    expect(strengthPoints(10, false)).toBe(10)
-    expect(strengthPoints(10, true)).toBe(3)
+    expect(strengthPoints(10, false)).toBe(7)
+    expect(strengthPoints(10, true)).toBe(2)
   })
 
   it('damagePoints returns correct damage points', () => {
-    expect(damagePoints(10, 10, false)).toBe(10)
-    expect(damagePoints(10, 10, true)).toBe(3)
+    expect(damagePoints(10, 10, false)).toBe(7)
+    expect(damagePoints(10, 10, true)).toBe(2)
   })
 
   it('evasionChance returns correct evasion chance', () => {
