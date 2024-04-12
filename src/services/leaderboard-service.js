@@ -7,15 +7,10 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 const leaderboardTable = 'leaderboard'
 
-export async function createLeaderboardEntry(
-  characterName,
-  playerName,
-  stage,
-  character,
-) {
+export async function createLeaderboardEntry(playerName, stage, character) {
   const { data, error } = await supabase.from(leaderboardTable).insert([
     {
-      character_name: characterName,
+      character_name: character.name,
       player_name: playerName,
       stage,
       character,

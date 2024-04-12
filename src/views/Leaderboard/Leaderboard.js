@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLeaderboard } from '../../store/leaderboard/leaderboardSlice'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
+import GoBackButton from '../../components/organisms/GoBackButton/GoBackButton'
 
 const Leaderboard = () => {
   const dispatch = useDispatch()
@@ -14,6 +15,7 @@ const Leaderboard = () => {
 
   return (
     <RpgContainer fullPage scrollable>
+      <GoBackButton className="align-self-start" />
       <h1>Leaderboard</h1>
       {loading === 'loading' && <p>Loading...</p>}
       {loading === 'idle' && (
