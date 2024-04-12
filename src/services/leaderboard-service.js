@@ -1,9 +1,9 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = 'https://ccsgujvmudczzpadmxmh.supabase.co'
-const supabaseKey =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjc2d1anZtdWRjenpwYWRteG1oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTIyNzE1NTYsImV4cCI6MjAyNzg0NzU1Nn0.3Ndzp5_siyjaHJn0igKn7z7MW5znFAtQ6zKGIcrBYOY'
-const supabase = createClient(supabaseUrl, supabaseKey)
+const supabase = createClient(
+  process.env.REACT_APP_SUPABASE_URL,
+  process.env.REACT_APP_SUPABASE_ANON_KEY,
+)
 
 const leaderboardTable = 'leaderboard'
 
