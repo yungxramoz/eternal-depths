@@ -35,7 +35,6 @@ const Won = () => {
       <div className="won-container">
         <h2>Victorious Escape!</h2>
         <h3>Stage {stage}</h3>
-        <RpgIcon icon={RPGUI_ICON.SKULL} />
         <p>
           You've emerged from the dungeon's darkness, your tales of bravery
           spreading far and wide. As a hero celebrated in story and song, carve
