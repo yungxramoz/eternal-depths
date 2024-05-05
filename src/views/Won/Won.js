@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import RpgButton from '../../components/atoms/RpgButton/RpgButton'
-import RpgIcon from '../../components/atoms/RpgIcon/RpgIcon'
-import { RPGUI_ICON } from '../../constants/rpgui-icon'
 import { createLeaderboardEntry } from '../../services/leaderboard-service'
 import { gameReset } from '../../store/game/gameSlice'
 import './Won.css'
