@@ -34,11 +34,10 @@ const DungeonInBattle = () => {
   const [isDisabled, setIsDisabled] = useState(false)
 
   const [messages, setMessages] = useState([])
-  const [messageCounter, setMessageCounter] = useState(0)
 
   const addIndicator = (type, damage) => {
-    setMessageCounter(messageCounter + 1)
-    setMessages((prev) => [...prev, { id: messageCounter, type, damage }])
+    const id = Math.random().toString(36).substring(2, 9)
+    setMessages((prev) => [...prev, { id, type, damage }])
   }
 
   useEffect(() => {
