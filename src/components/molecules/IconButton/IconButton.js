@@ -7,20 +7,7 @@ import PlusIcon from '../../atoms/Icons/PlusIcon'
 import './IconButton.css'
 import CloseIcon from '../../atoms/Icons/CloseIcon'
 
-const IconButton = ({ icon, size, disabled, onClick, className = '' }) => {
-  const getSizeClass = (size) => {
-    switch (size) {
-      case 'small':
-        return 'small'
-      case 'medium':
-        return 'medium'
-      case 'large':
-        return 'large'
-      default:
-        return ''
-    }
-  }
-
+const IconButton = ({ icon, disabled, onClick, size = '', className = '' }) => {
   const getIcon = (icon) => {
     switch (icon) {
       case 'chevron-left':
@@ -42,7 +29,7 @@ const IconButton = ({ icon, size, disabled, onClick, className = '' }) => {
 
   return (
     <button
-      className={`icon-button ${getSizeClass(size)} ${className}`}
+      className={`icon-button ${size} ${className}`}
       disabled={disabled}
       onClick={onClick}
     >

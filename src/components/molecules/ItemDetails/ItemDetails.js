@@ -5,7 +5,7 @@ import RpgIcon from '../../atoms/RpgIcon/RpgIcon'
 const ItemDetails = ({ title, subtitle, description, icon }) => {
   return (
     <div className="item-container">
-      {icon ? <RpgIcon className="item-icon" icon={icon} /> : null}
+      {icon && <RpgIcon className="item-icon" icon={icon} />}
       <div className="item-content">
         <p className="item-title">{title}</p>
         <p className="item-subtitle">
