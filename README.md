@@ -19,6 +19,24 @@ git clone https://git.ffhs.ch/web-technologien/fwebt/fs24/inf-w-af004-fwebt-ol-s
 cd ol010-sandro-gerber-eternal-depths
 ```
 
+### Supabase Konfiguration
+Für die lokale Entwicklung wird eine Supabase Instanz benötigt. Erstelle ein Konto auf [Supabase](https://supabase.io/) und erstelle eine neue Instanz. Erstelle eine neue Datenbank und füge die Tabellen `leaderboard` hinzu. Erstelle folgende Spalten in der `leaderboard` Tabelle:
+![column configuration](/docs/assets/leaderboard-table.png)
+
+Kopiere dann die URL und den API Key in die `.env.local` Datei.
+
+```bash
+REACT_APP_SUPABASE_URL=https://<supabase-url>.supabase.co
+REACT_APP_SUPABASE_ANON_KEY=<supabase-api-key>
+```
+
+Es kann auch die Test Instanz verwendet werden. Dazu können die folgenden Werte in die `.env.local` Datei kopiert werden.
+
+```bash
+REACT_APP_SUPABASE_URL='https://ccsgujvmudczzpadmxmh.supabase.co'
+REACT_APP_SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjc2d1anZtdWRjenpwYWRteG1oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTIyNzE1NTYsImV4cCI6MjAyNzg0NzU1Nn0.3Ndzp5_siyjaHJn0igKn7z7MW5znFAtQ6zKGIcrBYOY'
+```
+
 ### Verfügbare Scripts
 
 Im Projektverzeichnis kannst du Folgendes ausführen:
