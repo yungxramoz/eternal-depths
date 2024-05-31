@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchLeaderboard } from '../../store/leaderboard/leaderboardSlice'
 import RpgContainer from '../../components/templates/RpgContainer/RpgContainer'
 import GoBackButton from '../../components/organisms/GoBackButton/GoBackButton'
+import CharacterAvatar from '../../components/molecules/CharacterAvatar/CharacterAvatar'
+
+import './Leaderboard.css'
 
 const Leaderboard = () => {
   const dispatch = useDispatch()
@@ -19,24 +22,19 @@ const Leaderboard = () => {
       <h1>Leaderboard</h1>
       {loading === 'loading' && <p>Loading...</p>}
       {loading === 'idle' && (
-        <table>
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Name</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leaderboard.map((entry, index) => (
-              <tr key={entry.id}>
-                <td>{index + 1}</td>
-                <td>{`${entry.player_name} (${entry.character_name})`}</td>
-                <td>{entry.stage}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <>
+          {leaderboard.map((entry, index) => (
+            <RpgContainer key={entry.id} golden className="leaderboard-entry">
+              <p className="rank">{index + 1}</p>
+              <CharacterAvatar look={entry.character.look} />
+              <div className="name">
+                <p>{entry.player_name}</p>
+                <p>{entry.character_name}</p>
+              </div>
+              <p>{entry.stage}</p>
+            </RpgContainer>
+          ))}
+        </>
       )}
     </RpgContainer>
   )
