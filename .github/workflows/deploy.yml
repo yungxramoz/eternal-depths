@@ -1,0 +1,32 @@
+name: 🚀 Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📦 Checkout Repository
+        uses: actions/checkout@v4.2.0
+
+      - name: 🔧 Set up Node.js
+        uses: actions/setup-node@v4.0.4
+
+      - name: 📥 Install Dependencies
+        run: npm install
+
+      - name: 🛠️ Run Predeploy
+        run: npm run predeploy
+
+      - name: 🔒 Set up Git credentials for GitHub Pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+
+      - name: 🌐 Deploy to GitHub Pages
+        run: npm run deploy
