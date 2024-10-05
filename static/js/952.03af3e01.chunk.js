@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkol010_sandro_gerber_eternal_depths=self.webpackChunkol010_sandro_gerber_eternal_depths||[]).push([[952],{4952:e=>{e.exports=function(){throw new Error("ws does not work in the browser. Browser clients must use the native WebSocket object")}}}]);
+//# sourceMappingURL=952.03af3e01.chunk.js.map

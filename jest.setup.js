@@ -1,1 +1,0 @@
-jest.mock('require.context', () => {})
