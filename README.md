@@ -12,6 +12,10 @@ Willkommen bei Eternal Depths, dem ultimativen rundenbasierten RPG für unterweg
 - **Ausrüstungssystem:** Rüste deinen Charakter mit mächtigen Waffen, Rüstungen aus.
 - **Wettbewerb und Ruhm:** Erklimme die Spitze des Leaderboards und zeige allen, dass du der wahre Meister des Dungeons bist.
 
+## 📖 Spielkonzept
+
+Das vollständige Spielkonzept mit allen Regeln, Formeln und Balancing-Werten ist in einem eigenen Dokument beschrieben: [Spielkonzept & Spielmechanik](/docs/game-concept.md)
+
 ## 🛠 Lokales Setup
 
 ```bash
